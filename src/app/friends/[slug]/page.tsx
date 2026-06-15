@@ -1,18 +1,45 @@
-'use client'
-export const runtime = 'edge'
-
-import { notFound, useParams } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { team } from '@/data/team'
 
-export default function MemberPage() {
-  const params = useParams()
-  const member = team.find(m => m.slug === params.slug)
-  if (!member) notFound()
+export async function generateStaticParams() {
+  return team.map((member) => ({
+    slug: member.slug,
+  }))
+}
 
-  const { firstName, lastName, role, eyebrow, bio, skills, funFact, accent, accentGlow, accentFaint, accentDim, github, githubHandle, linkedin, resumeFile } = member!
+export default async function MemberPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+
+  const member = team.find((m) => m.slug === slug)
+
+  if (!member) {
+    notFound()
+  }
+
+  const {
+    firstName,
+    lastName,
+    role,
+    eyebrow,
+    bio,
+    skills,
+    funFact,
+    accent,
+    accentGlow,
+    accentFaint,
+    accentDim,
+    github,
+    githubHandle,
+    linkedin,
+    resumeFile,
+  } = member
 
   return (
     <>
@@ -48,63 +75,169 @@ export default function MemberPage() {
       `}</style>
 
       <Header />
-      <main style={{ position: 'relative', zIndex: 1, maxWidth: '860px', margin: '0 auto', padding: '120px 40px 80px' }}>
-
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '40px', marginBottom: '60px', flexWrap: 'wrap' }}>
-          <div style={{
-            width: '100px', height: '100px', flexShrink: 0,
-            border: `2px solid ${accent}`, background: accentFaint,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900,
-            color: accent, position: 'relative', boxShadow: `0 0 30px ${accentGlow}`,
-          }}>
-            <div style={{ position: 'absolute', inset: '-6px', border: `1px solid ${accentDim}`, pointerEvents: 'none' }} />
+      <main
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          maxWidth: '860px',
+          margin: '0 auto',
+          padding: '120px 40px 80px',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '40px',
+            marginBottom: '60px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <div
+            style={{
+              width: '100px',
+              height: '100px',
+              flexShrink: 0,
+              border: `2px solid ${accent}`,
+              background: accentFaint,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: 'var(--display)',
+              fontSize: '32px',
+              fontWeight: 900,
+              color: accent,
+              position: 'relative',
+              boxShadow: `0 0 30px ${accentGlow}`,
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                inset: '-6px',
+                border: `1px solid ${accentDim}`,
+                pointerEvents: 'none',
+              }}
+            />
             {firstName[0]}
           </div>
+
           <div>
-            <div style={{ fontFamily: 'var(--mono)', fontSize: '11px', color: accent, letterSpacing: '4px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ display: 'block', width: '24px', height: '1px', background: accent }} />
+            <div
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: '11px',
+                color: accent,
+                letterSpacing: '4px',
+                marginBottom: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <span
+                style={{
+                  display: 'block',
+                  width: '24px',
+                  height: '1px',
+                  background: accent,
+                }}
+              />
               {eyebrow}
             </div>
-            <h1 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(28px, 5vw, 52px)', fontWeight: 900, color: '#fff', lineHeight: 1, letterSpacing: '-0.5px', marginBottom: '8px' }}>
-              {firstName}<br /><span style={{ color: accent }}>{lastName}</span>
+
+            <h1
+              style={{
+                fontFamily: 'var(--display)',
+                fontSize: 'clamp(28px, 5vw, 52px)',
+                fontWeight: 900,
+                color: '#fff',
+                lineHeight: 1,
+                letterSpacing: '-0.5px',
+                marginBottom: '8px',
+              }}
+            >
+              {firstName}
+              <br />
+              <span style={{ color: accent }}>{lastName}</span>
             </h1>
-            <p style={{ fontFamily: 'var(--mono)', fontSize: '13px', color: 'var(--text-dim)', letterSpacing: '2px' }}>{role}</p>
+
+            <p
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: '13px',
+                color: 'var(--text-dim)',
+                letterSpacing: '2px',
+              }}
+            >
+              {role}
+            </p>
           </div>
         </div>
 
         <div style={{ fontFamily: 'var(--mono)', fontSize: '10px', color: accent, letterSpacing: '4px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           // ABOUT <span style={{ flex: 1, height: '1px', background: `linear-gradient(90deg, ${accentDim}, transparent)` }} />
         </div>
-        <p style={{ fontFamily: 'var(--prose)', fontSize: '15px', color: 'var(--text)', lineHeight: 1.85, marginBottom: '40px' }}>{bio}</p>
+
+        <p style={{ fontFamily: 'var(--prose)', fontSize: '15px', color: 'var(--text)', lineHeight: 1.85, marginBottom: '40px' }}>
+          {bio}
+        </p>
 
         <div style={{ fontFamily: 'var(--mono)', fontSize: '10px', color: accent, letterSpacing: '4px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           // SKILLS <span style={{ flex: 1, height: '1px', background: `linear-gradient(90deg, ${accentDim}, transparent)` }} />
         </div>
+
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '40px' }}>
-          {skills.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
+          {skills.map((skill) => (
+            <span key={skill} className="skill-tag">
+              {skill}
+            </span>
+          ))}
         </div>
 
         <div style={{ fontFamily: 'var(--mono)', fontSize: '10px', color: accent, letterSpacing: '4px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           // SYS.LOG <span style={{ flex: 1, height: '1px', background: `linear-gradient(90deg, ${accentDim}, transparent)` }} />
         </div>
+
         <div style={{ border: `1px solid ${accentDim}`, background: accentFaint, padding: '24px 28px', marginBottom: '40px', position: 'relative' }}>
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
-          <div style={{ fontFamily: 'var(--mono)', fontSize: '10px', color: accent, letterSpacing: '3px', marginBottom: '10px' }}>SYS.LOG // PERSONAL</div>
-          <p style={{ fontFamily: 'var(--prose)', fontSize: '14px', color: 'var(--text)', lineHeight: 1.7 }}>{funFact}</p>
+          <div style={{ fontFamily: 'var(--mono)', fontSize: '10px', color: accent, letterSpacing: '3px', marginBottom: '10px' }}>
+            SYS.LOG // PERSONAL
+          </div>
+          <p style={{ fontFamily: 'var(--prose)', fontSize: '14px', color: 'var(--text)', lineHeight: 1.7 }}>
+            {funFact}
+          </p>
         </div>
 
         <div style={{ fontFamily: 'var(--mono)', fontSize: '10px', color: accent, letterSpacing: '4px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           // CONNECT <span style={{ flex: 1, height: '1px', background: `linear-gradient(90deg, ${accentDim}, transparent)` }} />
         </div>
+
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '40px' }}>
-          {github && <a href={github} target="_blank" rel="noopener noreferrer" className="profile-link">⌥ GITHUB {githubHandle ? `/ ${githubHandle}` : ''}</a>}
-          {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer" className="profile-link">◈ LINKEDIN</a>}
-          {resumeFile && <a href={resumeFile} target="_blank" rel="noopener noreferrer" className="resume-link">↓ RESUME / CV</a>}
+          {github && (
+            <a href={github} target="_blank" rel="noopener noreferrer" className="profile-link">
+              ⌥ GITHUB {githubHandle ? `/ ${githubHandle}` : ''}
+            </a>
+          )}
+
+          {linkedin && (
+            <a href={linkedin} target="_blank" rel="noopener noreferrer" className="profile-link">
+              ◈ LINKEDIN
+            </a>
+          )}
+
+          {resumeFile && (
+            <a href={resumeFile} target="_blank" rel="noopener noreferrer" className="resume-link">
+              ↓ RESUME / CV
+            </a>
+          )}
         </div>
 
-        <Link href="/friends" className="back-link">← BACK TO FRIENDS</Link>
+        <Link href="/friends" className="back-link">
+          ← BACK TO FRIENDS
+        </Link>
       </main>
+
       <Footer />
     </>
   )
