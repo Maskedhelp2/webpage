@@ -1,13 +1,22 @@
-'use client'
 export const runtime = 'edge'
-import { notFound, useParams } from 'next/navigation'
+
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { team } from '@/data/team'
 
-export default function MemberPage() {
-  const params = useParams()
+export async function generateStaticParams() {
+  return team.map((member) => ({
+    slug: member.slug,
+  }))
+}
+
+export default function MemberPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const member = team.find(m => m.slug === params.slug)
   if (!member) notFound()
 
