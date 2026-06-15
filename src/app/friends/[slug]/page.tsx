@@ -1,4 +1,5 @@
 'use client'
+export const runtime = 'edge'
 
 import { notFound, useParams } from 'next/navigation'
 import Link from 'next/link'
