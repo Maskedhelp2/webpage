@@ -223,7 +223,7 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="footer-bottom">
             <span className="footer-copy">{SITE_FOOTER}</span>
-            <span className="footer-made">BUILT WITH <span>♥</span> AND TOO MUCH CAFFEINE</span>
+            <span className="footer-made">BUILT WITH <span>♥</span> AND CHAOS</span>
           </div>
         </div>
       </footer>
