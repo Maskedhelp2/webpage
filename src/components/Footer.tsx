@@ -174,7 +174,7 @@ export default function Footer() {
             {/* Col 1 — Brand */}
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-                <Image src="/logo.webp" alt="MaskedHelp" width={32} height={32} style={{ objectFit: 'contain' }} />
+                <Image src="/logo.webp" alt="MaskedHelp" width={32} height={32} style={{ objectFit: 'contain' }}  />
                 <div className="footer-brand-name">
                   MASKED<span style={{ color: 'var(--accent)' }}>HELP</span>
                 </div>

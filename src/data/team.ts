@@ -21,26 +21,6 @@ export type TeamMember = {
 
 export const team: TeamMember[] = [
   {
-    slug: 'karthik',
-    name: 'KARTHIK KUMAR',
-    firstName: 'KARTHIK',
-    lastName: 'KUMAR',
-    role: 'LEAD DEVELOPER // FULL STACK · EMBEDDED · AI',
-    eyebrow: 'FRIENDS // LEAD',
-    bio: 'Karthik is the lead developer and founder of MaskedHelp, driving architecture across firmware, full-stack, and AI/robotics. Studying B.Tech in Artificial Intelligence at Amity University (2024–2028), he is also a Technology Intern at Karvy InnoTech and a Research Intern in Amity\'s robotics division. IEEE Student Member.',
-    skills: ['REACT', 'NEXT.JS', 'RUST', 'PYTHON', 'ROS2', 'EMBEDDED', 'QMK', 'TAURI', 'TYPESCRIPT', 'DOCKER', 'AI/ML', 'SLAM'],
-    funFact: 'Debugged firmware-to-desktop Raw HID packet drops at 2am and called it a good time. Also built a 3D LiDAR from a 2D sensor using a motor and pure spite.',
-    accent: '#e63329',
-    accentGlow: 'rgba(230,51,41,0.35)',
-    accentFaint: 'rgba(230,51,41,0.07)',
-    accentDim: 'rgba(230,51,41,0.3)',
-    github: 'https://github.com/Maskedhelp2',
-    githubHandle: 'Maskedhelp2',
-    linkedin: 'https://linkedin.com/in/karthik-kumar-7319b6332',
-    resumeFile: '/resumes/karthik.pdf',
-    photo: '/team/karthik.jpg',
-  },
-  {
     slug: 'abhiroop',
     name: 'ABHIROOP CHATTERJEE',
     firstName: 'ABHIROOP',

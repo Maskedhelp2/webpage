@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'MASKEDHELP // PORTFOLIO',
-  description: 'Portfolio of the MaskedHelp team — Karthik Kumar, Aahana Hajariwala, Rohan Alex Basil, Sparsh Tyagi.',
+  description: 'Portfolio of  MaskedHelp - Karthik Kumar.',
   icons: { icon: '/logo.webp' },
 }
 

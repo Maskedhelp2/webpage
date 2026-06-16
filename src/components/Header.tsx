@@ -118,7 +118,7 @@ export default function Header() {
       <nav className={`nav-root ${scrolled ? 'small' : 'large'}`}>
         {/* Logo */}
         <Link href="/" className="nav-logo">
-          <Image src="/logo.webp" alt="MaskedHelp" width={48} height={48} className="nav-logo-img" style={{ objectFit: 'contain' }} />
+          <Image src="/logo.webp" alt="MaskedHelp" width={48} height={48} className="nav-logo-img" style={{ objectFit: 'contain' }} loading="eager" priority/>
           <span className="nav-logo-text">
             MASKED<span style={{ color: 'var(--accent)' }}>HELP</span>
           </span>
