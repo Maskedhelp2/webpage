@@ -50,6 +50,7 @@ const FOOTER_LINKS = [
   { label: 'SKILLS',       href: '/skills' },
   { label: 'PRIVACY POLICY', href: '/privacy' },
   { label: 'TERMS',        href: '/terms' },
+  { label: 'EXPERIENCE', href: '/experience' },
 ]
 
 export default function Footer() {

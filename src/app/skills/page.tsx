@@ -460,7 +460,6 @@ export default function SkillsPage() {
 
       </main>
 
-      <Footer />
     </>
   );
 }

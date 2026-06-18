@@ -28,7 +28,6 @@ export default function FriendsPage() {
           {team.map(m => <TeamCard key={m.slug} member={m} friendsMode />)}
         </div>
       </main>
-      <Footer />
     </>
   )
 }

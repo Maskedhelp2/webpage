@@ -5,8 +5,9 @@ export const SITE_FOOTER = `© ${SITE_YEAR} MASKEDHELP TEAM // ALL RIGHTS RESERV
 
 export const NAV_LINKS = [
   { label: 'PROJECTS', href: '/projects' },
+  { label: 'SKILLS', href: '/skills' },
+  { label: 'EXPERIENCE', href: '/experience' },
   { label: 'FRIENDS', href: '/friends' },
-    { label: 'SKILLS', href: '/skills' },
   { label: 'PRIVACY', href: '/privacy' },
   { label: 'TERMS', href: '/terms' },
 ]

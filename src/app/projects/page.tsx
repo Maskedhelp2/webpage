@@ -41,7 +41,6 @@ export default function ProjectsPage() {
           {projects.map(p => <ProjectCard key={p.slug} project={p} />)}
         </div>
       </main>
-      <Footer />
     </>
   )
 }
