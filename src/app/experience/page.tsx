@@ -34,6 +34,10 @@ const EDUCATION = [
   },
 ];
 
+type WorkItem = typeof EXPERIENCE[number];
+type EducationItem = typeof EDUCATION[number];
+type CardItem = WorkItem | EducationItem;
+
 function ExternalLink() {
   return (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -44,9 +48,8 @@ function ExternalLink() {
   );
 }
 
-function Card({ item }: { item: typeof EXPERIENCE[0] | typeof EDUCATION[0] }) {
+function Card({ item }: { item: CardItem }) {
   const isEdu = item.type === 'edu';
-  const eduItem = item as typeof EDUCATION[0];
 
   return (
     <div className="exp-card">
@@ -63,13 +66,13 @@ function Card({ item }: { item: typeof EXPERIENCE[0] | typeof EDUCATION[0] }) {
         {/* Left — title block */}
         <div className="exp-left">
           <div className="exp-role">
-            {isEdu ? (
-              <>
-                <span>{eduItem.degree}</span>
-                <span className="exp-role-accent"> // {eduItem.field}</span>
-              </>
-            ) : (
+            {'role' in item ? (
               item.role
+            ) : (
+              <>
+                <span>{item.degree}</span>
+                <span className="exp-role-accent"> // {item.field}</span>
+              </>
             )}
           </div>
           <a
@@ -94,9 +97,9 @@ function Card({ item }: { item: typeof EXPERIENCE[0] | typeof EDUCATION[0] }) {
           <p className="exp-desc">{item.description}</p>
 
           {/* Skills pills (education only) */}
-          {isEdu && eduItem.skills && (
+          {'skills' in item && item.skills && (
             <div className="exp-skills">
-              {eduItem.skills.map(s => (
+              {item.skills.map(s => (
                 <span key={s} className="exp-skill-tag">{s}</span>
               ))}
             </div>
