@@ -76,8 +76,8 @@ export default function Hero() {
 
         {/* Bio */}
         <p className="hero-bio" style={{ fontFamily: 'var(--prose)', fontSize: '16px', color: 'var(--text)', lineHeight: 1.85, maxWidth: '600px', marginBottom: '48px' }}>
-          A crew from Amity University building at the intersection of embedded systems,
-          full-stack software, and AI/robotics. We turn ideas into hardware that ships and software that works.
+          A student from Amity University building at the intersection of embedded systems,
+          full-stack software, and AI/robotics. I like to turn ideas into hardware that ships and software that works.
         </p>
 
         {/* Stats */}
