@@ -150,7 +150,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
 
         {/* Highlight bar */}
-        <div style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '20px', marginBottom: '48px', background: 'rgba(230,51,41,0.03)', padding: '20px 20px 20px 20px', borderLeft: '2px solid var(--accent)', position: 'relative' }}>
+        <div style={ {paddingLeft: '20px', marginBottom: '48px', background: 'rgba(230,51,41,0.03)', padding: '20px 20px 20px 20px', borderLeft: '2px solid var(--accent)', position: 'relative' }}>
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(90deg, var(--accent), transparent)' }} />
           <div style={{ fontFamily: 'var(--mono)', fontSize: '9px', color: 'var(--accent)', letterSpacing: '3px', marginBottom: '10px' }}>// KEY HIGHLIGHT</div>
           <p style={{ fontFamily: 'var(--mono)', fontSize: '13px', color: '#fff', letterSpacing: '1px', lineHeight: 1.7 }}>{project.highlight}</p>
