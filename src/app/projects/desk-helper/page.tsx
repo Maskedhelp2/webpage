@@ -24,40 +24,37 @@ interface FeatureSectionProps {
 }
 
 const sections: Feature[] = [
-    {
-  label: "SYSTEM_OVERVIEW",
-
-  title: (
-  <>
-    HARDWARE MEETS
-    <br />
-    SOFTWARE
-  </>
-),
-  description:
-    "A programmable macro keypad paired with a powerful desktop configurator. Customize every key, create layers, assign macros and manage profiles in real time.",
-
-  words: [
-    "17 KEYS",
-    "5 LAYERS",
-    "MACROS",
-    "PROFILES",
-    "ENCODER",
-    "CONFIGURATOR",
-    "FIRMWARE",
-    "CUSTOMIZATION"
-  ]
-},
-
+  {
+    label: "SYSTEM_OVERVIEW",
+    title: (
+      <>
+        HARDWARE MEETS
+        <br />
+        SOFTWARE
+      </>
+    ),
+    description:
+      "A programmable macro keypad paired with a powerful desktop configurator. Customize every key, create layers, assign macros and manage profiles in real time.",
+    words: [
+      "17 KEYS",
+      "5 LAYERS",
+      "MACROS",
+      "PROFILES",
+      "ENCODER",
+      "CONFIGURATOR",
+      "FIRMWARE",
+      "CUSTOMIZATION"
+    ]
+  },
   {
     label: "FEATURE_01",
     title: (
-  <>
-    MULTI-LAYER
-    <br />
-    WORKFLOWS
-  </>
-),
+      <>
+        MULTI-LAYER
+        <br />
+        WORKFLOWS
+      </>
+    ),
     description:
       "Create multiple key layouts and instantly switch between task-specific configurations.",
     words: [
@@ -69,16 +66,15 @@ const sections: Feature[] = [
       "CUSTOMIZATION"
     ]
   },
-
   {
     label: "FEATURE_02",
     title: (
-  <>
-    MACRO
-    <br />
-    AUTOMATION
-  </>
-),
+      <>
+        MACRO
+        <br />
+        AUTOMATION
+      </>
+    ),
     description:
       "Assign complex sequences to a single key and automate repetitive actions.",
     words: [
@@ -90,16 +86,15 @@ const sections: Feature[] = [
       "SHORTCUTS"
     ]
   },
-
   {
     label: "FEATURE_03",
     title: (
-  <>
-    ROTARY
-    <br />
-    ENCODER
-  </>
-),
+      <>
+        ROTARY
+        <br />
+        ENCODER
+      </>
+    ),
     description:
       "Control volume, zoom, timeline scrubbing and application-specific actions.",
     words: [
@@ -111,16 +106,15 @@ const sections: Feature[] = [
       "ROTATION"
     ]
   },
-
   {
     label: "FEATURE_04",
     title: (
-  <>
-    APPLICATION
-    <br />
-    PROFILES
-  </>
-),
+      <>
+        APPLICATION
+        <br />
+        PROFILES
+      </>
+    ),
     description:
       "Store dedicated layouts for Blender, VS Code, Photoshop and media software.",
     words: [
@@ -132,16 +126,15 @@ const sections: Feature[] = [
       "PRESETS"
     ]
   },
-
   {
     label: "FEATURE_05",
     title: (
-  <>
-    REAL-TIME
-    <br />
-    CONFIGURATION
-  </>
-),
+      <>
+        REAL-TIME
+        <br />
+        CONFIGURATION
+      </>
+    ),
     description:
       "Apply changes instantly without reflashing firmware or restarting devices.",
     words: [
@@ -153,16 +146,15 @@ const sections: Feature[] = [
       "SYNC"
     ]
   },
-
   {
     label: "FEATURE_06",
     title: (
-  <>
-    FIRMWARE
-    <br />
-    MANAGEMENT
-  </>
-),
+      <>
+        FIRMWARE
+        <br />
+        MANAGEMENT
+      </>
+    ),
     description:
       "Backup, restore and update device firmware directly from the configurator.",
     words: [
@@ -175,6 +167,118 @@ const sections: Feature[] = [
     ]
   }
 ];
+
+function Hero(): React.JSX.Element {
+  return (
+    <section
+      className="
+      hero-section
+        min-h-screen
+        flex
+        items-center
+        justify-center
+        overflow-hidden
+        relative
+      "
+    >
+      <div
+        className="
+          max-w-[1500px]
+          mx-auto
+          grid
+          grid-cols-2
+          items-center
+          gap-24
+          px-16
+        "
+      >
+
+        {/* LEFT SIDE */}
+        <div className="max-w-[650px]">
+
+          <div className="flex items-center gap-4 mb-8">
+
+            <div className="w-10 h-[2px] bg-red-500" />
+
+            <span
+              className="
+                font-terminal
+                text-red-500
+                uppercase
+                tracking-[0.35em]
+                text-sm
+              "
+            >
+              PROJECT_V1.0 // INITIALIZED
+            </span>
+
+          </div>
+
+          <h1
+            className="
+              font-cyber
+              uppercase
+              crt
+              text-white
+              leading-[0.9]
+              tracking-tight
+              text-5xl
+              md:text-6xl
+              lg:text-[4.5rem]
+              cyber-title
+            "
+          >
+            NUMPAD
+            <br />
+            CONTROLLER
+          </h1>
+
+          <p
+            className="
+              font-terminal
+              text-gray-400
+              mt-10
+              text-xl
+              leading-relaxed
+              max-w-xl
+            "
+          >
+            A programmable macro keypad featuring
+            multi-layer support, encoder controls,
+            custom profiles, firmware management
+            and real-time software configuration.
+          </p>
+          <br />
+          <br />
+
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div className="relative flex justify-center items-center">
+
+          <div
+            className="
+              absolute
+              inset-0
+              bg-red-600
+              blur-[220px]
+              opacity-20
+              rounded-full
+            "
+          />
+
+          <img
+            src="/numpad.png.jpeg"
+            alt="Numpad Configurator"
+            className="hero-image"
+          />
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
 
 function FeatureSection(props: FeatureSectionProps) {
 
@@ -190,22 +294,22 @@ function FeatureSection(props: FeatureSectionProps) {
 
     const section = sectionRef.current;
 
-if (!section) return;
+    if (!section) return;
 
     const title =
-  section.querySelector<HTMLElement>(
-    ".feature-title"
-  );
+      section.querySelector<HTMLElement>(
+        ".feature-title"
+      );
 
-const desc =
-  section.querySelector<HTMLElement>(
-    ".feature-description"
-  );
+    const desc =
+      section.querySelector<HTMLElement>(
+        ".feature-description"
+      );
 
-const label =
-  section.querySelector<HTMLElement>(
-    ".feature-label"
-  );
+    const label =
+      section.querySelector<HTMLElement>(
+        ".feature-label"
+      );
 
     gsap.fromTo(
       [label, title, desc],
@@ -227,9 +331,9 @@ const label =
     );
 
     const words =
-  section.querySelectorAll<HTMLElement>(
-    ".spiral-word"
-  );
+      section.querySelectorAll<HTMLElement>(
+        ".spiral-word"
+      );
 
     words.forEach((word, i) => {
 
@@ -266,7 +370,7 @@ const label =
       ref={sectionRef}
       className={`feature-section ${
         index === 0 ? "overview-section" : ""
-     }`}
+      }`}
     >
 
       <div className="feature-glow" />
@@ -326,76 +430,76 @@ const label =
 
       <div className="feature-center">
 
-  <div className="feature-label font-terminal">
-    {feature.label}
-  </div>
-
-  <h2
-    className="
-      feature-title
-      font-cyber
-      transition-all
-      duration-500
-    "
-  >
-    {feature.title}
-  </h2>
-
-  <div className="feature-description font-terminal">
-
-    <p>{feature.description}</p>
-
-    {index === 0 && (
-      <div className="overview-stats">
-
-        <div className="overview-card">
-          <h3>17</h3>
-          <span>CUSTOMISABLE KEYS</span>
+        <div className="feature-label font-terminal">
+          {feature.label}
         </div>
 
-        <div className="overview-card">
-          <h3>5</h3>
-          <span>PROFILES INTERCHANGEABLE</span>
-        </div>
+        <h2
+          className="
+            feature-title
+            font-cyber
+            transition-all
+            duration-500
+          "
+        >
+          {feature.title}
+        </h2>
 
-        <div className="overview-card">
-          <h3>10</h3>
-          <span>CUSTOMIZABLE MACROS</span>
+        <div className="feature-description font-terminal">
+
+          <p>{feature.description}</p>
+
+          {index === 0 && (
+            <div className="overview-stats">
+
+              <div className="overview-card">
+                <h3>17</h3>
+                <span>CUSTOMISABLE KEYS</span>
+              </div>
+
+              <div className="overview-card">
+                <h3>5</h3>
+                <span>PROFILES INTERCHANGEABLE</span>
+              </div>
+
+              <div className="overview-card">
+                <h3>10</h3>
+                <span>CUSTOMIZABLE MACROS</span>
+              </div>
+
+            </div>
+          )}
+
+          <span
+            className="
+              block
+              mt-8
+              text-red-500
+              uppercase
+              tracking-[0.4em]
+            "
+          >
+            {feature.words[activeWord]}
+          </span>
+
         </div>
 
       </div>
-    )}
 
-    <span
-      className="
-        block
-        mt-8
-        text-red-500
-        uppercase
-        tracking-[0.4em]
-      "
-    >
-      {feature.words[activeWord]}
-    </span>
-
-  </div>
-
-</div>
-
-</section>
+    </section>
   );
 }
 
-export default function DualWave() {
+function DualWave() {
 
   useEffect(() => {
 
     const progress =
-  document.querySelector<HTMLElement>(
-    ".scroll-progress"
-  );
+      document.querySelector<HTMLElement>(
+        ".scroll-progress"
+      );
 
-if (!progress) return;
+    if (!progress) return;
 
     gsap.to(progress, {
       scaleX: 1,
@@ -410,9 +514,9 @@ if (!progress) return;
   }, []);
 
   return (
-    <div 
-    id="configurator"
-    className="dualwave-page">
+    <div
+      id="configurator"
+      className="dualwave-page">
 
       <div className="dualwave-grid" />
 
@@ -426,20 +530,20 @@ if (!progress) return;
 
       <div className="text-center pt-40 pb-20">
 
-  <p className="feature-label">
-    SOFTWARE EXPERIENCE
-  </p>
+        <p className="feature-label">
+          SOFTWARE EXPERIENCE
+        </p>
 
-  <h2 className="feature-title font-cyber crt cyber-title">
-    CONFIGURATOR
-  </h2>
+        <h2 className="feature-title font-cyber crt cyber-title">
+          CONFIGURATOR
+        </h2>
 
-  <p className="feature-description">
-    Explore layers, macros, encoder controls,
-    firmware management and profile workflows.
-  </p>
+        <p className="feature-description">
+          Explore layers, macros, encoder controls,
+          firmware management and profile workflows.
+        </p>
 
-</div>
+      </div>
 
       {sections.map((feature, index) => (
         <FeatureSection
@@ -450,5 +554,14 @@ if (!progress) return;
       ))}
 
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <>
+      <Hero />
+      <DualWave />
+    </>
   );
 }

@@ -655,3 +655,66 @@ h1, h2, h3, h4 {
 .feature-section {
   min-height: 90vh;
 }
+
+/* ---------------- HERO ---------------- */
+
+.hero-section{
+    padding:120px 80px 80px;
+    background:#050505;
+    position:relative;
+}
+
+.hero-content{
+    width:100%;
+    align-items:center;
+}
+
+.hero-image{
+    width:100%;
+    max-width:720px;
+    margin:auto;
+    display:block;
+    border-radius:16px;
+    border:1px solid rgba(255,0,0,.25);
+    box-shadow:
+        0 0 60px rgba(255,0,0,.18),
+        0 0 120px rgba(255,0,0,.08);
+}
+
+.hero-section h1{
+    font-size:clamp(4rem,7vw,7rem);
+    line-height:.9;
+    letter-spacing:-.06em;
+}
+
+.hero-section p{
+    max-width:620px;
+    font-size:1.2rem;
+    line-height:1.8;
+}
+
+.hero-section a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:220px;
+}
+
+.hero-section .max-w-\[650px\] {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-section .max-w-\[650px\] .flex {
+  justify-content: center;
+}
+
+.hero-section .max-w-\[650px\] p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-section .max-w-\[650px\] > div:last-child {
+  justify-content: center;
+}
