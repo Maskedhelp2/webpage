@@ -186,8 +186,6 @@ export default function NotFound() {
         }
       `}</style>
 
-      <Header />
-
       <main className="nf-main">
         <div className="nf-label">// ERROR</div>
 
@@ -222,7 +220,6 @@ export default function NotFound() {
         </div>
       </main>
 
-      <Footer />
     </>
   )
 }
