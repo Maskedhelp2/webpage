@@ -513,21 +513,86 @@ export default function LidarWorldMapper() {
   .future-item{font-family:var(--mono);font-size:13.5px;color:var(--muted);padding:18px;border-left:2px solid var(--cyan-dim);background:rgba(61,219,255,0.03);}
 
   /* ---------- FOOTER ---------- */
-  footer{padding:60px 5% 40px; border-top:1px solid var(--panel-border);}
-  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;margin-bottom:50px;}
-  .footer-cta h2{font-size:clamp(1.6rem,4vw,2.6rem);}
-  .footer-links{display:flex;gap:14px;flex-wrap:wrap;}
-  .footer-links a{
-    font-family:var(--mono); font-size:12px; color:var(--white); border:1px solid var(--panel-border);
-    padding:12px 22px; border-radius:30px; text-decoration:none; transition:all .25s;
-  }
-  .footer-links a:hover{border-color:var(--cyan); color:var(--cyan);}
-  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:11px;color:var(--muted-dim);letter-spacing:1px;}
+footer{
+  padding:60px 5% 40px;
+  border-top:1px solid var(--panel-border);
+}
 
-  @media (max-width:600px){
-    section{padding:90px 6%;}
-    .hw-grid,.team-grid{grid-template-columns:1fr;}
+.footer-top{
+    display:flex;
+    grid-template-columns:420px 1fr;
+    align-items:center;
+    gap:60px;
+    margin-bottom:50px;
+}
+
+.footer-cta{
+    min-width:420px;   /* or 450px if you prefer */
+}
+
+.footer-cta h2{
+    max-width:420px;
+    line-height:1;
+}
+
+.footer-links{
+    display:flex;
+    gap:15px;
+    flex-wrap:nowrap;
+}
+
+.footer-links a{
+    width:220px;
+    height:64px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    font-family:var(--mono);
+    font-size:15px;
+    border:1px solid var(--panel-border);
+    border-radius:20px;
+    text-decoration:none;
+}
+
+.footer-links a:hover{
+  border-color:var(--cyan);
+  color:var(--cyan);
+}
+
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted-dim);
+  letter-spacing:1px;
+}
+
+@media (max-width:600px){
+  section{
+    padding:90px 6%;
   }
+
+  .hw-grid,
+  .team-grid{
+    grid-template-columns:1fr;
+  }
+
+  .footer-links{
+    flex-direction:column;
+  }
+
+  .footer-links a{
+    width:100%;
+    max-width:260px;
+  }
+}
 
       `}</style>
 
@@ -714,13 +779,20 @@ export default function LidarWorldMapper() {
             <h2>Open source. Open to questions.</h2>
           </div>
           <div className="footer-links">
-            <a href="#">GITHUB REPO →</a>
+            <a 
+            href="https://github.com/Maskedhelp2/Space-visualiser.git"
+            target="_blank"
+            rel="noopener noreferrer"
+            >
+              GITHUB REPO →
+            </a>
+
             <a href="#">PROJECT REPORT →</a>
-            <a href="mailto:hello@example.com">EMAIL US →</a>
+            <a href="mailto:karthik31012007@gmail.com">EMAIL US →</a>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>LOW-COST 2D-TO-3D LIDAR MAPPING // FINAL YEAR PROJECT</span>
+          <span>LOW-COST 2D-TO-3D LIDAR MAPPING</span>
           <span>// 2026</span>
         </div>
       </footer>

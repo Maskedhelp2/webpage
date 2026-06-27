@@ -562,6 +562,39 @@ export default function Page() {
     <>
       <Hero />
       <DualWave />
+
+      <section className="project-footer">
+        <h2 className="project-footer-title">
+          OPEN SOURCE. OPEN TO QUESTIONS.
+        </h2>
+
+        <div className="project-footer-buttons">
+          <a
+            href="https://github.com/Maskedhelp2/desk-helper"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-footer-btn"
+          >
+            GITHUB REPO →
+          </a>
+
+          <a
+            href="/Numpad_Project_Report.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-footer-btn"
+          >
+            PROJECT REPORT →
+          </a>
+
+          <a
+            href="mailto:karthik31012007@gmail.com"
+            className="project-footer-btn"
+          >
+            EMAIL US →
+          </a>
+        </div>
+      </section>
     </>
   );
 }
