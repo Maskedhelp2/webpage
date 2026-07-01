@@ -527,7 +527,7 @@ footer{
 }
 
 .footer-cta{
-    min-width:420px;   /* or 450px if you prefer */
+    min-width:420px;
 }
 
 .footer-cta h2{
@@ -544,13 +544,10 @@ footer{
 .footer-links a{
     width:220px;
     height:64px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     flex-shrink:0;
-
     font-family:var(--mono);
     font-size:15px;
     border:1px solid var(--panel-border);
@@ -599,8 +596,6 @@ footer{
       <div className="grain"></div>
       <div className="scanlines"></div>
 
-      
-
       {/* ================= HERO ================= */}
       <header className="hero" id="top">
         <canvas id="scanCanvas"></canvas>
@@ -610,7 +605,6 @@ footer{
           <p className="hero-sub">A servo motor and an IMU give a cheap 2D LiDAR a third dimension — tilting it through space, tracking every angle, and stitching the slices into a full 3D point cloud, at a fraction of the cost of commercial sensors.</p>
           <div className="hero-meta">
             <div className="item"><div className="num">2D → 3D</div><div className="label">SENSOR CONVERSION</div></div>
-            <div className="item"><div className="num">3</div><div className="label">DETECTION CLASSES</div></div>
             <div className="item"><div className="num">80</div><div className="label">TRAINING EPOCHS</div></div>
             <div className="item"><div className="num">~$120</div><div className="label">EST. HARDWARE COST</div></div>
           </div>
@@ -695,20 +689,17 @@ footer{
       <section id="ai">
         <div className="section-head">
           <div className="eyebrow"><span className="num">04</span><span className="line"></span>AI INTEGRATION</div>
-          <h2>Our own model, trained on JRDB</h2>
-
-          <p className="section-desc">The generated point cloud is passed through a custom, in-house-built detection model to classify objects directly in 3D space — no camera required, which also helps in low-light or visually cluttered environments.</p>
+          <h2>Modified RPEA model, trained on JRDB</h2>
+          <p className="section-desc">The generated point cloud is passed through a modified version of the Residual Path Network with Efficient Attention (RPEA) detection model with a multi-branch detection head to specialize in occlusion patterns and distance bands in order to better detect humans in 3D space — no camera required, which also helps in low-light or visually cluttered environments.</p>
         </div>
         <div className="ai-grid">
-          <div className="ai-stat"><div className="v">Custom Model</div><div className="l">MODEL ARCHITECTURE</div></div>
+          <div className="ai-stat"><div className="v">Modified RPEA</div><div className="l">MODEL ARCHITECTURE</div></div>
           <div className="ai-stat"><div className="v">JRDB</div><div className="l">TRAINING DATASET</div></div>
           <div className="ai-stat"><div className="v">80</div><div className="l">EPOCHS TRAINED</div></div>
           <div className="ai-stat"><div className="v">PyTorch</div><div className="l">FRAMEWORK</div></div>
         </div>
         <div className="classes-row">
-          <span className="class-chip">PEDESTRIAN</span>
-          <span className="class-chip">CYCLIST</span>
-          <span className="class-chip">OBSTACLE</span>
+          <span className="class-chip">HUMAN</span>
         </div>
       </section>
 
@@ -723,7 +714,7 @@ footer{
         <div className="stack-grid">
           <div className="stack-col">
             <span className="tag">AI / ML</span>
-            <ul><li>Python</li><li>PyTorch</li><li>Custom Model</li><li>JRDB Dataset</li></ul>
+            <ul><li>Python</li><li>PyTorch</li><li>Modified RPEA</li><li>JRDB Dataset</li></ul>
           </div>
           <div className="stack-col">
             <span className="tag">HARDWARE</span>
@@ -779,14 +770,13 @@ footer{
             <h2>Open source. Open to questions.</h2>
           </div>
           <div className="footer-links">
-            <a 
-            href="https://github.com/Maskedhelp2/Space-visualiser.git"
-            target="_blank"
-            rel="noopener noreferrer"
+            <a
+              href="https://github.com/Maskedhelp2/Space-visualiser.git"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               GITHUB REPO →
             </a>
-
             <a href="#">PROJECT REPORT →</a>
             <a href="mailto:karthik31012007@gmail.com">EMAIL US →</a>
           </div>
