@@ -778,7 +778,7 @@ footer{
               GITHUB REPO →
             </a>
             <a href="#">PROJECT REPORT →</a>
-            <a href="mailto:karthik31012007@gmail.com">EMAIL US →</a>
+            <a href="mailto:masked@maskedhelp.com">EMAIL US →</a>
           </div>
         </div>
         <div className="footer-bottom">

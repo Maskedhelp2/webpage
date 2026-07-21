@@ -588,7 +588,7 @@ export default function Page() {
           </a>
 
           <a
-            href="mailto:karthik31012007@gmail.com"
+            href="mailto:masked@maskedhelp.com"
             className="project-footer-btn"
           >
             EMAIL US →

@@ -34,7 +34,7 @@ const SOCIALS = [
   },
   {
     label: 'EMAIL',
-    href: 'mailto:karthik31012007@gmail.com',
+    href: 'mailto:masked@maskedhelp.com',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -347,7 +347,7 @@ export default function Footer() {
             </div>
             <p className="footer-cta-sub">OPEN TO COLLABS · INTERNSHIPS · PROJECTS</p>
           </div>
-          <a href="mailto:karthik31012007@gmail.com" className="footer-cta-btn">
+          <a href="mailto:masked@maskedhelp.com" className="footer-cta-btn">
             GET IN TOUCH
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -358,8 +358,8 @@ export default function Footer() {
         {/* ── Email strip ── */}
         <div className="footer-email-strip">
           <span className="footer-email-label">// CONTACT</span>
-          <a href="mailto:karthik31012007@gmail.com" className="footer-email-value">
-            karthik31012007@gmail.com
+          <a href="mailto:masked@maskedhelp.com" className="footer-email-value">
+            masked@maskedhelp.com
           </a>
           <div className="footer-email-sep" />
         </div>
@@ -403,7 +403,7 @@ export default function Footer() {
               <div className="footer-col-label">// CONNECT</div>
               <a href="https://github.com/Maskedhelp2" target="_blank" rel="noopener noreferrer" className="footer-nav-link">GITHUB ↗</a>
               <a href="https://linkedin.com/in/karthik-kumar-7319b6332" target="_blank" rel="noopener noreferrer" className="footer-nav-link">LINKEDIN ↗</a>
-              <a href="mailto:karthik31012007@gmail.com" className="footer-nav-link">EMAIL ↗</a>
+              <a href="mailto:masked@maskedhelp.com" className="footer-nav-link">EMAIL ↗</a>
               <a href="https://www.ieee.org" target="_blank" rel="noopener noreferrer" className="footer-nav-link">IEEE ↗</a>
               <div style={{ marginTop: '20px' }}>
                 <div className="footer-col-label">// BASED IN</div>

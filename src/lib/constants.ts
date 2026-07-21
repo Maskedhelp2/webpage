@@ -7,7 +7,7 @@ export const NAV_LINKS = [
   { label: 'PROJECTS', href: '/projects' },
   { label: 'SKILLS', href: '/skills' },
   { label: 'EXPERIENCE', href: '/experience' },
+  { label: '3D PRINT', href: '/print' },
   { label: 'FRIENDS', href: '/friends' },
   { label: 'PRIVACY', href: '/privacy' },
-  { label: 'TERMS', href: '/terms' },
 ]
