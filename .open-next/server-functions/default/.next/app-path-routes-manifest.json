@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/experience/page": "/experience",
+  "/friends/[slug]/page": "/friends/[slug]",
+  "/friends/page": "/friends",
+  "/page": "/",
+  "/print/page": "/print",
+  "/privacy/page": "/privacy",
+  "/projects/[slug]/page": "/projects/[slug]",
+  "/projects/desk-helper/page": "/projects/desk-helper",
+  "/projects/page": "/projects",
+  "/projects/slam-nav/page": "/projects/slam-nav",
+  "/skills/page": "/skills",
+  "/team/[slug]/page": "/team/[slug]",
+  "/team/page": "/team",
+  "/terms/page": "/terms"
+}
