@@ -92,11 +92,13 @@ function PrintBedDeco() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d')!
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
     let frame = 0
     let raf: number
 
     function resize() {
+      if (!canvas) return
       canvas.width  = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
     }
@@ -104,6 +106,7 @@ function PrintBedDeco() {
     window.addEventListener('resize', resize)
 
     function draw() {
+      if (!canvas || !ctx) return
       const { width, height } = canvas
       ctx.clearRect(0, 0, width, height)
 
