@@ -1,500 +1,979 @@
 'use client';
 
-const EXPERIENCE = [
+import { useEffect, useRef } from 'react';
+
+type ExperienceItem = {
+  type: 'work';
+  role: string;
+  org: string;
+  orgUrl: string;
+  period: string;
+  duration: string;
+  mode: string;
+  location: string;
+  status: string;
+  tags: string[];
+  description: string;
+  highlights: string[];
+};
+
+type EducationItem = {
+  type: 'edu';
+  degree: string;
+  field: string;
+  org: string;
+  orgUrl: string;
+  period: string;
+  duration: string;
+  mode: string;
+  location: string;
+  status: string;
+  tags: string[];
+  description: string;
+  highlights: string[];
+  skills: string[];
+};
+
+type CardItem = ExperienceItem | EducationItem;
+
+const EXPERIENCE: ExperienceItem[] = [
   {
     type: 'work',
     role: 'RESEARCH INTERN',
     org: 'AMEYA SONIC OPTEO SYSTEMS',
     orgUrl: 'https://ameyasonicopteosystem.com',
-    period: '2026 — PRESENT',
+    period: '2026 - PRESENT',
     duration: 'ONGOING',
     mode: 'ON-SITE',
     location: 'INDIA',
+    status: 'ACTIVE',
     tags: ['INTERNSHIP', 'RESEARCH', 'SYSTEMS'],
-    description: 'Currently interning at Ameya Sonic Opteo Systems, contributing to research and development in advanced systems engineering. Working on applied technical projects within a specialised engineering environment.',
+    description:
+      'Contributing to research and development work in an applied engineering environment, with exposure to advanced system design and technical problem solving.',
+    highlights: [
+      'Supporting R&D workflows across hardware and software touchpoints.',
+      'Documenting technical findings and implementation constraints.',
+      'Building practical systems intuition in a specialised engineering setting.',
+    ],
   },
   {
     type: 'work',
     role: 'INTERN',
     org: 'INDCASTING.COM',
     orgUrl: 'https://indcasting.com',
-    period: '2025 — 2026',
+    period: '2025 - 2026',
     duration: 'CONTRACT',
     mode: 'REMOTE',
     location: 'INDIA',
+    status: 'COMPLETE',
     tags: ['INTERNSHIP', 'MANUFACTURING', 'REMOTE'],
-    description: 'Interned at IndCasting.com, a platform in the casting and manufacturing industry. Gained hands-on exposure to industrial workflows and contributed to technical development work.',
+    description:
+      'Worked with a casting and manufacturing platform, gaining exposure to industrial workflows while contributing to technical development tasks.',
+    highlights: [
+      'Learned how software supports manufacturing and casting workflows.',
+      'Worked remotely with delivery constraints and async communication.',
+      'Improved implementation discipline through production-facing tasks.',
+    ],
   },
   {
     type: 'work',
     role: 'TECHNOLOGY INTERN',
     org: 'KARVY INNOTECH LTD.',
     orgUrl: 'https://www.linkedin.com/company/karvy-innotech-ltd/',
-    period: 'DEC 2025 — APR 2026',
+    period: 'DEC 2025 - APR 2026',
     duration: '5 MONTHS',
     mode: 'HYBRID',
     location: 'INDIA',
+    status: 'COMPLETE',
     tags: ['INTERNSHIP', 'FINTECH', 'HYBRID'],
-    description: "Worked as a technology intern at Karvy Innotech, one of India's leading financial technology firms. Contributed to internal tooling and software development within a hybrid work environment.",
+    description:
+      'Contributed to internal tooling and software development work inside a financial technology environment with a hybrid operating model.',
+    highlights: [
+      'Worked around internal tooling, delivery expectations, and team workflows.',
+      'Strengthened fundamentals in practical software development.',
+      'Built context around fintech systems and operational constraints.',
+    ],
   },
 ];
 
-const EDUCATION = [
+const EDUCATION: EducationItem[] = [
   {
     type: 'edu',
     degree: 'BACHELOR OF TECHNOLOGY',
     field: 'ARTIFICIAL INTELLIGENCE',
     org: 'AMITY UNIVERSITY, NOIDA',
     orgUrl: 'https://www.linkedin.com/school/amity-university/posts/?feedView=all',
-    period: 'SEP 2024 — SEP 2028',
+    period: 'SEP 2024 - SEP 2028',
     duration: '4 YEARS',
     mode: 'ON-CAMPUS',
     location: 'NOIDA, INDIA',
+    status: 'IN PROGRESS',
     tags: ['BTECH', 'ARTIFICIAL INTELLIGENCE', 'COMPUTER SCIENCE'],
-    description: 'Pursuing a Bachelor of Technology in Artificial Intelligence at Amity University, Noida. Core subjects include machine learning, computer vision, NLP, robotics, and full-stack development.',
+    description:
+      'Pursuing a Bachelor of Technology in Artificial Intelligence with coursework across machine learning, computer vision, NLP, robotics, and full-stack development.',
+    highlights: [
+      'Studying AI fundamentals alongside computer science and engineering foundations.',
+      'Applying coursework through web, robotics, and embedded systems projects.',
+      'Building toward a 2028 graduation timeline.',
+    ],
     skills: ['COMPUTER SCIENCE', 'ARTIFICIAL INTELLIGENCE', 'MACHINE LEARNING', 'NLP', 'ROBOTICS'],
   },
 ];
 
-type WorkItem = typeof EXPERIENCE[number];
-type EducationItem = typeof EDUCATION[number];
-type CardItem = WorkItem | EducationItem;
+const STATS = [
+  ['3', 'INTERNSHIPS'],
+  ['4+', 'YEARS DEGREE'],
+  ['2028', 'GRADUATING'],
+  ['AI', 'FOCUS'],
+];
 
-function ExternalLink() {
+function ExternalLinkIcon() {
   return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-      <polyline points="15 3 21 3 21 9"/>
-      <line x1="10" y1="14" x2="21" y2="3"/>
+    <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      <path d="M15 3h6v6" />
+      <path d="M10 14 21 3" />
     </svg>
   );
 }
 
-function Card({ item, index }: { item: CardItem; index: number }) {
-  const isEdu = item.type === 'edu';
+function TimelineCard({ item, index }: { item: CardItem; index: number }) {
+  const isEducation = item.type === 'edu';
+  const title = isEducation ? item.degree : item.role;
+  const subtitle = isEducation ? item.field : item.org;
 
   return (
-    <div className="exp-card" style={{ animationDelay: `${index * 80}ms` }}>
-
-      {/* Top bar */}
-      <div className="exp-card-top">
-        <div className="exp-type-badge">
-          {isEdu ? '// EDUCATION' : '// EXPERIENCE'}
-        </div>
-        <div className="exp-period">{item.period}</div>
+    <article className="exp-card" style={{ animationDelay: `${index * 75}ms` }}>
+      <div className="exp-node" aria-hidden="true">
+        <span>{String(index + 1).padStart(2, '0')}</span>
       </div>
 
-      {/* Main content */}
-      <div className="exp-card-body">
-
-        {/* Left — title block */}
-        <div className="exp-left">
-          <div className="exp-role">
-            {'role' in item ? (
-              item.role
-            ) : (
-              <>
-                {(item as EducationItem).degree}
-                <span className="exp-role-accent">
-                  <br />// {(item as EducationItem).field}
-                </span>
-              </>
-            )}
-          </div>
-
-          <a href={item.orgUrl} target="_blank" rel="noopener noreferrer" className="exp-org">
-            {item.org}
-            <span className="exp-org-icon"><ExternalLink /></span>
-          </a>
-
-          <div className="exp-meta-row">
-            <span className="exp-meta-chip">{item.duration}</span>
-            <span className="exp-meta-chip">{item.mode}</span>
-            <span className="exp-meta-chip">{item.location}</span>
-          </div>
+      <div className="exp-card-shell">
+        <div className="exp-card-top">
+          <span className="exp-type">{isEducation ? 'EDUCATION' : 'EXPERIENCE'}</span>
+          <span className={`exp-status ${item.status === 'ACTIVE' || item.status === 'IN PROGRESS' ? 'is-live' : ''}`}>
+            {item.status}
+          </span>
         </div>
 
-        {/* Right — description */}
-        <div className="exp-right">
-          <p className="exp-desc">{item.description}</p>
+        <div className="exp-card-grid">
+          <div className="exp-aside">
+            <span className="exp-period">{item.period}</span>
+            <div className="exp-meta-list">
+              <span>{item.duration}</span>
+              <span>{item.mode}</span>
+              <span>{item.location}</span>
+            </div>
+          </div>
 
-          {'skills' in item && item.skills && (
-            <div className="exp-skills">
-              {(item as EducationItem).skills!.map(s => (
-                <span key={s} className="exp-skill-tag">{s}</span>
+          <div className="exp-main">
+            <div className="exp-heading-row">
+              <div>
+                <h2 className="exp-role">{title}</h2>
+                <p className="exp-subrole">{subtitle}</p>
+              </div>
+              <a href={item.orgUrl} target="_blank" rel="noopener noreferrer" className="exp-org" aria-label={`Open ${item.org}`}>
+                <span>{item.org}</span>
+                <ExternalLinkIcon />
+              </a>
+            </div>
+
+            <p className="exp-desc">{item.description}</p>
+
+            <ul className="exp-highlights">
+              {item.highlights.map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
+            </ul>
+
+            {'skills' in item && (
+              <div className="exp-skills" aria-label="Education focus areas">
+                {item.skills.map((skill) => (
+                  <span key={skill}>{skill}</span>
+                ))}
+              </div>
+            )}
+
+            <div className="exp-tags" aria-label="Tags">
+              {item.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
               ))}
             </div>
-          )}
-
-          <div className="exp-tags">
-            {item.tags.map(t => (
-              <span key={t} className="exp-tag">{t}</span>
-            ))}
           </div>
         </div>
       </div>
-
-      {/* Bottom accent line */}
-      <div className="exp-card-bottom" />
-    </div>
+    </article>
   );
 }
 
 export default function ExperiencePage() {
+  const pageRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const root = pageRef.current;
+    if (!root) return;
+
+    const revealTargets = root.querySelectorAll<HTMLElement>('[data-reveal]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.18,
+        rootMargin: '0px 0px -8% 0px',
+      }
+    );
+
+    revealTargets.forEach((target) => observer.observe(target));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <style>{`
+        .reveal {
+          opacity: 0;
+          transform: translateY(18px);
+          will-change: transform, opacity;
+        }
 
-        /* ── PAGE ── */
+        .reveal.is-visible {
+          animation: exp-rise 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation-delay: var(--delay, 0ms);
+        }
+
+        @keyframes exp-rise {
+          from {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         .exp-page {
-          max-width: 1000px;
+          width: min(1120px, calc(100% - 40px));
           margin: 0 auto;
-          padding: 140px 2rem 8rem;
+          padding: 136px 0 96px;
           min-height: 100vh;
           position: relative;
           z-index: 1;
         }
 
-        /* ── HEADER ── */
+        .exp-hero {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) 320px;
+          gap: 48px;
+          align-items: end;
+          margin-bottom: 48px;
+        }
+
         .exp-eyebrow {
           font-family: var(--mono);
           font-size: 11px;
-          color: var(--accent, #e63329);
+          color: var(--accent);
           letter-spacing: 0.22em;
-          margin-bottom: 1rem;
+          margin-bottom: 16px;
           display: flex;
           align-items: center;
           gap: 12px;
         }
+
         .exp-eyebrow::before {
           content: '';
-          display: block;
-          width: 28px;
+          width: 30px;
           height: 1px;
-          background: var(--accent, #e63329);
-          flex-shrink: 0;
+          background: var(--accent);
+          flex: 0 0 auto;
+          box-shadow: 0 0 16px rgba(230, 51, 41, 0.55);
         }
 
         .exp-title {
           font-family: var(--display);
-          font-size: clamp(2.4rem, 7vw, 5rem);
+          font-size: clamp(2.5rem, 7vw, 5.4rem);
           font-weight: 900;
           color: #fff;
-          letter-spacing: -0.01em;
           line-height: 0.92;
-          margin-bottom: 0.5rem;
-        }
-        .exp-title-accent { color: var(--accent, #e63329); }
-
-        .exp-subtitle {
-          font-family: var(--mono);
-          font-size: 11px;
-          color: #555;
-          letter-spacing: 0.18em;
-          margin-bottom: 4rem;
+          letter-spacing: 0;
+          margin-bottom: 18px;
         }
 
-        /* ── STATS ── */
-        .exp-stats {
+        .exp-title span {
+          color: var(--accent);
+          text-shadow: 0 0 28px rgba(230, 51, 41, 0.35);
+        }
+
+        .exp-summary {
+          font-family: var(--prose);
+          color: #b1b1b1;
+          font-size: clamp(14px, 1.35vw, 16px);
+          line-height: 1.9;
+          max-width: 62ch;
+        }
+
+        .exp-terminal {
+          border: 1px solid rgba(230, 51, 41, 0.22);
+          background:
+            linear-gradient(180deg, rgba(230, 51, 41, 0.07), rgba(230, 51, 41, 0.015)),
+            rgba(8, 8, 8, 0.72);
+          padding: 18px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .exp-terminal::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, transparent, rgba(230, 51, 41, 0.08), transparent);
+          transform: translateX(-100%);
+          animation: exp-scan 4.5s linear infinite;
+          pointer-events: none;
+        }
+
+        .exp-terminal:hover::before {
+          animation-duration: 2.6s;
+        }
+
+        @keyframes exp-scan {
+          to { transform: translateX(100%); }
+        }
+
+        .exp-terminal-line {
           display: flex;
-          gap: 0;
-          margin-bottom: 5rem;
-          border: 1px solid #1a1a1a;
-          width: fit-content;
-          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 16px;
+          font-family: var(--mono);
+          font-size: 10px;
+          letter-spacing: 0.16em;
+          color: #555;
+          padding: 8px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
+
+        .exp-terminal-line:last-child {
+          border-bottom: none;
+        }
+
+        .exp-terminal-line strong {
+          color: var(--accent);
+          font-weight: 400;
+          text-align: right;
+        }
+
+        .exp-stats {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          border: 1px solid #1a1a1a;
+          background: rgba(255, 255, 255, 0.012);
+          margin-bottom: 56px;
+        }
+
         .exp-stat {
-          padding: 18px 28px;
+          padding: 20px 22px;
           border-right: 1px solid #1a1a1a;
           position: relative;
+          min-width: 0;
+          overflow: hidden;
         }
-        .exp-stat:last-child { border-right: none; }
+
+        .exp-stat:last-child {
+          border-right: none;
+        }
+
         .exp-stat::before {
           content: '';
           position: absolute;
-          top: 0; left: 0; right: 0;
+          left: 0;
+          top: 0;
+          width: 100%;
           height: 1px;
-          background: linear-gradient(90deg, var(--accent, #e63329), transparent);
-        }
-        .exp-stat-num {
-          font-family: var(--display);
-          font-size: 2rem;
-          font-weight: 900;
-          color: var(--accent, #e63329);
-          line-height: 1;
-        }
-        .exp-stat-label {
-          font-family: var(--mono);
-          font-size: 9px;
-          color: #444;
-          letter-spacing: 0.18em;
-          margin-top: 6px;
+          background: linear-gradient(90deg, rgba(230, 51, 41, 0.65), transparent);
+          opacity: 0.75;
         }
 
-        /* ── SECTION LABEL ── */
-        .exp-section-label {
+        .exp-stat::after {
+          content: '';
+          position: absolute;
+          inset: auto -15% 0 -15%;
+          height: 42%;
+          background: radial-gradient(circle, rgba(230, 51, 41, 0.1), transparent 72%);
+          transform: translateY(25%);
+          opacity: 0;
+          transition: opacity 0.2s ease;
+          pointer-events: none;
+        }
+
+        .exp-stat:hover::after {
+          opacity: 1;
+        }
+
+        .exp-stat-num {
+          font-family: var(--display);
+          color: var(--accent);
+          font-size: clamp(1.5rem, 3vw, 2.15rem);
+          font-weight: 900;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        .exp-stat-label {
           font-family: var(--mono);
-          font-size: 10px;
-          color: var(--accent, #e63329);
-          letter-spacing: 0.3em;
-          margin-bottom: 1.5rem;
+          color: #474747;
+          font-size: 9px;
+          letter-spacing: 0.18em;
+          margin-top: 8px;
+        }
+
+        .exp-section {
+          margin-bottom: 54px;
+        }
+
+        .exp-section-head {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 16px;
+          margin-bottom: 20px;
+          font-family: var(--mono);
+          color: var(--accent);
+          font-size: 10px;
+          letter-spacing: 0.26em;
         }
-        .exp-section-label::after {
+
+        .exp-section-head::after {
           content: '';
           flex: 1;
           height: 1px;
-          background: linear-gradient(90deg, rgba(230,51,41,0.25), transparent);
+          background: linear-gradient(90deg, rgba(230, 51, 41, 0.28), transparent);
         }
-        .exp-section { margin-bottom: 4rem; }
 
-        /* ── CARD ── */
-        .exp-card {
-          border: 1px solid #1c1c1c;
-          background: rgba(8,8,8,0.6);
+        .exp-timeline {
           position: relative;
-          margin-bottom: 1px;
-          transition: border-color 0.25s, background 0.25s;
-          animation: card-in 0.5s both;
-        }
-        .exp-card:last-child { margin-bottom: 0; }
-
-        @keyframes card-in {
-          from { opacity: 0; transform: translateY(12px); }
-          to   { opacity: 1; transform: translateY(0); }
+          display: grid;
+          gap: 18px;
         }
 
-        .exp-card:hover {
-          border-color: rgba(230,51,41,0.25);
-          background: rgba(12,8,8,0.8);
-        }
-        .exp-card::before {
+        .exp-timeline::before {
           content: '';
           position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 1px;
-          background: linear-gradient(90deg, #e63329 0%, rgba(230,51,41,0.15) 60%, transparent 100%);
-          opacity: 0;
-          transition: opacity 0.25s;
+          left: 23px;
+          top: 18px;
+          bottom: 18px;
+          width: 1px;
+          background: linear-gradient(to bottom, rgba(230, 51, 41, 0.5), rgba(230, 51, 41, 0.08));
         }
-        .exp-card:hover::before { opacity: 1; }
+
+        .exp-card {
+          position: relative;
+          display: grid;
+          grid-template-columns: 48px minmax(0, 1fr);
+          gap: 18px;
+          animation: exp-card-in 0.45s ease both;
+        }
+
+        @keyframes exp-card-in {
+          from { opacity: 0; transform: translateY(14px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exp-node {
+          width: 48px;
+          display: flex;
+          justify-content: center;
+          padding-top: 18px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .exp-node span {
+          width: 34px;
+          height: 34px;
+          display: grid;
+          place-items: center;
+          border: 1px solid rgba(230, 51, 41, 0.4);
+          background: #080808;
+          color: var(--accent);
+          font-family: var(--mono);
+          font-size: 10px;
+          box-shadow: 0 0 20px rgba(230, 51, 41, 0.14);
+          animation: exp-node-breathe 3.4s ease-in-out infinite;
+        }
+
+        @keyframes exp-node-breathe {
+          0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 20px rgba(230, 51, 41, 0.14);
+          }
+          50% {
+            transform: scale(1.05);
+            box-shadow: 0 0 28px rgba(230, 51, 41, 0.22);
+          }
+        }
+
+        .exp-card-shell {
+          border: 1px solid #1c1c1c;
+          background:
+            linear-gradient(135deg, rgba(230, 51, 41, 0.05), transparent 40%),
+            rgba(8, 8, 8, 0.72);
+          transition: border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+          min-width: 0;
+        }
+
+        .exp-card-shell:hover {
+          border-color: rgba(230, 51, 41, 0.36);
+          background:
+            linear-gradient(135deg, rgba(230, 51, 41, 0.075), transparent 44%),
+            rgba(12, 8, 8, 0.86);
+          box-shadow: 0 0 36px rgba(230, 51, 41, 0.08);
+          transform: translateY(-3px);
+        }
+
+        .exp-card-shell::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
+          transform: translateX(-120%);
+          transition: transform 0.7s ease;
+          pointer-events: none;
+        }
+
+        .exp-card-shell:hover::before {
+          transform: translateX(120%);
+        }
 
         .exp-card-top {
           display: flex;
-          align-items: center;
           justify-content: space-between;
-          padding: 12px 24px;
-          border-bottom: 1px solid #111;
-          background: rgba(230,51,41,0.02);
+          align-items: center;
+          gap: 16px;
+          padding: 12px 18px;
+          border-bottom: 1px solid #131313;
         }
-        .exp-type-badge {
+
+        .exp-type,
+        .exp-status,
+        .exp-period,
+        .exp-meta-list,
+        .exp-subrole,
+        .exp-org,
+        .exp-tags span,
+        .exp-skills span {
           font-family: var(--mono);
+        }
+
+        .exp-type {
+          color: var(--accent);
           font-size: 10px;
-          color: var(--accent, #e63329);
           letter-spacing: 0.2em;
         }
-        .exp-period {
-          font-family: var(--mono);
-          font-size: 10px;
-          color: #444;
-          letter-spacing: 0.15em;
-        }
 
-        .exp-card-body {
-          display: grid;
-          grid-template-columns: 240px 1fr;
-          gap: 0;
-          padding: 0;
-        }
-
-        .exp-left {
-          padding: 28px 24px;
-          border-right: 1px solid #111;
-        }
-
-        .exp-right {
-          padding: 28px 28px;
-        }
-
-        .exp-role {
-          font-family: var(--display);
-          font-size: clamp(0.9rem, 1.8vw, 1.2rem);
-          font-weight: 700;
-          color: #fff;
-          letter-spacing: 0.04em;
-          line-height: 1.3;
-          margin-bottom: 12px;
-        }
-        .exp-role-accent {
-          color: var(--accent, #e63329);
-          font-size: 0.82em;
-          font-weight: 400;
-          letter-spacing: 0.02em;
-        }
-
-        .exp-org {
-          font-family: var(--mono);
-          font-size: 11px;
-          color: #666;
-          letter-spacing: 0.08em;
-          text-decoration: none;
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          margin-bottom: 16px;
-          transition: color 0.2s;
-          line-height: 1.4;
-        }
-        .exp-org:hover { color: var(--accent, #e63329); }
-        .exp-org-icon { opacity: 0.4; display: flex; align-items: center; flex-shrink: 0; }
-        .exp-org:hover .exp-org-icon { opacity: 1; }
-
-        .exp-meta-row { display: flex; flex-direction: column; gap: 6px; }
-        .exp-meta-chip {
-          font-family: var(--mono);
-          font-size: 9px;
+        .exp-status {
           color: #555;
-          letter-spacing: 0.1em;
+          font-size: 9px;
+          letter-spacing: 0.18em;
+          border: 1px solid #202020;
+          padding: 4px 9px;
+        }
+
+        .exp-status.is-live {
+          color: var(--accent);
+          border-color: rgba(230, 51, 41, 0.28);
+          background: rgba(230, 51, 41, 0.06);
+        }
+
+        .exp-card-grid {
+          display: grid;
+          grid-template-columns: 210px minmax(0, 1fr);
+        }
+
+        .exp-aside {
+          border-right: 1px solid #131313;
+          padding: 28px 22px;
+        }
+
+        .exp-period {
+          color: #d8d8d8;
+          font-size: 11px;
+          letter-spacing: 0.14em;
+          line-height: 1.5;
+          display: block;
+          margin-bottom: 18px;
+        }
+
+        .exp-meta-list {
+          display: grid;
+          gap: 8px;
+          color: #555;
+          font-size: 9px;
+          letter-spacing: 0.12em;
+        }
+
+        .exp-meta-list span {
           display: flex;
           align-items: center;
           gap: 8px;
         }
-        .exp-meta-chip::before {
+
+        .exp-meta-list span::before {
           content: '';
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background: #2a2a2a;
-          flex-shrink: 0;
+          width: 5px;
+          height: 5px;
+          border: 1px solid rgba(230, 51, 41, 0.35);
+          background: rgba(230, 51, 41, 0.08);
+          flex: 0 0 auto;
+        }
+
+        .exp-main {
+          padding: 28px;
+          min-width: 0;
+        }
+
+        .exp-heading-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 24px;
+          margin-bottom: 18px;
+        }
+
+        .exp-role {
+          font-family: var(--display);
+          color: #fff;
+          font-size: clamp(1rem, 2vw, 1.35rem);
+          line-height: 1.25;
+          letter-spacing: 0.04em;
+          font-weight: 900;
+          margin-bottom: 6px;
+        }
+
+        .exp-subrole {
+          color: var(--accent);
+          font-size: 10px;
+          letter-spacing: 0.2em;
+          line-height: 1.6;
+        }
+
+        .exp-org {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: #646464;
+          font-size: 10px;
+          letter-spacing: 0.1em;
+          line-height: 1.4;
+          transition: color 0.18s ease;
+          text-align: right;
+          max-width: 220px;
+        }
+
+        .exp-org:hover {
+          color: var(--accent);
+        }
+
+        .exp-org svg {
+          flex: 0 0 auto;
+          opacity: 0.58;
         }
 
         .exp-desc {
-          font-family: 'Inter', var(--prose, sans-serif);
+          font-family: var(--prose);
+          color: #bebebe;
           font-size: 14px;
-          color: #aaa;
-          line-height: 1.8;
+          line-height: 1.85;
+          margin-bottom: 18px;
+          max-width: 760px;
+        }
+
+        .exp-highlights {
+          display: grid;
+          gap: 9px;
+          list-style: none;
           margin-bottom: 20px;
-          font-weight: 400;
+        }
+
+        .exp-highlights li {
+          position: relative;
+          padding-left: 18px;
+          color: #909090;
+          font-family: var(--prose);
+          font-size: 13px;
+          line-height: 1.65;
+        }
+
+        .exp-highlights li::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0.75em;
+          width: 8px;
+          height: 1px;
+          background: var(--accent);
+        }
+
+        .exp-skills,
+        .exp-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 7px;
         }
 
         .exp-skills {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
-          margin-bottom: 14px;
+          margin-bottom: 12px;
         }
-        .exp-skill-tag {
-          font-family: var(--mono);
+
+        .exp-skills span {
+          color: var(--accent);
+          border: 1px solid rgba(230, 51, 41, 0.24);
+          background: rgba(230, 51, 41, 0.055);
+          padding: 4px 10px;
           font-size: 9px;
-          color: var(--accent, #e63329);
-          border: 1px solid rgba(230,51,41,0.2);
-          background: rgba(230,51,41,0.04);
-          padding: 3px 10px;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.12em;
         }
 
-        .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .exp-tag {
-          font-family: var(--mono);
+        .exp-tags span {
+          color: #3f3f3f;
+          border: 1px solid #1e1e1e;
+          padding: 4px 10px;
           font-size: 9px;
-          color: #333;
-          border: 1px solid #1c1c1c;
-          padding: 3px 10px;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.12em;
         }
 
-        .exp-card-bottom {
-          height: 1px;
-          background: linear-gradient(90deg, rgba(230,51,41,0.5), transparent);
-          opacity: 0;
-          transition: opacity 0.25s;
+        .exp-tags span:hover,
+        .exp-skills span:hover {
+          transform: translateY(-1px);
         }
-        .exp-card:hover .exp-card-bottom { opacity: 1; }
 
-        /* ── TIMELINE ── */
-        .exp-timeline {
+        .exp-divider {
           display: flex;
-          flex-direction: column;
           align-items: center;
-          gap: 0;
-          margin: 32px auto;
-          width: fit-content;
+          justify-content: center;
+          gap: 12px;
+          margin: 42px 0;
         }
-        .exp-timeline-dot {
+
+        .exp-divider span {
           width: 8px;
           height: 8px;
-          background: var(--accent, #e63329);
-          border-radius: 50%;
-          box-shadow: 0 0 12px rgba(230,51,41,0.6);
-        }
-        .exp-timeline-line {
-          width: 1px;
-          height: 48px;
-          background: linear-gradient(to bottom, var(--accent, #e63329), transparent);
+          background: var(--accent);
+          box-shadow: 0 0 16px rgba(230, 51, 41, 0.7);
+          animation: exp-dot-pulse 2.6s ease-in-out infinite;
         }
 
-        /* ── MOBILE ── */
-        @media (max-width: 768px) {
-          .exp-page { padding: 120px 1rem 5rem; }
-          .exp-card-body { grid-template-columns: 1fr; }
-          .exp-left { border-right: none; border-bottom: 1px solid #111; padding: 20px 20px 16px; }
-          .exp-right { padding: 20px; }
-          .exp-meta-row { flex-direction: row; flex-wrap: wrap; gap: 6px; }
-          .exp-meta-chip { flex-direction: row; }
-          .exp-stats { width: 100%; }
-          .exp-stat { flex: 1; min-width: 80px; padding: 14px 16px; }
+        @keyframes exp-dot-pulse {
+          0%, 100% { transform: scale(1); opacity: 0.9; }
+          50% { transform: scale(1.35); opacity: 1; }
         }
 
+        .exp-divider::before,
+        .exp-divider::after {
+          content: '';
+          width: 90px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(230, 51, 41, 0.35));
+        }
+
+        .exp-divider::after {
+          background: linear-gradient(90deg, rgba(230, 51, 41, 0.35), transparent);
+        }
+
+        @media (max-width: 860px) {
+          .exp-page {
+            width: min(100% - 28px, 1120px);
+            padding-top: 116px;
+          }
+
+          .exp-hero {
+            grid-template-columns: 1fr;
+            gap: 28px;
+            margin-bottom: 34px;
+          }
+
+          .exp-terminal {
+            max-width: 420px;
+          }
+
+          .exp-stats {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .exp-stat:nth-child(2) {
+            border-right: none;
+          }
+
+          .exp-stat:nth-child(-n + 2) {
+            border-bottom: 1px solid #1a1a1a;
+          }
+
+          .exp-card-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .exp-aside {
+            border-right: none;
+            border-bottom: 1px solid #131313;
+            padding: 20px;
+          }
+
+          .exp-meta-list {
+            display: flex;
+            flex-wrap: wrap;
+          }
+
+          .exp-main {
+            padding: 22px 20px;
+          }
+
+          .exp-heading-row {
+            flex-direction: column;
+            gap: 12px;
+          }
+
+          .exp-org {
+            text-align: left;
+            max-width: 100%;
+          }
+        }
+
+        @media (max-width: 560px) {
+          .exp-page {
+            width: min(100% - 24px, 1120px);
+            padding-bottom: 72px;
+          }
+
+          .exp-eyebrow {
+            font-size: 9px;
+            letter-spacing: 0.14em;
+          }
+
+          .exp-summary {
+            font-size: 14px;
+          }
+
+          .exp-stats {
+            grid-template-columns: 1fr;
+          }
+
+          .exp-stat,
+          .exp-stat:nth-child(2) {
+            border-right: none;
+            border-bottom: 1px solid #1a1a1a;
+          }
+
+          .exp-stat:last-child {
+            border-bottom: none;
+          }
+
+          .exp-timeline::before {
+            display: none;
+          }
+
+          .exp-card {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          .exp-node {
+            width: auto;
+            justify-content: flex-start;
+            padding-top: 0;
+          }
+
+          .exp-card-top {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 8px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .reveal,
+          .reveal.is-visible,
+          .exp-terminal::before,
+          .exp-node span,
+          .exp-divider span,
+          .exp-card-shell::before {
+            animation: none !important;
+            transition: none !important;
+          }
+
+          .reveal {
+            opacity: 1;
+            transform: none;
+          }
+        }
       `}</style>
 
-      <main className="exp-page">
+      <main className="exp-page" ref={pageRef}>
+        <section className="exp-hero reveal" data-reveal style={{ ['--delay' as string]: '0ms' }} aria-labelledby="experience-title">
+          <div>
+            <p className="exp-eyebrow">MASKEDHELP // KARTHIK KUMAR // TIMELINE</p>
+            <h1 id="experience-title" className="exp-title">
+              EXPERIENCE<span>_</span>
+            </h1>
+            <p className="exp-summary">
+              A compact record of internships, engineering exposure, and AI-focused education. Built around practical systems work, software fundamentals, and a long-term interest in intelligent hardware.
+            </p>
+          </div>
 
-        {/* Header */}
-        <p className="exp-eyebrow">MASKEDHELP // KARTHIK KUMAR // TIMELINE</p>
-        <h1 className="exp-title">
-          EXPERIENCE<span className="exp-title-accent">_</span>
-        </h1>
-        <p className="exp-subtitle">EDUCATION · WORK · INTERNSHIPS</p>
+          <aside className="exp-terminal" data-reveal style={{ ['--delay' as string]: '120ms' }} aria-label="Timeline summary">
+            <div className="exp-terminal-line">
+              <span>TRACK</span>
+              <strong>AI + SYSTEMS</strong>
+            </div>
+            <div className="exp-terminal-line">
+              <span>STATUS</span>
+              <strong>BUILDING</strong>
+            </div>
+            <div className="exp-terminal-line">
+              <span>BASE</span>
+              <strong>INDIA</strong>
+            </div>
+          </aside>
+        </section>
 
-        {/* Stats */}
-        <div className="exp-stats">
-          {[
-            ['3',       'INTERNSHIPS'],
-            ['5+',      'MONTHS EXP'],
-            ['2028',    'GRADUATING'],
-            ['BTech AI','DEGREE'],
-          ].map(([num, label]) => (
+        <section className="exp-stats reveal" data-reveal style={{ ['--delay' as string]: '140ms' }} aria-label="Experience statistics">
+          {STATS.map(([num, label]) => (
             <div key={label} className="exp-stat">
               <div className="exp-stat-num">{num}</div>
               <div className="exp-stat-label">{label}</div>
             </div>
           ))}
+        </section>
+
+        <section className="exp-section" data-reveal style={{ ['--delay' as string]: '180ms' }} aria-labelledby="work-heading">
+          <h2 id="work-heading" className="exp-section-head">{'// 01 - WORK EXPERIENCE'}</h2>
+          <div className="exp-timeline">
+            {EXPERIENCE.map((item, index) => (
+              <div key={`${item.org}-${item.role}`} className="reveal" data-reveal style={{ ['--delay' as string]: `${index * 110}ms` }}>
+                <TimelineCard item={item} index={index} />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="exp-divider reveal" data-reveal style={{ ['--delay' as string]: '260ms' }} aria-hidden="true">
+          <span />
         </div>
 
-        {/* Work */}
-        <div className="exp-section">
-          <div className="exp-section-label">// 01 · WORK EXPERIENCE</div>
-          {EXPERIENCE.map((item, i) => (
-            <Card key={i} item={item} index={i} />
-          ))}
-        </div>
-
-        {/* Connector */}
-        <div className="exp-timeline">
-          <div className="exp-timeline-dot" />
-          <div className="exp-timeline-line" />
-        </div>
-
-        {/* Education */}
-        <div className="exp-section">
-          <div className="exp-section-label">// 02 · EDUCATION</div>
-          {EDUCATION.map((item, i) => (
-            <Card key={i} item={item} index={i} />
-          ))}
-        </div>
-
+        <section className="exp-section" data-reveal style={{ ['--delay' as string]: '300ms' }} aria-labelledby="education-heading">
+          <h2 id="education-heading" className="exp-section-head">{'// 02 - EDUCATION'}</h2>
+          <div className="exp-timeline">
+            {EDUCATION.map((item, index) => (
+              <div key={`${item.org}-${item.degree}`} className="reveal" data-reveal style={{ ['--delay' as string]: `${(EXPERIENCE.length + index) * 110}ms` }}>
+                <TimelineCard item={item} index={EXPERIENCE.length + index} />
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
     </>
   );
