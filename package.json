@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:cloudflare": "opennextjs-cloudflare build",
+    "build:cloudflare": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "deploy": "next build && wrangler pages deploy out"
   },
   "dependencies": {
     "@emnapi/core": "^1.11.2",
