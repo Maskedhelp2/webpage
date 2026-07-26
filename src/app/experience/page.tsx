@@ -1,980 +1,717 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-type ExperienceItem = {
-  type: 'work';
-  role: string;
-  org: string;
-  orgUrl: string;
-  period: string;
-  duration: string;
-  mode: string;
-  location: string;
-  status: string;
-  tags: string[];
-  description: string;
-  highlights: string[];
-};
-
-type EducationItem = {
-  type: 'edu';
-  degree: string;
-  field: string;
-  org: string;
-  orgUrl: string;
-  period: string;
-  duration: string;
-  mode: string;
-  location: string;
-  status: string;
-  tags: string[];
-  description: string;
-  highlights: string[];
-  skills: string[];
-};
-
-type CardItem = ExperienceItem | EducationItem;
-
-const EXPERIENCE: ExperienceItem[] = [
+// ── DATA ─────────────────────────────────────────────────────────
+const ITEMS = [
   {
-    type: 'work',
+    idx: '01', type: 'WORK',
     role: 'RESEARCH INTERN',
     org: 'AMEYA SONIC OPTEO SYSTEMS',
     orgUrl: 'https://ameyasonicopteosystem.com',
-    period: '2026 - PRESENT',
-    duration: 'ONGOING',
+    period: '2026 — PRESENT',
+    year: '2026',
     mode: 'ON-SITE',
     location: 'INDIA',
-    status: 'ACTIVE',
-    tags: ['INTERNSHIP', 'RESEARCH', 'SYSTEMS'],
-    description:
-      'Contributing to research and development work in an applied engineering environment, with exposure to advanced system design and technical problem solving.',
-    highlights: [
-      'Supporting R&D workflows across hardware and software touchpoints.',
-      'Documenting technical findings and implementation constraints.',
-      'Building practical systems intuition in a specialised engineering setting.',
-    ],
+    tags: ['RESEARCH', 'SYSTEMS', 'ON-SITE'],
+    description: 'Contributing to R&D in advanced systems engineering at Ameya Sonic Opteo Systems. Working on applied technical projects within a specialised engineering environment.',
+    skills: [] as string[],
   },
   {
-    type: 'work',
+    idx: '02', type: 'WORK',
     role: 'INTERN',
     org: 'INDCASTING.COM',
     orgUrl: 'https://indcasting.com',
-    period: '2025 - 2026',
-    duration: 'CONTRACT',
+    period: '2025 — 2026',
+    year: '2025',
     mode: 'REMOTE',
     location: 'INDIA',
-    status: 'COMPLETE',
-    tags: ['INTERNSHIP', 'MANUFACTURING', 'REMOTE'],
-    description:
-      'Worked with a casting and manufacturing platform, gaining exposure to industrial workflows while contributing to technical development tasks.',
-    highlights: [
-      'Learned how software supports manufacturing and casting workflows.',
-      'Worked remotely with delivery constraints and async communication.',
-      'Improved implementation discipline through production-facing tasks.',
-    ],
+    tags: ['MANUFACTURING', 'REMOTE', 'CONTRACT'],
+    description: 'Gained hands-on exposure to industrial workflows at IndCasting.com, a platform in the casting and manufacturing industry. Contributed to technical development work.',
+    skills: [] as string[],
   },
   {
-    type: 'work',
+    idx: '03', type: 'WORK',
     role: 'TECHNOLOGY INTERN',
     org: 'KARVY INNOTECH LTD.',
     orgUrl: 'https://www.linkedin.com/company/karvy-innotech-ltd/',
-    period: 'DEC 2025 - APR 2026',
-    duration: '5 MONTHS',
+    period: 'DEC 2025 — APR 2026',
+    year: '2025',
     mode: 'HYBRID',
     location: 'INDIA',
-    status: 'COMPLETE',
-    tags: ['INTERNSHIP', 'FINTECH', 'HYBRID'],
-    description:
-      'Contributed to internal tooling and software development work inside a financial technology environment with a hybrid operating model.',
-    highlights: [
-      'Worked around internal tooling, delivery expectations, and team workflows.',
-      'Strengthened fundamentals in practical software development.',
-      'Built context around fintech systems and operational constraints.',
-    ],
+    tags: ['FINTECH', 'HYBRID', '5 MONTHS'],
+    description: "Worked as a technology intern at Karvy Innotech, one of India's leading financial technology firms. Contributed to internal tooling and software development.",
+    skills: [] as string[],
   },
-];
-
-const EDUCATION: EducationItem[] = [
   {
-    type: 'edu',
-    degree: 'BACHELOR OF TECHNOLOGY',
-    field: 'ARTIFICIAL INTELLIGENCE',
+    idx: '04', type: 'EDUCATION',
+    role: 'B.TECH — ARTIFICIAL INTELLIGENCE',
     org: 'AMITY UNIVERSITY, NOIDA',
-    orgUrl: 'https://www.linkedin.com/school/amity-university/posts/?feedView=all',
-    period: 'SEP 2024 - SEP 2028',
-    duration: '4 YEARS',
+    orgUrl: 'https://www.linkedin.com/school/amity-university/',
+    period: 'SEP 2024 — SEP 2028',
+    year: '2024',
     mode: 'ON-CAMPUS',
     location: 'NOIDA, INDIA',
-    status: 'IN PROGRESS',
-    tags: ['BTECH', 'ARTIFICIAL INTELLIGENCE', 'COMPUTER SCIENCE'],
-    description:
-      'Pursuing a Bachelor of Technology in Artificial Intelligence with coursework across machine learning, computer vision, NLP, robotics, and full-stack development.',
-    highlights: [
-      'Studying AI fundamentals alongside computer science and engineering foundations.',
-      'Applying coursework through web, robotics, and embedded systems projects.',
-      'Building toward a 2028 graduation timeline.',
-    ],
-    skills: ['COMPUTER SCIENCE', 'ARTIFICIAL INTELLIGENCE', 'MACHINE LEARNING', 'NLP', 'ROBOTICS'],
+    tags: ['AI', 'COMPUTER SCIENCE', '4 YEARS'],
+    description: 'Pursuing a Bachelor of Technology in Artificial Intelligence. Core subjects span machine learning, computer vision, NLP, robotics, embedded systems, and full-stack development.',
+    skills: ['MACHINE LEARNING', 'COMPUTER VISION', 'NLP', 'ROBOTICS', 'FULL-STACK'],
   },
 ];
 
-const STATS = [
-  ['3', 'INTERNSHIPS'],
-  ['4+', 'YEARS DEGREE'],
-  ['2028', 'GRADUATING'],
-  ['AI', 'FOCUS'],
-];
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#%&';
 
-function ExternalLinkIcon() {
-  return (
-    <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-      <path d="M15 3h6v6" />
-      <path d="M10 14 21 3" />
-    </svg>
-  );
+function useScramble(text: string) {
+  const [display, setDisplay] = useState(text);
+  const frame = useRef<number>(0);
+  const iter  = useRef(0);
+  const scramble = useCallback(() => {
+    cancelAnimationFrame(frame.current);
+    iter.current = 0;
+    const tick = () => {
+      setDisplay(text.split('').map((ch, i) => {
+        if (ch === ' ' || ch === '.' || ch === '-' || ch === '—') return ch;
+        if (i < iter.current) return ch;
+        return CHARS[Math.floor(Math.random() * CHARS.length)];
+      }).join(''));
+      iter.current += 0.6;
+      if (iter.current < text.length) frame.current = requestAnimationFrame(tick);
+      else setDisplay(text);
+    };
+    frame.current = requestAnimationFrame(tick);
+  }, [text]);
+  useEffect(() => () => cancelAnimationFrame(frame.current), []);
+  return { display, scramble };
 }
 
-function TimelineCard({ item, index }: { item: CardItem; index: number }) {
-  const isEducation = item.type === 'edu';
-  const title = isEducation ? item.degree : item.role;
-  const subtitle = isEducation ? item.field : item.org;
+// ── ACCORDION ROW ─────────────────────────────────────────────────
+function Row({ item, index }: { item: typeof ITEMS[number]; index: number }) {
+  const [open, setOpen]   = useState(false);
+  const bodyRef           = useRef<HTMLDivElement>(null);
+  const rowRef            = useRef<HTMLDivElement>(null);
+  const { display, scramble } = useScramble(item.role);
+
+  // Animate open/close
+  useEffect(() => {
+    const body = bodyRef.current;
+    if (!body) return;
+    if (open) {
+      gsap.fromTo(body,
+        { height: 0, opacity: 0 },
+        { height: 'auto', opacity: 1, duration: 0.55, ease: 'power3.inOut' }
+      );
+    } else {
+      gsap.to(body, { height: 0, opacity: 0, duration: 0.4, ease: 'power3.inOut' });
+    }
+  }, [open]);
+
+  // Scroll-in animation
+  useEffect(() => {
+    if (!rowRef.current) return;
+    gsap.fromTo(rowRef.current,
+      { x: -40, opacity: 0 },
+      {
+        x: 0, opacity: 1, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: rowRef.current, start: 'top 90%', toggleActions: 'play none none none' },
+        delay: index * 0.07,
+      }
+    );
+  }, [index]);
+
+  const isEdu = item.type === 'EDUCATION';
 
   return (
-    <article className="exp-card" style={{ animationDelay: `${index * 75}ms` }}>
-      <div className="exp-node" aria-hidden="true">
-        <span>{String(index + 1).padStart(2, '0')}</span>
+    <div
+      ref={rowRef}
+      className={`row ${open ? 'row-open' : ''}`}
+      style={{ opacity: 0 }}
+    >
+      {/* ── COLLAPSED HEADER ── */}
+      <div
+        className="row-header"
+        onClick={() => setOpen(o => !o)}
+        onMouseEnter={scramble}
+      >
+        {/* Index */}
+        <span className="row-idx">{item.idx}</span>
+
+        {/* Type pill */}
+        <span className={`row-type ${isEdu ? 'row-type-edu' : ''}`}>{item.type}</span>
+
+        {/* Role — takes up most space */}
+        <span className="row-role">{open ? item.role : display}</span>
+
+        {/* Org */}
+        <span className="row-org">{item.org}</span>
+
+        {/* Year */}
+        <span className="row-year">{item.year}</span>
+
+        {/* Expand icon */}
+        <span className={`row-icon ${open ? 'row-icon-open' : ''}`}>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" strokeWidth="1.5" className="row-plus-v"/>
+            <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" strokeWidth="1.5"/>
+          </svg>
+        </span>
       </div>
 
-      <div className="exp-card-shell">
-        <div className="exp-card-top">
-          <span className="exp-type">{isEducation ? 'EDUCATION' : 'EXPERIENCE'}</span>
-          <span className={`exp-status ${item.status === 'ACTIVE' || item.status === 'IN PROGRESS' ? 'is-live' : ''}`}>
-            {item.status}
-          </span>
-        </div>
+      {/* ── EXPANDED BODY ── */}
+      <div ref={bodyRef} className="row-body" style={{ height: 0, overflow: 'hidden', opacity: 0 }}>
+        <div className="row-body-inner">
 
-        <div className="exp-card-grid">
-          <div className="exp-aside">
-            <span className="exp-period">{item.period}</span>
-            <div className="exp-meta-list">
-              <span>{item.duration}</span>
-              <span>{item.mode}</span>
-              <span>{item.location}</span>
+          {/* Left col — meta */}
+          <div className="row-meta">
+            <div className="row-meta-block">
+              <span className="row-meta-label">// PERIOD</span>
+              <span className="row-meta-val">{item.period}</span>
             </div>
+            <div className="row-meta-block">
+              <span className="row-meta-label">// MODE</span>
+              <span className="row-meta-val">{item.mode}</span>
+            </div>
+            <div className="row-meta-block">
+              <span className="row-meta-label">// LOCATION</span>
+              <span className="row-meta-val">{item.location}</span>
+            </div>
+            <a
+              href={item.orgUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="row-org-link"
+              onClick={e => e.stopPropagation()}
+            >
+              VIEW ORG ↗
+            </a>
           </div>
 
-          <div className="exp-main">
-            <div className="exp-heading-row">
-              <div>
-                <h2 className="exp-role">{title}</h2>
-                <p className="exp-subrole">{subtitle}</p>
-              </div>
-              <a href={item.orgUrl} target="_blank" rel="noopener noreferrer" className="exp-org" aria-label={`Open ${item.org}`}>
-                <span>{item.org}</span>
-                <ExternalLinkIcon />
-              </a>
-            </div>
-
-            <p className="exp-desc">{item.description}</p>
-
-            <ul className="exp-highlights">
-              {item.highlights.map((highlight) => (
-                <li key={highlight}>{highlight}</li>
-              ))}
-            </ul>
-
-            {'skills' in item && (
-              <div className="exp-skills" aria-label="Education focus areas">
-                {item.skills.map((skill) => (
-                  <span key={skill}>{skill}</span>
+          {/* Center col — description */}
+          <div className="row-desc-col">
+            <p className="row-desc">{item.description}</p>
+            {item.skills.length > 0 && (
+              <div className="row-skills">
+                {item.skills.map(s => (
+                  <span key={s} className="row-skill">{s}</span>
                 ))}
               </div>
             )}
+          </div>
 
-            <div className="exp-tags" aria-label="Tags">
-              {item.tags.map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </div>
+          {/* Right col — tags */}
+          <div className="row-tags-col">
+            {item.tags.map(t => (
+              <span key={t} className="row-tag">{t}</span>
+            ))}
           </div>
         </div>
       </div>
-    </article>
+    </div>
   );
 }
 
-export default function ExperiencePage() {
-  const pageRef = useRef<HTMLElement | null>(null);
-
+// ── ANIMATED COUNTER ─────────────────────────────────────────────
+function Counter({ val }: { val: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const n   = parseInt(val.replace(/\D/g, '')) || 0;
   useEffect(() => {
-    const root = pageRef.current;
-    if (!root) return;
-
-    const revealTargets = root.querySelectorAll<HTMLElement>('[data-reveal]');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+    if (!ref.current || n === 0) return;
+    const el = ref.current;
+    ScrollTrigger.create({
+      trigger: el, start: 'top 90%', once: true,
+      onEnter: () => {
+        gsap.fromTo({ v: 0 }, { v: n }, {
+          duration: 1.6, ease: 'power2.out',
+          onUpdate: function() {
+            el.textContent = Math.round((this as any).targets()[0].v) + (val.includes('+') ? '+' : '');
           }
         });
-      },
-      {
-        threshold: 0.18,
-        rootMargin: '0px 0px -8% 0px',
       }
-    );
+    });
+  }, [n, val]);
+  return <span ref={ref}>{val}</span>;
+}
 
-    revealTargets.forEach((target) => observer.observe(target));
+// ── PAGE ─────────────────────────────────────────────────────────
+export default function ExperiencePage() {
+  const pageRef    = useRef<HTMLDivElement>(null);
+  const titleRef   = useRef<HTMLHeadingElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
-    return () => observer.disconnect();
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Lenis
+  useEffect(() => {
+    let lenis: any;
+    import('lenis').then(({ default: Lenis }) => {
+      lenis = new Lenis({ lerp: 0.08, wheelMultiplier: 1.2 });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((t: number) => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    });
+    return () => lenis?.destroy();
   }, []);
+
+  // Title clip-path wipe
+  useEffect(() => {
+    if (!titleRef.current) return;
+    const chars = titleRef.current.querySelectorAll('.t-char');
+    gsap.fromTo(chars,
+      { clipPath: 'inset(0 0 100% 0)', y: 20 },
+      { clipPath: 'inset(0 0 0% 0)', y: 0, duration: 1, ease: 'power4.out', stagger: 0.04, delay: 0.1 }
+    );
+  }, []);
+
+  // Marquee
+  useEffect(() => {
+    if (!marqueeRef.current) return;
+    const inner = marqueeRef.current.querySelector('.mq-inner');
+    if (inner) gsap.to(inner, { xPercent: -50, duration: 22, ease: 'none', repeat: -1 });
+    ScrollTrigger.create({
+      trigger: marqueeRef.current, start: 'top 90%',
+      onEnter: () => gsap.to(marqueeRef.current, { opacity: 1, duration: 0.6 }),
+    });
+  }, []);
+
+  const title = 'EXPERIENCE';
 
   return (
     <>
       <style>{`
-        .reveal {
-          opacity: 0;
-          transform: translateY(18px);
-          will-change: transform, opacity;
-        }
-
-        .reveal.is-visible {
-          animation: exp-rise 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-          animation-delay: var(--delay, 0ms);
-        }
-
-        @keyframes exp-rise {
-          from {
-            opacity: 0;
-            transform: translateY(18px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .exp-page {
-          width: min(1120px, calc(100% - 40px));
-          margin: 0 auto;
-          padding: 136px 0 96px;
+        /* ── PAGE ── */
+        .xp-page {
           min-height: 100vh;
+          padding: 140px 0 8rem;
           position: relative;
-          z-index: 1;
         }
 
-        .exp-hero {
+        /* ── HERO ── */
+        .xp-hero {
+          padding: 0 2.5rem 3rem;
+          max-width: 1200px;
+          margin: 0 auto;
           display: grid;
-          grid-template-columns: minmax(0, 1fr) 320px;
-          gap: 48px;
+          grid-template-columns: 1fr auto;
           align-items: end;
-          margin-bottom: 48px;
+          gap: 2rem;
         }
-
-        .exp-eyebrow {
-          font-family: var(--mono);
-          font-size: 11px;
-          color: var(--accent);
-          letter-spacing: 0.22em;
-          margin-bottom: 16px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .exp-eyebrow::before {
-          content: '';
-          width: 30px;
-          height: 1px;
-          background: var(--accent);
-          flex: 0 0 auto;
-          box-shadow: 0 0 16px rgba(230, 51, 41, 0.55);
-        }
-
-        .exp-title {
-          font-family: var(--display);
-          font-size: clamp(2.5rem, 7vw, 5.4rem);
-          font-weight: 900;
-          color: #fff;
-          line-height: 0.92;
-          letter-spacing: 0;
-          margin-bottom: 18px;
-        }
-
-        .exp-title span {
-          color: var(--accent);
-          text-shadow: 0 0 28px rgba(230, 51, 41, 0.35);
-        }
-
-        .exp-summary {
-          font-family: var(--prose);
-          color: #b1b1b1;
-          font-size: clamp(14px, 1.35vw, 16px);
-          line-height: 1.9;
-          max-width: 62ch;
-        }
-
-        .exp-terminal {
-          border: 1px solid rgba(230, 51, 41, 0.22);
-          background:
-            linear-gradient(180deg, rgba(230, 51, 41, 0.07), rgba(230, 51, 41, 0.015)),
-            rgba(8, 8, 8, 0.72);
-          padding: 18px;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .exp-terminal::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(90deg, transparent, rgba(230, 51, 41, 0.08), transparent);
-          transform: translateX(-100%);
-          animation: exp-scan 4.5s linear infinite;
-          pointer-events: none;
-        }
-
-        .exp-terminal:hover::before {
-          animation-duration: 2.6s;
-        }
-
-        @keyframes exp-scan {
-          to { transform: translateX(100%); }
-        }
-
-        .exp-terminal-line {
-          display: flex;
-          justify-content: space-between;
-          gap: 16px;
+        .xp-eyebrow {
           font-family: var(--mono);
           font-size: 10px;
-          letter-spacing: 0.16em;
-          color: #555;
-          padding: 8px 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          color: #e63329;
+          letter-spacing: 0.25em;
+          margin-bottom: 1.5rem;
+          display: flex;
+          align-items: center;
+          gap: 10px;
         }
-
-        .exp-terminal-line:last-child {
-          border-bottom: none;
-        }
-
-        .exp-terminal-line strong {
-          color: var(--accent);
-          font-weight: 400;
-          text-align: right;
-        }
-
-        .exp-stats {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          border: 1px solid #1a1a1a;
-          background: rgba(255, 255, 255, 0.012);
-          margin-bottom: 56px;
-        }
-
-        .exp-stat {
-          padding: 20px 22px;
-          border-right: 1px solid #1a1a1a;
-          position: relative;
-          min-width: 0;
-          overflow: hidden;
-        }
-
-        .exp-stat:last-child {
-          border-right: none;
-        }
-
-        .exp-stat::before {
+        .xp-eyebrow::before {
           content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 1px;
-          background: linear-gradient(90deg, rgba(230, 51, 41, 0.65), transparent);
-          opacity: 0.75;
+          width: 24px; height: 1px;
+          background: #e63329;
         }
-
-        .exp-stat::after {
-          content: '';
-          position: absolute;
-          inset: auto -15% 0 -15%;
-          height: 42%;
-          background: radial-gradient(circle, rgba(230, 51, 41, 0.1), transparent 72%);
-          transform: translateY(25%);
-          opacity: 0;
-          transition: opacity 0.2s ease;
-          pointer-events: none;
-        }
-
-        .exp-stat:hover::after {
-          opacity: 1;
-        }
-
-        .exp-stat-num {
+        .xp-title {
           font-family: var(--display);
-          color: var(--accent);
-          font-size: clamp(1.5rem, 3vw, 2.15rem);
+          font-size: clamp(3.5rem, 10vw, 8rem);
           font-weight: 900;
+          color: #fff;
+          letter-spacing: -0.03em;
+          line-height: 0.88;
+          margin: 0;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .t-char {
+          display: inline-block;
+          will-change: clip-path, transform;
+        }
+        .t-char-accent { color: #e63329; }
+
+        /* Right — vertical stats */
+        .xp-hero-stats {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          border: 1px solid #1a1a1a;
+          align-self: end;
+          margin-bottom: 0.2rem;
+        }
+        .xp-stat {
+          padding: 14px 24px;
+          border-bottom: 1px solid #1a1a1a;
+          position: relative;
+        }
+        .xp-stat:last-child { border-bottom: none; }
+        .xp-stat::before {
+          content: '';
+          position: absolute;
+          left: 0; top: 0; bottom: 0;
+          width: 2px;
+          background: #e63329;
+        }
+        .xp-stat-n {
+          font-family: var(--display);
+          font-size: 1.6rem;
+          font-weight: 900;
+          color: #e63329;
           line-height: 1;
+        }
+        .xp-stat-l {
+          font-family: var(--mono);
+          font-size: 8px;
+          color: #555;
+          letter-spacing: 0.18em;
+          margin-top: 4px;
+        }
+
+        /* ── MARQUEE ── */
+        .xp-mq {
+          border-top: 1px solid #111;
+          border-bottom: 1px solid #111;
+          padding: 10px 0;
+          overflow: hidden;
+          opacity: 0;
+          margin-bottom: 0;
+        }
+        .mq-inner {
+          display: flex;
+          width: max-content;
+          will-change: transform;
+        }
+        .mq-text {
+          font-family: var(--mono);
+          font-size: 10px;
+          color: #2a2a2a;
+          letter-spacing: 0.25em;
+          white-space: nowrap;
+          padding-right: 4rem;
+        }
+        .mq-text .mq-hl { color: #e63329; }
+
+        /* ── TABLE HEADER ── */
+        .xp-table-head {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 48px 100px 1fr 200px 60px 36px;
+          gap: 0;
+          padding: 10px 2.5rem;
+          border-bottom: 1px solid #1a1a1a;
+        }
+        .xp-th {
+          font-family: var(--mono);
+          font-size: 9px;
+          color: #333;
+          letter-spacing: 0.2em;
+        }
+
+        /* ── ROW ── */
+        .row {
+          max-width: 1200px;
+          margin: 0 auto;
+          border-bottom: 1px solid #141414;
+          transition: border-color 0.2s;
+        }
+        .row:hover, .row.row-open {
+          border-color: #252525;
+        }
+
+        .row-header {
+          display: grid;
+          grid-template-columns: 48px 100px 1fr 200px 60px 36px;
+          gap: 0;
+          align-items: center;
+          padding: 20px 2.5rem;
+          cursor: pointer;
+          transition: background 0.2s;
+          user-select: none;
+        }
+        .row-header:hover { background: rgba(255,255,255,0.02); }
+        .row-open .row-header { background: rgba(230,51,41,0.03); }
+
+        .row-idx {
+          font-family: var(--mono);
+          font-size: 10px;
+          color: #2a2a2a;
+          letter-spacing: 0.15em;
+        }
+        .row-open .row-idx { color: #e63329; }
+
+        .row-type {
+          font-family: var(--mono);
+          font-size: 9px;
+          letter-spacing: 0.12em;
+          color: #555;
+          border: 1px solid #1e1e1e;
+          padding: 3px 8px;
+          width: fit-content;
+          transition: all 0.2s;
+        }
+        .row-type-edu {
+          color: #6366f1;
+          border-color: rgba(99,102,241,0.2);
+        }
+        .row-open .row-type {
+          color: #e63329;
+          border-color: rgba(230,51,41,0.3);
+        }
+
+        .row-role {
+          font-family: var(--display);
+          font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+          font-weight: 700;
+          color: #fff;
+          letter-spacing: 0.02em;
+          transition: color 0.2s;
+          padding-right: 1rem;
+        }
+        .row-header:hover .row-role,
+        .row-open .row-role { color: #e63329; }
+
+        .row-org {
+          font-family: var(--mono);
+          font-size: 10px;
+          color: #666;
+          letter-spacing: 0.06em;
+          padding-right: 1rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: color 0.2s;
+        }
+        .row-header:hover .row-org { color: #999; }
+
+        .row-year {
+          font-family: var(--mono);
+          font-size: 11px;
+          color: #333;
+          letter-spacing: 0.1em;
+        }
+        .row-open .row-year { color: #777; }
+
+        .row-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #333;
+          transition: transform 0.4s ease, color 0.2s;
+        }
+        .row-icon-open {
+          transform: rotate(45deg);
+          color: #e63329;
+        }
+        .row-plus-v {
+          transition: transform 0.4s ease;
+          transform-origin: center;
+        }
+        .row-icon-open .row-plus-v {
+          transform: rotate(90deg);
+        }
+
+        /* ── EXPANDED BODY ── */
+        .row-body { overflow: hidden; }
+        .row-body-inner {
+          display: grid;
+          grid-template-columns: 200px 1fr 160px;
+          gap: 0;
+          padding: 0 2.5rem 2rem calc(2.5rem + 48px + 100px);
+          border-top: 1px solid #111;
+        }
+
+        .row-meta {
+          padding: 1.5rem 1.5rem 0 0;
+          border-right: 1px solid #111;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .row-meta-block { display: flex; flex-direction: column; gap: 3px; }
+        .row-meta-label {
+          font-family: var(--mono);
+          font-size: 8px;
+          color: #e63329;
+          letter-spacing: 0.2em;
+        }
+        .row-meta-val {
+          font-family: var(--mono);
+          font-size: 11px;
+          color: #bbb;
+          letter-spacing: 0.08em;
+        }
+        .row-org-link {
+          font-family: var(--mono);
+          font-size: 9px;
+          color: #444;
+          letter-spacing: 0.15em;
+          text-decoration: none;
+          margin-top: auto;
+          padding-top: 0.5rem;
+          transition: color 0.2s;
+        }
+        .row-org-link:hover { color: #e63329; }
+
+        .row-desc-col {
+          padding: 1.5rem 2rem 0;
+        }
+        .row-desc {
+          font-family: 'Inter', sans-serif;
+          font-size: 14px;
+          color: #aaa;
+          line-height: 1.8;
+          margin-bottom: 1.25rem;
+        }
+        .row-skills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+        }
+        .row-skill {
+          font-family: var(--mono);
+          font-size: 9px;
+          color: #e63329;
+          border: 1px solid rgba(230,51,41,0.2);
+          background: rgba(230,51,41,0.04);
+          padding: 3px 10px;
+          letter-spacing: 0.1em;
+        }
+
+        .row-tags-col {
+          padding: 1.5rem 0 0 1.5rem;
+          border-left: 1px solid #111;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          align-items: flex-start;
+        }
+        .row-tag {
+          font-family: var(--mono);
+          font-size: 9px;
+          color: #444;
+          border: 1px solid #1e1e1e;
+          padding: 3px 10px;
+          letter-spacing: 0.1em;
           white-space: nowrap;
         }
 
-        .exp-stat-label {
-          font-family: var(--mono);
-          color: #474747;
-          font-size: 9px;
-          letter-spacing: 0.18em;
-          margin-top: 8px;
-        }
-
-        .exp-section {
-          margin-bottom: 54px;
-        }
-
-        .exp-section-head {
+        /* ── FOOTER COUNT ── */
+        .xp-foot {
+          max-width: 1200px;
+          margin: 3rem auto 0;
+          padding: 1.5rem 2.5rem;
+          border-top: 1px solid #111;
           display: flex;
           align-items: center;
-          gap: 16px;
-          margin-bottom: 20px;
-          font-family: var(--mono);
-          color: var(--accent);
-          font-size: 10px;
-          letter-spacing: 0.26em;
-        }
-
-        .exp-section-head::after {
-          content: '';
-          flex: 1;
-          height: 1px;
-          background: linear-gradient(90deg, rgba(230, 51, 41, 0.28), transparent);
-        }
-
-        .exp-timeline {
-          position: relative;
-          display: grid;
-          gap: 18px;
-        }
-
-        .exp-timeline::before {
-          content: '';
-          position: absolute;
-          left: 23px;
-          top: 18px;
-          bottom: 18px;
-          width: 1px;
-          background: linear-gradient(to bottom, rgba(230, 51, 41, 0.5), rgba(230, 51, 41, 0.08));
-        }
-
-        .exp-card {
-          position: relative;
-          display: grid;
-          grid-template-columns: 48px minmax(0, 1fr);
-          gap: 18px;
-          animation: exp-card-in 0.45s ease both;
-        }
-
-        @keyframes exp-card-in {
-          from { opacity: 0; transform: translateY(14px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .exp-node {
-          width: 48px;
-          display: flex;
-          justify-content: center;
-          padding-top: 18px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .exp-node span {
-          width: 34px;
-          height: 34px;
-          display: grid;
-          place-items: center;
-          border: 1px solid rgba(230, 51, 41, 0.4);
-          background: #080808;
-          color: var(--accent);
-          font-family: var(--mono);
-          font-size: 10px;
-          box-shadow: 0 0 20px rgba(230, 51, 41, 0.14);
-          animation: exp-node-breathe 3.4s ease-in-out infinite;
-        }
-
-        @keyframes exp-node-breathe {
-          0%, 100% {
-            transform: scale(1);
-            box-shadow: 0 0 20px rgba(230, 51, 41, 0.14);
-          }
-          50% {
-            transform: scale(1.05);
-            box-shadow: 0 0 28px rgba(230, 51, 41, 0.22);
-          }
-        }
-
-        .exp-card-shell {
-          border: 1px solid #1c1c1c;
-          background:
-            linear-gradient(135deg, rgba(230, 51, 41, 0.05), transparent 40%),
-            rgba(8, 8, 8, 0.72);
-          transition: border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-          min-width: 0;
-        }
-
-        .exp-card-shell:hover {
-          border-color: rgba(230, 51, 41, 0.36);
-          background:
-            linear-gradient(135deg, rgba(230, 51, 41, 0.075), transparent 44%),
-            rgba(12, 8, 8, 0.86);
-          box-shadow: 0 0 36px rgba(230, 51, 41, 0.08);
-          transform: translateY(-3px);
-        }
-
-        .exp-card-shell::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
-          transform: translateX(-120%);
-          transition: transform 0.7s ease;
-          pointer-events: none;
-        }
-
-        .exp-card-shell:hover::before {
-          transform: translateX(120%);
-        }
-
-        .exp-card-top {
-          display: flex;
           justify-content: space-between;
-          align-items: center;
-          gap: 16px;
-          padding: 12px 18px;
-          border-bottom: 1px solid #131313;
         }
-
-        .exp-type,
-        .exp-status,
-        .exp-period,
-        .exp-meta-list,
-        .exp-subrole,
-        .exp-org,
-        .exp-tags span,
-        .exp-skills span {
+        .xp-foot-label {
           font-family: var(--mono);
-        }
-
-        .exp-type {
-          color: var(--accent);
           font-size: 10px;
+          color: #2a2a2a;
           letter-spacing: 0.2em;
         }
-
-        .exp-status {
-          color: #555;
-          font-size: 9px;
-          letter-spacing: 0.18em;
-          border: 1px solid #202020;
-          padding: 4px 9px;
-        }
-
-        .exp-status.is-live {
-          color: var(--accent);
-          border-color: rgba(230, 51, 41, 0.28);
-          background: rgba(230, 51, 41, 0.06);
-        }
-
-        .exp-card-grid {
-          display: grid;
-          grid-template-columns: 210px minmax(0, 1fr);
-        }
-
-        .exp-aside {
-          border-right: 1px solid #131313;
-          padding: 28px 22px;
-        }
-
-        .exp-period {
-          color: #d8d8d8;
-          font-size: 11px;
-          letter-spacing: 0.14em;
-          line-height: 1.5;
-          display: block;
-          margin-bottom: 18px;
-        }
-
-        .exp-meta-list {
-          display: grid;
-          gap: 8px;
-          color: #555;
-          font-size: 9px;
-          letter-spacing: 0.12em;
-        }
-
-        .exp-meta-list span {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .exp-meta-list span::before {
-          content: '';
-          width: 5px;
-          height: 5px;
-          border: 1px solid rgba(230, 51, 41, 0.35);
-          background: rgba(230, 51, 41, 0.08);
-          flex: 0 0 auto;
-        }
-
-        .exp-main {
-          padding: 28px;
-          min-width: 0;
-        }
-
-        .exp-heading-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          gap: 24px;
-          margin-bottom: 18px;
-        }
-
-        .exp-role {
+        .xp-foot-count {
           font-family: var(--display);
-          color: #fff;
-          font-size: clamp(1rem, 2vw, 1.35rem);
-          line-height: 1.25;
-          letter-spacing: 0.04em;
-          font-weight: 900;
-          margin-bottom: 6px;
-        }
-
-        .exp-subrole {
-          color: var(--accent);
-          font-size: 10px;
-          letter-spacing: 0.2em;
-          line-height: 1.6;
-        }
-
-        .exp-org {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          color: #646464;
-          font-size: 10px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: #1a1a1a;
           letter-spacing: 0.1em;
-          line-height: 1.4;
-          transition: color 0.18s ease;
-          text-align: right;
-          max-width: 220px;
         }
 
-        .exp-org:hover {
-          color: var(--accent);
-        }
-
-        .exp-org svg {
-          flex: 0 0 auto;
-          opacity: 0.58;
-        }
-
-        .exp-desc {
-          font-family: var(--prose);
-          color: #bebebe;
-          font-size: 14px;
-          line-height: 1.85;
-          margin-bottom: 18px;
-          max-width: 760px;
-        }
-
-        .exp-highlights {
-          display: grid;
-          gap: 9px;
-          list-style: none;
-          margin-bottom: 20px;
-        }
-
-        .exp-highlights li {
-          position: relative;
-          padding-left: 18px;
-          color: #909090;
-          font-family: var(--prose);
-          font-size: 13px;
-          line-height: 1.65;
-        }
-
-        .exp-highlights li::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0.75em;
-          width: 8px;
-          height: 1px;
-          background: var(--accent);
-        }
-
-        .exp-skills,
-        .exp-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 7px;
-        }
-
-        .exp-skills {
-          margin-bottom: 12px;
-        }
-
-        .exp-skills span {
-          color: var(--accent);
-          border: 1px solid rgba(230, 51, 41, 0.24);
-          background: rgba(230, 51, 41, 0.055);
-          padding: 4px 10px;
-          font-size: 9px;
-          letter-spacing: 0.12em;
-        }
-
-        .exp-tags span {
-          color: #3f3f3f;
-          border: 1px solid #1e1e1e;
-          padding: 4px 10px;
-          font-size: 9px;
-          letter-spacing: 0.12em;
-        }
-
-        .exp-tags span:hover,
-        .exp-skills span:hover {
-          transform: translateY(-1px);
-        }
-
-        .exp-divider {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          margin: 42px 0;
-        }
-
-        .exp-divider span {
-          width: 8px;
-          height: 8px;
-          background: var(--accent);
-          box-shadow: 0 0 16px rgba(230, 51, 41, 0.7);
-          animation: exp-dot-pulse 2.6s ease-in-out infinite;
-        }
-
-        @keyframes exp-dot-pulse {
-          0%, 100% { transform: scale(1); opacity: 0.9; }
-          50% { transform: scale(1.35); opacity: 1; }
-        }
-
-        .exp-divider::before,
-        .exp-divider::after {
-          content: '';
-          width: 90px;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(230, 51, 41, 0.35));
-        }
-
-        .exp-divider::after {
-          background: linear-gradient(90deg, rgba(230, 51, 41, 0.35), transparent);
-        }
-
-        @media (max-width: 860px) {
-          .exp-page {
-            width: min(100% - 28px, 1120px);
-            padding-top: 116px;
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+          .xp-page { padding: 120px 0 5rem; }
+          .xp-hero { grid-template-columns: 1fr; padding: 0 1rem 2rem; }
+          .xp-hero-stats { flex-direction: row; }
+          .xp-stat { flex: 1; }
+          .xp-title { font-size: clamp(2.8rem, 14vw, 5rem); }
+          .xp-table-head { display: none; }
+          .row-header {
+            grid-template-columns: 36px 1fr 50px 28px;
+            padding: 16px 1rem;
           }
-
-          .exp-hero {
+          .row-type { display: none; }
+          .row-org  { display: none; }
+          .row-body-inner {
             grid-template-columns: 1fr;
-            gap: 28px;
-            margin-bottom: 34px;
+            padding: 0 1rem 1.5rem 1rem;
           }
-
-          .exp-terminal {
-            max-width: 420px;
-          }
-
-          .exp-stats {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-
-          .exp-stat:nth-child(2) {
-            border-right: none;
-          }
-
-          .exp-stat:nth-child(-n + 2) {
-            border-bottom: 1px solid #1a1a1a;
-          }
-
-          .exp-card-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .exp-aside {
-            border-right: none;
-            border-bottom: 1px solid #131313;
-            padding: 20px;
-          }
-
-          .exp-meta-list {
-            display: flex;
-            flex-wrap: wrap;
-          }
-
-          .exp-main {
-            padding: 22px 20px;
-          }
-
-          .exp-heading-row {
-            flex-direction: column;
-            gap: 12px;
-          }
-
-          .exp-org {
-            text-align: left;
-            max-width: 100%;
-          }
-        }
-
-        @media (max-width: 560px) {
-          .exp-page {
-            width: min(100% - 24px, 1120px);
-            padding-bottom: 72px;
-          }
-
-          .exp-eyebrow {
-            font-size: 9px;
-            letter-spacing: 0.14em;
-          }
-
-          .exp-summary {
-            font-size: 14px;
-          }
-
-          .exp-stats {
-            grid-template-columns: 1fr;
-          }
-
-          .exp-stat,
-          .exp-stat:nth-child(2) {
-            border-right: none;
-            border-bottom: 1px solid #1a1a1a;
-          }
-
-          .exp-stat:last-child {
-            border-bottom: none;
-          }
-
-          .exp-timeline::before {
-            display: none;
-          }
-
-          .exp-card {
-            grid-template-columns: 1fr;
-            gap: 10px;
-          }
-
-          .exp-node {
-            width: auto;
-            justify-content: flex-start;
-            padding-top: 0;
-          }
-
-          .exp-card-top {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 8px;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .reveal,
-          .reveal.is-visible,
-          .exp-terminal::before,
-          .exp-node span,
-          .exp-divider span,
-          .exp-card-shell::before {
-            animation: none !important;
-            transition: none !important;
-          }
-
-          .reveal {
-            opacity: 1;
-            transform: none;
-          }
+          .row-meta { border-right: none; border-bottom: 1px solid #111; padding-bottom: 1rem; }
+          .row-desc-col { padding: 1rem 0 0; }
+          .row-tags-col { border-left: none; border-top: 1px solid #111; padding: 1rem 0 0; flex-direction: row; flex-wrap: wrap; }
+          .xp-foot { padding: 1.5rem 1rem; }
         }
       `}</style>
 
-      <main className="exp-page" ref={pageRef}>
-        <section className="exp-hero reveal" data-reveal style={{ ['--delay' as string]: '0ms' }} aria-labelledby="experience-title">
+      <div className="xp-page" ref={pageRef}>
+
+        {/* ── HERO ── */}
+        <div className="xp-hero">
           <div>
-            <p className="exp-eyebrow">MASKEDHELP // KARTHIK KUMAR // TIMELINE</p>
-            <h1 id="experience-title" className="exp-title">
-              EXPERIENCE<span>_</span>
+            <p className="xp-eyebrow">MASKEDHELP // KARTHIK KUMAR // TIMELINE</p>
+            <h1 className="xp-title" ref={titleRef}>
+              {title.split('').map((ch, i) => (
+                <span key={i} className={`t-char${i === title.length - 1 ? ' t-char-accent' : ''}`}>
+                  {ch}
+                </span>
+              ))}
+              <span className="t-char t-char-accent">_</span>
             </h1>
-            <p className="exp-summary">
-              A compact record of internships, engineering exposure, and AI-focused education. Built around practical systems work, software fundamentals, and a long-term interest in intelligent hardware.
-            </p>
           </div>
 
-          <aside className="exp-terminal" data-reveal style={{ ['--delay' as string]: '120ms' }} aria-label="Timeline summary">
-            <div className="exp-terminal-line">
-              <span>TRACK</span>
-              <strong>AI + SYSTEMS</strong>
-            </div>
-            <div className="exp-terminal-line">
-              <span>STATUS</span>
-              <strong>BUILDING</strong>
-            </div>
-            <div className="exp-terminal-line">
-              <span>BASE</span>
-              <strong>INDIA</strong>
-            </div>
-          </aside>
-        </section>
-
-        <section className="exp-stats reveal" data-reveal style={{ ['--delay' as string]: '140ms' }} aria-label="Experience statistics">
-          {STATS.map(([num, label]) => (
-            <div key={label} className="exp-stat">
-              <div className="exp-stat-num">{num}</div>
-              <div className="exp-stat-label">{label}</div>
-            </div>
-          ))}
-        </section>
-
-        <section className="exp-section" data-reveal style={{ ['--delay' as string]: '180ms' }} aria-labelledby="work-heading">
-          <h2 id="work-heading" className="exp-section-head">{'// 01 - WORK EXPERIENCE'}</h2>
-          <div className="exp-timeline">
-            {EXPERIENCE.map((item, index) => (
-              <div key={`${item.org}-${item.role}`} className="reveal" data-reveal style={{ ['--delay' as string]: `${index * 110}ms` }}>
-                <TimelineCard item={item} index={index} />
+          <div className="xp-hero-stats">
+            {[
+              { n: '3',     l: 'INTERNSHIPS' },
+              { n: '5+',   l: 'MONTHS EXP'  },
+              { n: '2028', l: 'GRADUATING'  },
+            ].map(({ n, l }) => (
+              <div key={l} className="xp-stat">
+                <div className="xp-stat-n"><Counter val={n} /></div>
+                <div className="xp-stat-l">{l}</div>
               </div>
             ))}
           </div>
-        </section>
-
-        <div className="exp-divider reveal" data-reveal style={{ ['--delay' as string]: '260ms' }} aria-hidden="true">
-          <span />
         </div>
 
-        <section className="exp-section" data-reveal style={{ ['--delay' as string]: '300ms' }} aria-labelledby="education-heading">
-          <h2 id="education-heading" className="exp-section-head">{'// 02 - EDUCATION'}</h2>
-          <div className="exp-timeline">
-            {EDUCATION.map((item, index) => (
-              <div key={`${item.org}-${item.degree}`} className="reveal" data-reveal style={{ ['--delay' as string]: `${(EXPERIENCE.length + index) * 110}ms` }}>
-                <TimelineCard item={item} index={EXPERIENCE.length + index} />
+        {/* ── MARQUEE ── */}
+        <div className="xp-mq" ref={marqueeRef}>
+          <div className="mq-inner">
+            {[0, 1].map(i => (
+              <div key={i} className="mq-text">
+                {'WORK · EDUCATION · INTERNSHIPS · AMITY UNIVERSITY · KARVY INNOTECH · AMEYA SONIC · INDCASTING · AI · ROBOTICS · FULL STACK · '
+                  .split('·').map((seg, j) => (
+                    <span key={j}>
+                      {j % 4 === 0
+                        ? <span className="mq-hl">{seg.trim()} · </span>
+                        : `${seg.trim()} · `}
+                    </span>
+                  ))}
               </div>
             ))}
           </div>
-        </section>
-      </main>
+        </div>
+
+        {/* ── TABLE HEAD ── */}
+        <div className="xp-table-head">
+          <span className="xp-th">#</span>
+          <span className="xp-th">TYPE</span>
+          <span className="xp-th">ROLE</span>
+          <span className="xp-th">ORGANISATION</span>
+          <span className="xp-th">YEAR</span>
+          <span className="xp-th"></span>
+        </div>
+
+        {/* ── ROWS ── */}
+        {ITEMS.map((item, i) => (
+          <Row key={item.idx} item={item} index={i} />
+        ))}
+
+        {/* ── FOOTER ── */}
+        <div className="xp-foot">
+          <span className="xp-foot-label">// END OF TIMELINE</span>
+          <span className="xp-foot-count">{ITEMS.length} ENTRIES</span>
+        </div>
+
+      </div>
     </>
   );
 }
