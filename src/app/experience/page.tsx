@@ -21,7 +21,7 @@ const ITEMS = [
   },
   {
     idx: '02', type: 'WORK',
-    role: 'INTERN',
+    role: 'LEAD DEVELOPER INTERN',
     org: 'INDCASTING.COM',
     orgUrl: 'https://indcasting.com',
     period: '2025 — 2026',
