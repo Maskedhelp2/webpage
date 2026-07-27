@@ -75,7 +75,7 @@ function useScramble(text: string) {
         if (i < iter.current) return ch;
         return CHARS[Math.floor(Math.random() * CHARS.length)];
       }).join(''));
-      iter.current += 0.6;
+      iter.current += 0.09;
       if (iter.current < text.length) frame.current = requestAnimationFrame(tick);
       else setDisplay(text);
     };
@@ -297,8 +297,8 @@ export default function ExperiencePage() {
         }
         .xp-eyebrow {
           font-family: var(--mono);
-          font-size: 10px;
-          color: #e63329;
+          font-size: 12px;
+          color: #55dff7;
           letter-spacing: 0.25em;
           margin-bottom: 1.5rem;
           display: flex;
@@ -358,8 +358,8 @@ export default function ExperiencePage() {
         }
         .xp-stat-l {
           font-family: var(--mono);
-          font-size: 8px;
-          color: #555;
+          font-size: 11px;
+          color: #55dff7;
           letter-spacing: 0.18em;
           margin-top: 4px;
         }
@@ -380,8 +380,8 @@ export default function ExperiencePage() {
         }
         .mq-text {
           font-family: var(--mono);
-          font-size: 10px;
-          color: #2a2a2a;
+          font-size: 11px;
+          color: #555;
           letter-spacing: 0.25em;
           white-space: nowrap;
           padding-right: 4rem;
@@ -400,8 +400,8 @@ export default function ExperiencePage() {
         }
         .xp-th {
           font-family: var(--mono);
-          font-size: 9px;
-          color: #333;
+          font-size: 11px;
+          color: #55dff7;
           letter-spacing: 0.2em;
         }
 
@@ -421,7 +421,7 @@ export default function ExperiencePage() {
           grid-template-columns: 48px 100px 1fr 200px 60px 36px;
           gap: 0;
           align-items: center;
-          padding: 20px 2.5rem;
+          padding: 30px 2.5rem;
           cursor: pointer;
           transition: background 0.2s;
           user-select: none;
@@ -431,25 +431,25 @@ export default function ExperiencePage() {
 
         .row-idx {
           font-family: var(--mono);
-          font-size: 10px;
-          color: #2a2a2a;
+          font-size: 13px;
+          color: #55dff7;
           letter-spacing: 0.15em;
         }
         .row-open .row-idx { color: #e63329; }
 
         .row-type {
           font-family: var(--mono);
-          font-size: 9px;
+          font-size: 12px;
           letter-spacing: 0.12em;
-          color: #555;
-          border: 1px solid #1e1e1e;
-          padding: 3px 8px;
+          color: #55dff7;
+          border: 1px solid rgba(124,58,237,0.35);
+          padding: 4px 10px;
           width: fit-content;
           transition: all 0.2s;
         }
         .row-type-edu {
-          color: #6366f1;
-          border-color: rgba(99,102,241,0.2);
+          color: #55dff7;
+          border-color: rgba(124,58,237,0.35);
         }
         .row-open .row-type {
           color: #e63329;
@@ -470,8 +470,8 @@ export default function ExperiencePage() {
 
         .row-org {
           font-family: var(--mono);
-          font-size: 10px;
-          color: #666;
+          font-size: 13px;
+          color: #55dff7;
           letter-spacing: 0.06em;
           padding-right: 1rem;
           white-space: nowrap;
@@ -479,21 +479,21 @@ export default function ExperiencePage() {
           text-overflow: ellipsis;
           transition: color 0.2s;
         }
-        .row-header:hover .row-org { color: #999; }
+        .row-header:hover .row-org { color: #55dff7; }
 
         .row-year {
           font-family: var(--mono);
-          font-size: 11px;
-          color: #333;
+          font-size: 14px;
+          color: #55dff7;
           letter-spacing: 0.1em;
         }
-        .row-open .row-year { color: #777; }
+        .row-open .row-year { color: #55dff7; }
 
         .row-icon {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #333;
+          color: #55dff7;
           transition: transform 0.4s ease, color 0.2s;
         }
         .row-icon-open {
@@ -514,7 +514,7 @@ export default function ExperiencePage() {
           display: grid;
           grid-template-columns: 200px 1fr 160px;
           gap: 0;
-          padding: 0 2.5rem 2rem calc(2.5rem + 48px + 100px);
+          padding: 0 2.5rem 3rem calc(2.5rem + 48px + 100px);
           border-top: 1px solid #111;
         }
 
@@ -528,35 +528,35 @@ export default function ExperiencePage() {
         .row-meta-block { display: flex; flex-direction: column; gap: 3px; }
         .row-meta-label {
           font-family: var(--mono);
-          font-size: 8px;
+          font-size: 12px;
           color: #e63329;
           letter-spacing: 0.2em;
         }
         .row-meta-val {
           font-family: var(--mono);
-          font-size: 11px;
-          color: #bbb;
+          font-size: 14px;
+          color: #fff;
           letter-spacing: 0.08em;
         }
         .row-org-link {
           font-family: var(--mono);
-          font-size: 9px;
-          color: #444;
+          font-size: 12px;
+          color: #e63329;
           letter-spacing: 0.15em;
           text-decoration: none;
           margin-top: auto;
           padding-top: 0.5rem;
           transition: color 0.2s;
         }
-        .row-org-link:hover { color: #e63329; }
+        .row-org-link:hover { color: #fff; }
 
         .row-desc-col {
           padding: 1.5rem 2rem 0;
         }
         .row-desc {
           font-family: 'Inter', sans-serif;
-          font-size: 14px;
-          color: #aaa;
+          font-size: 15px;
+          color: #e8e8e8;
           line-height: 1.8;
           margin-bottom: 1.25rem;
         }
@@ -567,11 +567,11 @@ export default function ExperiencePage() {
         }
         .row-skill {
           font-family: var(--mono);
-          font-size: 9px;
+          font-size: 12px;
           color: #e63329;
-          border: 1px solid rgba(230,51,41,0.2);
+          border: 1px solid rgba(230,51,41,0.25);
           background: rgba(230,51,41,0.04);
-          padding: 3px 10px;
+          padding: 5px 12px;
           letter-spacing: 0.1em;
         }
 
@@ -585,10 +585,10 @@ export default function ExperiencePage() {
         }
         .row-tag {
           font-family: var(--mono);
-          font-size: 9px;
-          color: #444;
-          border: 1px solid #1e1e1e;
-          padding: 3px 10px;
+          font-size: 12px;
+          color: #e63329;
+          border: 1px solid rgba(230,51,41,0.25);
+          padding: 5px 12px;
           letter-spacing: 0.1em;
           white-space: nowrap;
         }
@@ -605,15 +605,15 @@ export default function ExperiencePage() {
         }
         .xp-foot-label {
           font-family: var(--mono);
-          font-size: 10px;
-          color: #2a2a2a;
+          font-size: 12px;
+          color: #55dff7;
           letter-spacing: 0.2em;
         }
         .xp-foot-count {
           font-family: var(--display);
-          font-size: 0.8rem;
+          font-size: 0.9rem;
           font-weight: 700;
-          color: #1a1a1a;
+          color: #55dff7;
           letter-spacing: 0.1em;
         }
 
