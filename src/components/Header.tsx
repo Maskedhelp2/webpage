@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState, useCallback } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import { NAV_LINKS } from '@/lib/constants'
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890#%&/'
@@ -33,23 +33,23 @@ function useScramble(text: string) {
   return { display, scramble }
 }
 
-const overlayVariants = {
+const overlayVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.25 } },
   exit: { opacity: 0, transition: { duration: 0.2 } },
 }
 
-const panelVariants = {
+const panelVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.07, delayChildren: 0.15 } },
   exit: { transition: { staggerChildren: 0.03, staggerDirection: -1 } },
 }
 
-const linkVariants = {
+const linkVariants: Variants = {
   hidden: { clipPath: 'inset(0 0 100% 0)', x: -20 },
   visible: {
     clipPath: 'inset(0 0 0% 0)', x: 0,
-    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
   },
   exit: { clipPath: 'inset(0 0 100% 0)', transition: { duration: 0.2 } },
 }
