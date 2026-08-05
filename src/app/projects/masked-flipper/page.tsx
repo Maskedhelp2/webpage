@@ -1,7 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-/* ── Module cards ── */
+/* ── Data ── */
 const moduleCards = [
   { icon: 'fa-keyboard', name: 'BadUSB HID', status: 'IDLE', statusColor: '#5c5c5c', info: 'Disarmed (Safe)', badge: 'simulated' },
   { icon: 'fa-gear', name: 'Hardware & Telemetry', status: 'RUNNING', statusColor: '#e6192c', info: 'Temp: 41.0°C | Batt: 3.84V (63%)', badge: 'simulated' },
@@ -12,20 +12,198 @@ const moduleCards = [
   { icon: 'fa-wifi', name: 'WiFi Recon (Passive)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Passive Scan Active (14 networks, 3 BLE)', badge: 'simulated' },
 ];
 
-/* ── Sidebar nav items ── */
 const navItems = [
-  { icon: 'fa-chart-line', label: 'Dashboard', active: true },
-  { icon: 'fa-wifi', label: 'WiFi Auditing' },
-  { icon: 'fa-keyboard', label: 'BadUSB HID' },
-  { icon: 'fa-tower-broadcast', label: 'Sub-GHz & IR' },
-  { icon: 'fa-address-card', label: 'NFC / RFID' },
-  { icon: 'fa-gauge-high', label: 'Telemetry & Sensors' },
-  { icon: 'fa-display', label: 'ST7789 Screen & Keypad' },
-  { icon: 'fa-clipboard-list', label: 'Audit Logs' },
-  { icon: 'fa-circle-info', label: 'Project Overview' },
+  { id: 'dashboard', icon: 'fa-chart-line', label: 'Dashboard' },
+  { id: 'wifi', icon: 'fa-wifi', label: 'WiFi Auditing' },
+  { id: 'badusb', icon: 'fa-keyboard', label: 'BadUSB HID' },
+  { id: 'rf', icon: 'fa-tower-broadcast', label: 'Sub-GHz & IR' },
+  { id: 'nfc', icon: 'fa-address-card', label: 'NFC / RFID' },
+  { id: 'hardware', icon: 'fa-gauge-high', label: 'Telemetry & Sensors' },
+  { id: 'virtual-device', icon: 'fa-display', label: 'ST7789 Screen & Keypad' },
+  { id: 'audit-logs', icon: 'fa-clipboard-list', label: 'Audit Logs' },
+  { id: 'overview', icon: 'fa-circle-info', label: 'Project Overview' },
 ];
 
 export default function MaskedFlipperPage() {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [time, setTime] = useState('00:00:00');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString('en-GB', { hour12: false }));
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const renderViewContent = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return (
+          <div className="mfd-fade-in">
+            <div>
+              <h2 className="mfd-section-title">SYSTEM OVERVIEW</h2>
+              <p className="mfd-section-sub">Real-time module health and active background scanning states</p>
+            </div>
+
+            <div className="mfd-modules-grid">
+              {moduleCards.map(m => (
+                <div key={m.name} className="mfd-mod-card">
+                  <div className="mfd-mod-header">
+                    <div className="mfd-mod-icon-name">
+                      <i className={`fa-solid ${m.icon} mfd-mod-icon`} />
+                    </div>
+                    <span className={`mfd-mod-badge ${m.status === 'RUNNING' ? 'running' : 'idle'}`}>
+                      {m.status}
+                    </span>
+                  </div>
+                  <div className="mfd-mod-name">{m.name}</div>
+                  <div className="mfd-mod-info">{m.info}</div>
+                  <span className="mfd-mod-sim">{m.badge}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mfd-bottom-grid">
+              <div className="mfd-panel">
+                <div className="mfd-panel-title"><i className="fa-solid fa-database" /> RECENT CAPTURES</div>
+                <table className="mfd-table">
+                  <thead>
+                    <tr>
+                      <th>Module</th><th>Name</th><th>Type</th><th>Timestamp</th><th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colSpan={5} style={{ textAlign: 'center', color: '#5c5c5c', padding: '20px' }}>No recent captures saved.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mfd-panel">
+                <div className="mfd-panel-title"><i className="fa-solid fa-sliders" /> QUICK CONTROLS</div>
+                <div className="mfd-qc-grid">
+                  <button className="mfd-qc-btn mfd-qc-green" onClick={() => alert('RTC Sync Triggered')}><i className="fa-solid fa-rotate" /> Sync System RTC</button>
+                  <button className="mfd-qc-btn mfd-qc-gray" onClick={() => alert('Audio Test Triggered')}><i className="fa-solid fa-volume-high" /> Test Piezo Audio (440Hz)</button>
+                  <button className="mfd-qc-btn mfd-qc-gray" onClick={() => alert('Haptic Test Triggered')}><i className="fa-solid fa-gear" /> Test Haptic Motors</button>
+                  <button className="mfd-qc-btn mfd-qc-red" onClick={() => alert('Shutdown Triggered')}><i className="fa-solid fa-power-off" /> Safe Device Shutdown</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case 'wifi':
+        return (
+          <div className="mfd-fade-in">
+             <h2 className="mfd-section-title">WIFI & NETWORK AUDITING</h2>
+             <p className="mfd-section-sub">Passive recon sweeps and scope-gated active wireless testing</p>
+             <div className="mfd-panel" style={{ marginTop: '20px' }}>
+                <div style={{ padding: '40px', textAlign: 'center', color: '#5c5c5c' }}>
+                  <i className="fa-solid fa-wifi" style={{ fontSize: '48px', marginBottom: '16px', color: '#1e1e1e' }}></i>
+                  <p>WiFi Auditing module is currently running in simulation mode.</p>
+                </div>
+             </div>
+          </div>
+        );
+      case 'badusb':
+        return (
+          <div className="mfd-fade-in">
+             <h2 className="mfd-section-title">BADUSB HID PAYLOAD MANAGER</h2>
+             <p className="mfd-section-sub">Duckyscript keystroke payload editor and two-stage Arm & Fire execution</p>
+             <div className="mfd-panel" style={{ marginTop: '20px' }}>
+                <div style={{ padding: '40px', textAlign: 'center', color: '#5c5c5c' }}>
+                  <i className="fa-solid fa-keyboard" style={{ fontSize: '48px', marginBottom: '16px', color: '#1e1e1e' }}></i>
+                  <p>BadUSB HID module is currently running in simulation mode.</p>
+                </div>
+             </div>
+          </div>
+        );
+       case 'rf':
+        return (
+          <div className="mfd-fade-in">
+             <h2 className="mfd-section-title">SUB-GHZ RF & INFRARED (IR)</h2>
+             <p className="mfd-section-sub">Frequency sweeping, waveform signal captures, IR pulse analyzer, and code replays</p>
+             <div className="mfd-panel" style={{ marginTop: '20px' }}>
+                <div style={{ padding: '40px', textAlign: 'center', color: '#5c5c5c' }}>
+                  <i className="fa-solid fa-wave-square" style={{ fontSize: '48px', marginBottom: '16px', color: '#1e1e1e' }}></i>
+                  <p>Sub-GHz & IR module is currently running in simulation mode.</p>
+                </div>
+             </div>
+          </div>
+        );
+       case 'nfc':
+        return (
+          <div className="mfd-fade-in">
+             <h2 className="mfd-section-title">NFC / RFID TAG MODULE</h2>
+             <p className="mfd-section-sub">Tag UID detection, sector memory dump, mfoc key recovery, and magic tag writer</p>
+             <div className="mfd-panel" style={{ marginTop: '20px' }}>
+                <div style={{ padding: '40px', textAlign: 'center', color: '#5c5c5c' }}>
+                  <i className="fa-solid fa-id-card" style={{ fontSize: '48px', marginBottom: '16px', color: '#1e1e1e' }}></i>
+                  <p>NFC / RFID module is currently running in simulation mode.</p>
+                </div>
+             </div>
+          </div>
+        );
+      case 'hardware':
+        return (
+          <div className="mfd-fade-in">
+             <h2 className="mfd-section-title">HARDWARE TELEMETRY & DIAGNOSTICS</h2>
+             <p className="mfd-section-sub">Live ADC voltage dials, CPU temperatures, RTC synchronization, piezo audio, and haptic testing</p>
+             <div className="mfd-panel" style={{ marginTop: '20px' }}>
+                <div style={{ padding: '40px', textAlign: 'center', color: '#5c5c5c' }}>
+                  <i className="fa-solid fa-microchip" style={{ fontSize: '48px', marginBottom: '16px', color: '#1e1e1e' }}></i>
+                  <p>Hardware Telemetry module is currently running in simulation mode.</p>
+                </div>
+             </div>
+          </div>
+        );
+       case 'virtual-device':
+        return (
+          <div className="mfd-fade-in">
+             <h2 className="mfd-section-title">VIRTUAL DEVICE EMULATOR</h2>
+             <p className="mfd-section-sub">Live 240x240 ST7789 LCD display screen frame mirror and interactive 4x4 matrix keypad</p>
+             <div className="mfd-panel" style={{ marginTop: '20px' }}>
+                <div style={{ padding: '40px', textAlign: 'center', color: '#5c5c5c' }}>
+                  <i className="fa-solid fa-tv" style={{ fontSize: '48px', marginBottom: '16px', color: '#1e1e1e' }}></i>
+                  <p>Virtual Device Emulator is currently running in simulation mode.</p>
+                </div>
+             </div>
+          </div>
+        );
+      case 'audit-logs':
+        return (
+          <div className="mfd-fade-in">
+             <h2 className="mfd-section-title">AUDIT LOGS & COMPLIANCE TRAIL</h2>
+             <p className="mfd-section-sub">Timestamped SQLite audit trail for all start/stop, active tier tests, and target scope notes</p>
+             <div className="mfd-panel" style={{ marginTop: '20px' }}>
+                <div style={{ padding: '40px', textAlign: 'center', color: '#5c5c5c' }}>
+                  <i className="fa-solid fa-list-check" style={{ fontSize: '48px', marginBottom: '16px', color: '#1e1e1e' }}></i>
+                  <p>Audit Logs are currently running in simulation mode.</p>
+                </div>
+             </div>
+          </div>
+        );
+      case 'overview':
+        return (
+          <div className="mfd-fade-in">
+             <h2 className="mfd-section-title">PROJECT OVERVIEW</h2>
+             <p className="mfd-section-sub">Executive project proposal, architecture matrix, hardware breakdown, and responsible-use design</p>
+             <div className="mfd-panel" style={{ marginTop: '20px' }}>
+                <div style={{ padding: '40px', textAlign: 'center', color: '#5c5c5c' }}>
+                  <i className="fa-solid fa-book-open" style={{ fontSize: '48px', marginBottom: '16px', color: '#1e1e1e' }}></i>
+                  <p>Masked Flipper is a pocket-sized, Raspberry Pi-powered hardware multi-tool for inspecting, understanding, and testing your own physical devices and wireless networks.</p>
+                </div>
+             </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <style>{`
@@ -79,7 +257,7 @@ export default function MaskedFlipperPage() {
         .mfd-mod-sim { display:inline-block; font-family:'Fira Code',monospace; font-size:9px; color:#5c5c5c; background:#1a1a1a; border:1px solid #2a2a2a; padding:2px 8px; border-radius:4px; margin-top:8px; }
 
         /* Bottom grid */
-        .mfd-bottom-grid { display:grid; grid-template-columns:2fr 1fr; gap:12px; }
+        .mfd-bottom-grid { display:grid; grid-template-columns:2fr 1fr; gap:12px; margin-top: 20px; }
         .mfd-panel { background:#141414; border:1px solid #1e1e1e; border-radius:10px; padding:16px; }
         .mfd-panel-title { font-family:'Fira Code',monospace; font-size:13px; font-weight:600; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
         .mfd-panel-title i { color:#e6192c; }
@@ -102,6 +280,10 @@ export default function MaskedFlipperPage() {
         /* Back link */
         .mfd-back { position:fixed; top:12px; right:16px; z-index:100; font-family:'Fira Code',monospace; font-size:11px; color:#9a9a9a; text-decoration:none; background:#141414; border:1px solid #2a2a2a; padding:6px 14px; border-radius:6px; transition:all .15s; letter-spacing:1px; }
         .mfd-back:hover { color:#e6192c; border-color:#e6192c; }
+
+        /* Animations */
+        .mfd-fade-in { animation: fadeIn 0.3s ease-in-out; display: flex; flex-direction: column; gap: 20px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Responsive */
         @media (max-width:900px) {
@@ -129,7 +311,11 @@ export default function MaskedFlipperPage() {
 
           <nav className="mfd-nav">
             {navItems.map(n => (
-              <button key={n.label} className={`mfd-nav-item${n.active ? ' active' : ''}`}>
+              <button 
+                key={n.id} 
+                className={`mfd-nav-item${activeTab === n.id ? ' active' : ''}`}
+                onClick={() => setActiveTab(n.id)}
+              >
                 <i className={`fa-solid ${n.icon}`} />
                 {n.label}
               </button>
@@ -141,7 +327,7 @@ export default function MaskedFlipperPage() {
               <i className="fa-solid fa-triangle-exclamation" />
               SIMULATION MODE
             </div>
-            <button className="mfd-stop-btn">
+            <button className="mfd-stop-btn" onClick={() => alert('All Scans Stopped!')}>
               <i className="fa-solid fa-stop" />
               STOP ALL SCANS
             </button>
@@ -155,60 +341,15 @@ export default function MaskedFlipperPage() {
             <div className="mfd-status-item"><i className="fa-solid fa-battery-three-quarters" /> 3.89V (69%)</div>
             <div className="mfd-status-item"><i className="fa-solid fa-temperature-half" /> 43.6°C</div>
             <div className="mfd-status-item"><i className="fa-solid fa-hard-drive" /> 172699.6 MB Free</div>
-            <div className="mfd-status-item"><i className="fa-solid fa-clock" style={{ color: '#e6192c' }} /> RTC: 16:31:13</div>
-          </div>
-
-          {/* Section header */}
-          <div>
-            <h2 className="mfd-section-title">SYSTEM OVERVIEW</h2>
-            <p className="mfd-section-sub">Real-time module health and active background scanning states</p>
-          </div>
-
-          {/* Module cards */}
-          <div className="mfd-modules-grid">
-            {moduleCards.map(m => (
-              <div key={m.name} className="mfd-mod-card">
-                <div className="mfd-mod-header">
-                  <div className="mfd-mod-icon-name">
-                    <i className={`fa-solid ${m.icon} mfd-mod-icon`} />
-                  </div>
-                  <span className={`mfd-mod-badge ${m.status === 'RUNNING' ? 'running' : 'idle'}`}>
-                    {m.status}
-                  </span>
-                </div>
-                <div className="mfd-mod-name">{m.name}</div>
-                <div className="mfd-mod-info">{m.info}</div>
-                <span className="mfd-mod-sim">{m.badge}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Bottom: Captures + Quick Controls */}
-          <div className="mfd-bottom-grid">
-            <div className="mfd-panel">
-              <div className="mfd-panel-title"><i className="fa-solid fa-database" /> RECENT CAPTURES</div>
-              <table className="mfd-table">
-                <thead>
-                  <tr>
-                    <th>Module</th><th>Name</th><th>Type</th><th>Timestamp</th><th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td colSpan={5} style={{ textAlign: 'center', color: '#5c5c5c', padding: '20px' }}>No recent captures saved.</td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div className="mfd-panel">
-              <div className="mfd-panel-title"><i className="fa-solid fa-sliders" /> QUICK CONTROLS</div>
-              <div className="mfd-qc-grid">
-                <button className="mfd-qc-btn mfd-qc-green"><i className="fa-solid fa-rotate" /> Sync System RTC</button>
-                <button className="mfd-qc-btn mfd-qc-gray"><i className="fa-solid fa-volume-high" /> Test Piezo Audio (440Hz)</button>
-                <button className="mfd-qc-btn mfd-qc-gray"><i className="fa-solid fa-gear" /> Test Haptic Motors</button>
-                <button className="mfd-qc-btn mfd-qc-red"><i className="fa-solid fa-power-off" /> Safe Device Shutdown</button>
-              </div>
+            <div className="mfd-status-item">
+              <i className="fa-solid fa-clock" style={{ color: '#e6192c' }} /> 
+              RTC: {isClient ? time : '00:00:00'}
             </div>
           </div>
+
+          {/* Dynamic Content View */}
+          {renderViewContent()}
+          
         </main>
       </div>
 
