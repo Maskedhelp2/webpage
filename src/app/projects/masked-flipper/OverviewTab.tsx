@@ -139,7 +139,7 @@ export default function OverviewTab() {
         .doc-nav-item.active { color:#e6192c; background:rgba(230,25,44,0.08); border-left-color:#e6192c; font-weight:600; }
         
         /* Main Content */
-        .doc-content { flex:1; max-width:900px; padding-bottom:100px; }
+        .doc-content { flex:1; width: 100%; padding-bottom:100px; }
         .doc-section { margin-bottom:64px; scroll-margin-top:40px; }
         .doc-h1 { font-family:'Fira Code', monospace; font-size:28px; font-weight:700; color:#fff; margin-bottom:24px; border-bottom:1px solid #1e1e1e; padding-bottom:12px; }
         .doc-h2 { font-family:'Fira Code', monospace; font-size:18px; font-weight:600; color:#fff; margin-bottom:16px; margin-top:32px; display:flex; align-items:center; gap:10px; }
@@ -198,19 +198,6 @@ export default function OverviewTab() {
           .doc-sidebar { width:100%; position:relative; top:0; max-height:200px; border-right:none; border-bottom:1px solid #1e1e1e; margin-bottom:24px; }
         }
       `}</style>
-
-      <aside className="doc-sidebar">
-        <div style={{fontSize:'11px', color:'#5c5c5c', fontWeight:700, letterSpacing:'1px', marginBottom:'16px'}}>DOCUMENTATION INDEX</div>
-        {navLinks.map(link => (
-          <div 
-            key={link.id} 
-            className={`doc-nav-item ${activeSection === link.id ? 'active' : ''}`}
-            onClick={() => scrollTo(link.id)}
-          >
-            {link.label}
-          </div>
-        ))}
-      </aside>
 
       <main className="doc-content" ref={sectionsRef}>
         
