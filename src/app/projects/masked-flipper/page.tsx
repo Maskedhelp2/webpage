@@ -1,32 +1,28 @@
 'use client';
 import React from 'react';
 
-const styles: Record<string, React.CSSProperties> = {
-  /* ── Tokens ── */
-  root: {
-    '--bg-primary': '#0a0a0a',
-    '--bg-surface': '#141414',
-    '--bg-surface-raised': '#1c1c1c',
-    '--border-subtle': '#2a2a2a',
-    '--red-primary': '#e6192c',
-    '--red-dim': '#8f0f1c',
-    '--red-glow': 'rgba(230, 25, 44, 0.25)',
-    '--text-primary': '#f2f2f2',
-    '--text-secondary': '#9a9a9a',
-    '--text-muted': '#5c5c5c',
-    '--font-heading': "'Fira Code', monospace",
-    '--font-body': "'Outfit', system-ui, sans-serif",
-  } as React.CSSProperties,
-};
+/* ── Module cards ── */
+const moduleCards = [
+  { icon: 'fa-keyboard', name: 'BadUSB HID', status: 'IDLE', statusColor: '#5c5c5c', info: 'Disarmed (Safe)', badge: 'simulated' },
+  { icon: 'fa-gear', name: 'Hardware & Telemetry', status: 'RUNNING', statusColor: '#e6192c', info: 'Temp: 41.0°C | Batt: 3.84V (63%)', badge: 'simulated' },
+  { icon: 'fa-bolt', name: 'Infrared (IR)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle', badge: 'simulated' },
+  { icon: 'fa-address-card', name: 'NFC / RFID', status: 'IDLE', statusColor: '#5c5c5c', info: 'Present a Tag …', badge: 'simulated' },
+  { icon: 'fa-tower-broadcast', name: 'Sub-GHz RF', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle (433.92MHz)', badge: 'simulated' },
+  { icon: 'fa-shield-halved', name: 'WiFi Audit (Active)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle (Scope Protected)', badge: 'simulated' },
+  { icon: 'fa-wifi', name: 'WiFi Recon (Passive)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Passive Scan Active (14 networks, 3 BLE)', badge: 'simulated' },
+];
 
-/* ── Module card data ── */
-const modules = [
-  { icon: 'fa-wifi', name: 'WiFi Auditing', desc: 'Deauth testing, rogue AP, and packet capture via Aircrack-ng.' },
-  { icon: 'fa-tower-broadcast', name: 'Sub-GHz Radio', desc: 'Capture and replay signals on common ISM frequencies.' },
-  { icon: 'fa-address-card', name: 'NFC / RFID', desc: 'Read, clone, and emulate 13.56 MHz and 125 kHz tags.' },
-  { icon: 'fa-satellite-dish', name: 'Infrared', desc: 'Learn, store, and replay IR remote control signals.' },
-  { icon: 'fa-keyboard', name: 'BadUSB HID', desc: 'Inject keystroke payloads via USB rubber-ducky scripts.' },
-  { icon: 'fa-gauge-high', name: 'Telemetry', desc: 'Real-time CPU, memory, temperature, and uptime monitoring.' },
+/* ── Sidebar nav items ── */
+const navItems = [
+  { icon: 'fa-chart-line', label: 'Dashboard', active: true },
+  { icon: 'fa-wifi', label: 'WiFi Auditing' },
+  { icon: 'fa-keyboard', label: 'BadUSB HID' },
+  { icon: 'fa-tower-broadcast', label: 'Sub-GHz & IR' },
+  { icon: 'fa-address-card', label: 'NFC / RFID' },
+  { icon: 'fa-gauge-high', label: 'Telemetry & Sensors' },
+  { icon: 'fa-display', label: 'ST7789 Screen & Keypad' },
+  { icon: 'fa-clipboard-list', label: 'Audit Logs' },
+  { icon: 'fa-circle-info', label: 'Project Overview' },
 ];
 
 export default function MaskedFlipperPage() {
@@ -35,157 +31,187 @@ export default function MaskedFlipperPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
-        .mf-wrapper { position:relative; min-height:100vh; width:100%; display:flex; flex-direction:column; overflow:hidden; background:#0a0a0a; font-family:'Outfit',system-ui,sans-serif; color:#f2f2f2; }
+        .mfd * { box-sizing:border-box; margin:0; padding:0; }
+        .mfd { display:flex; min-height:100vh; background:#0a0a0a; color:#f2f2f2; font-family:'Outfit',system-ui,sans-serif; }
 
-        /* Overlay grid + glow */
-        .mf-overlay { position:absolute; inset:0; background:
-          radial-gradient(ellipse 65% 55% at 25% 50%, rgba(230,25,44,0.12) 0%, transparent 70%),
-          linear-gradient(rgba(10,10,10,0.85),rgba(10,10,10,0.85)),
-          linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px),
-          linear-gradient(0deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-          background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px; z-index:1; pointer-events:none; }
+        /* Sidebar */
+        .mfd-sidebar { width:220px; flex-shrink:0; display:flex; flex-direction:column; padding:20px 16px; border-right:1px solid #1e1e1e; background:#0c0c0c; }
+        .mfd-brand { display:flex; align-items:center; gap:10px; padding-bottom:20px; border-bottom:1px solid #1e1e1e; margin-bottom:16px; }
+        .mfd-brand-icon { font-size:22px; color:#e6192c; text-shadow:0 0 8px #e6192c; }
+        .mfd-brand-title { font-family:'Fira Code',monospace; font-weight:700; font-size:13px; letter-spacing:0.5px; }
+        .mfd-brand-sub { display:block; font-size:10px; color:#9a9a9a; margin-top:1px; }
 
-        .mf-content { position:relative; z-index:10; display:flex; flex-direction:column; min-height:100vh; justify-content:space-between; padding:16px 24px; max-width:1280px; margin:0 auto; width:100%; box-sizing:border-box; }
+        .mfd-nav { display:flex; flex-direction:column; gap:4px; flex:1; }
+        .mfd-nav-item { display:flex; align-items:center; gap:10px; padding:9px 12px; color:#9a9a9a; text-decoration:none; border-radius:6px; font-size:13px; font-weight:500; transition:all .15s; cursor:pointer; border:none; background:none; text-align:left; }
+        .mfd-nav-item i { font-size:14px; width:18px; text-align:center; }
+        .mfd-nav-item:hover { color:#fff; background:rgba(230,25,44,0.1); }
+        .mfd-nav-item.active { color:#fff; background:rgba(230,25,44,0.18); border:1px solid rgba(230,25,44,0.4); }
 
-        /* Nav */
-        .mf-nav { display:flex; justify-content:space-between; align-items:center; padding:8px 0; }
-        .mf-brand { display:flex; align-items:center; gap:12px; }
-        .mf-brand-icon { font-size:28px; color:#e6192c; text-shadow:0 0 10px #e6192c; }
-        .mf-brand-title { font-family:'Fira Code',monospace; font-weight:700; font-size:16px; letter-spacing:1px; }
-        .mf-brand-sub { display:block; font-size:11px; color:#9a9a9a; }
+        .mfd-sidebar-footer { border-top:1px solid #1e1e1e; margin-top:auto; padding-top:14px; display:flex; flex-direction:column; gap:8px; }
+        .mfd-sim-badge { text-align:center; font-family:'Fira Code',monospace; font-size:10px; color:#e6192c; background:rgba(230,25,44,0.08); padding:6px 10px; border-radius:6px; border:1px dashed rgba(230,25,44,0.4); display:flex; align-items:center; justify-content:center; gap:6px; }
+        .mfd-stop-btn { background:#e6192c; color:#fff; border:none; padding:10px; border-radius:6px; font-family:'Outfit',sans-serif; font-size:12px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; transition:background .15s; }
+        .mfd-stop-btn:hover { background:#d01426; }
 
-        .mf-nav-pill { display:flex; align-items:center; gap:24px; background:#141414; border:1px solid #2a2a2a; padding:12px 24px; border-radius:9999px; box-shadow:0 4px 20px rgba(0,0,0,0.4); }
-        .mf-nav-pill a { color:#9a9a9a; text-decoration:none; font-size:14px; font-weight:500; transition:color .2s; }
-        .mf-nav-pill a:hover { color:#f2f2f2; }
+        /* Content area */
+        .mfd-content { flex:1; padding:20px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
 
-        .mf-nav-cta { background:transparent; color:#f2f2f2; border:1px solid #e6192c; padding:8px 16px; border-radius:9999px; font-size:13px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all .2s; }
-        .mf-nav-cta:hover { background:rgba(230,25,44,0.12); }
+        /* Top status bar */
+        .mfd-status-bar { display:flex; justify-content:space-around; align-items:center; padding:10px 20px; font-family:'Fira Code',monospace; font-size:12px; background:#111; border:1px solid #1e1e1e; border-radius:8px; }
+        .mfd-status-item { display:flex; align-items:center; gap:6px; }
+        .mfd-status-item i { color:#e6192c; font-size:12px; }
 
-        /* Top row */
-        .mf-top-row { display:grid; grid-template-columns:2fr 1fr; gap:16px; align-items:center; margin:16px 0; }
-        .mf-top-left { color:#9a9a9a; font-size:14px; max-width:640px; line-height:1.5; }
-        .mf-top-right { text-align:right; font-family:'Fira Code',monospace; color:#9a9a9a; font-size:14px; letter-spacing:1px; }
+        /* Section header */
+        .mfd-section-title { font-family:'Fira Code',monospace; font-size:18px; font-weight:700; letter-spacing:0.5px; }
+        .mfd-section-sub { font-size:12px; color:#5c5c5c; margin-top:2px; }
 
-        /* Hero center */
-        .mf-hero { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; margin:auto 0; padding:16px 0; }
-        .mf-eyebrow { font-family:'Fira Code',monospace; font-size:12px; letter-spacing:2px; color:#9a9a9a; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
-        .mf-dot { width:8px; height:8px; background:#e6192c; border-radius:50%; box-shadow:0 0 8px #e6192c; animation:mf-pulse 2s ease-in-out infinite; }
-        @keyframes mf-pulse { 0%,100%{box-shadow:0 0 8px #e6192c} 50%{box-shadow:0 0 18px #e6192c} }
+        /* Module cards grid */
+        .mfd-modules-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+        .mfd-mod-card { background:#141414; border:1px solid #1e1e1e; border-radius:10px; padding:16px; transition:border-color .15s; }
+        .mfd-mod-card:hover { border-color:rgba(230,25,44,0.35); }
+        .mfd-mod-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+        .mfd-mod-icon-name { display:flex; align-items:center; gap:8px; }
+        .mfd-mod-icon { font-size:18px; color:#e6192c; }
+        .mfd-mod-badge { font-family:'Fira Code',monospace; font-size:9px; letter-spacing:0.5px; padding:3px 8px; border-radius:4px; font-weight:600; }
+        .mfd-mod-badge.idle { background:rgba(92,92,92,0.2); color:#5c5c5c; border:1px solid #3a3a3a; }
+        .mfd-mod-badge.running { background:rgba(230,25,44,0.2); color:#e6192c; border:1px solid #e6192c; }
+        .mfd-mod-name { font-family:'Fira Code',monospace; font-size:13px; font-weight:600; }
+        .mfd-mod-info { font-size:12px; color:#9a9a9a; margin-top:4px; font-family:'Fira Code',monospace; }
+        .mfd-mod-sim { display:inline-block; font-family:'Fira Code',monospace; font-size:9px; color:#5c5c5c; background:#1a1a1a; border:1px solid #2a2a2a; padding:2px 8px; border-radius:4px; margin-top:8px; }
 
-        .mf-heading { font-family:'Fira Code',monospace; font-size:clamp(44px,7.5vw,96px); font-weight:700; line-height:0.95; letter-spacing:-2px; margin-bottom:16px; }
-        .mf-heading-line1 { display:block; color:#f2f2f2; }
-        .mf-shiny { display:inline-block; padding-right:0.05em; background-image:linear-gradient(100deg,#8f0f1c 0%,#e6192c 25%,#fff 50%,#e6192c 75%,#8f0f1c 100%); background-size:200% auto; background-clip:text; -webkit-background-clip:text; color:transparent; animation:mf-shine 3s linear infinite; }
-        @keyframes mf-shine { to { background-position:200% center; } }
+        /* Bottom grid */
+        .mfd-bottom-grid { display:grid; grid-template-columns:2fr 1fr; gap:12px; }
+        .mfd-panel { background:#141414; border:1px solid #1e1e1e; border-radius:10px; padding:16px; }
+        .mfd-panel-title { font-family:'Fira Code',monospace; font-size:13px; font-weight:600; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+        .mfd-panel-title i { color:#e6192c; }
 
-        .mf-hero-btn { background:#e6192c; color:#fff; padding:12px 28px; border-radius:9999px; font-size:15px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:10px; box-shadow:0 0 20px rgba(230,25,44,0.25); border:1px solid #e6192c; transition:all .25s; margin-top:8px; }
-        .mf-hero-btn:hover { background:#d01426; box-shadow:0 0 30px rgba(230,25,44,0.5); transform:translateY(-2px); }
+        /* Table */
+        .mfd-table { width:100%; border-collapse:collapse; font-size:12px; }
+        .mfd-table th { text-align:left; padding:8px 10px; color:#e6192c; font-family:'Fira Code',monospace; font-size:11px; border-bottom:1px solid #1e1e1e; }
+        .mfd-table td { padding:8px 10px; border-bottom:1px solid #1e1e1e; color:#5c5c5c; }
 
-        /* Modules section */
-        .mf-modules { padding:80px 0 60px; }
-        .mf-section-label { font-family:'Fira Code',monospace; font-size:12px; color:#e6192c; letter-spacing:3px; margin-bottom:12px; }
-        .mf-section-title { font-family:'Fira Code',monospace; font-size:28px; font-weight:700; margin-bottom:8px; }
-        .mf-section-desc { color:#9a9a9a; font-size:14px; margin-bottom:32px; max-width:600px; }
+        /* Quick controls */
+        .mfd-qc-grid { display:flex; flex-wrap:wrap; gap:8px; }
+        .mfd-qc-btn { padding:8px 14px; border-radius:6px; font-size:11px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:6px; border:none; transition:all .15s; font-family:'Outfit',sans-serif; }
+        .mfd-qc-green { background:rgba(59,165,92,0.15); color:#3ba55c; border:1px solid rgba(59,165,92,0.3); }
+        .mfd-qc-green:hover { background:rgba(59,165,92,0.25); }
+        .mfd-qc-gray { background:#1c1c1c; color:#9a9a9a; border:1px solid #2a2a2a; }
+        .mfd-qc-gray:hover { background:#252525; color:#fff; }
+        .mfd-qc-red { background:#e6192c; color:#fff; }
+        .mfd-qc-red:hover { background:#d01426; }
 
-        .mf-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
-        .mf-card { background:#141414; border:1px solid #2a2a2a; border-radius:12px; padding:24px; transition:all .2s; }
-        .mf-card:hover { border-color:rgba(230,25,44,0.4); transform:translateY(-2px); }
-        .mf-card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
-        .mf-card-icon { font-size:24px; color:#e6192c; }
-        .mf-card-name { font-family:'Fira Code',monospace; font-size:15px; font-weight:600; }
-        .mf-card-desc { font-size:13px; color:#9a9a9a; font-family:'Fira Code',monospace; margin-top:4px; }
-
-        /* Footer */
-        .mf-footer { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; font-size:13px; color:#5c5c5c; }
+        /* Back link */
+        .mfd-back { position:fixed; top:12px; right:16px; z-index:100; font-family:'Fira Code',monospace; font-size:11px; color:#9a9a9a; text-decoration:none; background:#141414; border:1px solid #2a2a2a; padding:6px 14px; border-radius:6px; transition:all .15s; letter-spacing:1px; }
+        .mfd-back:hover { color:#e6192c; border-color:#e6192c; }
 
         /* Responsive */
         @media (max-width:900px) {
-          .mf-nav-pill { display:none; }
-          .mf-top-row { grid-template-columns:1fr; }
-          .mf-top-right { text-align:left; }
+          .mfd { flex-direction:column; }
+          .mfd-sidebar { width:100%; border-right:none; border-bottom:1px solid #1e1e1e; flex-direction:row; flex-wrap:wrap; padding:12px; gap:8px; }
+          .mfd-nav { flex-direction:row; flex-wrap:wrap; gap:4px; }
+          .mfd-sidebar-footer { flex-direction:row; margin-top:0; border-top:none; padding-top:0; }
+          .mfd-bottom-grid { grid-template-columns:1fr; }
+          .mfd-modules-grid { grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); }
         }
-        @media (prefers-reduced-motion:reduce) { .mf-shiny { animation:none; color:#e6192c; } .mf-dot { animation:none; } }
       `}</style>
 
-      <div className="mf-wrapper" style={styles.root}>
-        <div className="mf-overlay" />
+      <a href="/projects" className="mfd-back">← PORTFOLIO</a>
 
-        <div className="mf-content">
-          {/* Navigation */}
-          <header className="mf-nav">
-            <div className="mf-brand">
-              <i className="fa-solid fa-mask mf-brand-icon" />
-              <div>
-                <span className="mf-brand-title">MASKED FLIPPER</span>
-                <span className="mf-brand-sub">Raspberry Pi Multi-Tool</span>
-              </div>
+      <div className="mfd">
+        {/* Sidebar */}
+        <aside className="mfd-sidebar">
+          <div className="mfd-brand">
+            <i className="fa-solid fa-mask mfd-brand-icon" />
+            <div>
+              <span className="mfd-brand-title">MASKED FLIPPER</span>
+              <span className="mfd-brand-sub">RPi4 Multi-Tool Companion</span>
             </div>
-
-            <nav className="mf-nav-pill">
-              <a href="#modules">Modules</a>
-              <a href="https://github.com/POLARI-S/masked-flipper" target="_blank" rel="noopener noreferrer">GitHub</a>
-              <a href="/projects">← Portfolio</a>
-            </nav>
-
-            <a href="https://github.com/POLARI-S/masked-flipper" target="_blank" rel="noopener noreferrer" className="mf-nav-cta">
-              View Source <i className="fa-solid fa-arrow-right" />
-            </a>
-          </header>
-
-          {/* Top row */}
-          <div className="mf-top-row">
-            <div className="mf-top-left">
-              A pocket-sized Raspberry Pi multi-tool for testing and understanding your own devices and networks — featuring both an on-device LCD interface and a live web companion dashboard.
-            </div>
-            <div className="mf-top-right">6 Modules. One Dashboard.</div>
           </div>
 
-          {/* Hero */}
-          <main className="mf-hero">
-            <div className="mf-eyebrow">
-              <span className="mf-dot" />
-              LIVE — HARDWARE ACTIVE
+          <nav className="mfd-nav">
+            {navItems.map(n => (
+              <button key={n.label} className={`mfd-nav-item${n.active ? ' active' : ''}`}>
+                <i className={`fa-solid ${n.icon}`} />
+                {n.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="mfd-sidebar-footer">
+            <div className="mfd-sim-badge">
+              <i className="fa-solid fa-triangle-exclamation" />
+              SIMULATION MODE
             </div>
+            <button className="mfd-stop-btn">
+              <i className="fa-solid fa-stop" />
+              STOP ALL SCANS
+            </button>
+          </div>
+        </aside>
 
-            <h1 className="mf-heading">
-              <span className="mf-heading-line1">Hack Your</span>
-              <span className="mf-shiny">Own Devices.</span>
-            </h1>
+        {/* Main content */}
+        <main className="mfd-content">
+          {/* Status bar */}
+          <div className="mfd-status-bar">
+            <div className="mfd-status-item"><i className="fa-solid fa-battery-three-quarters" /> 3.89V (69%)</div>
+            <div className="mfd-status-item"><i className="fa-solid fa-temperature-half" /> 43.6°C</div>
+            <div className="mfd-status-item"><i className="fa-solid fa-hard-drive" /> 172699.6 MB Free</div>
+            <div className="mfd-status-item"><i className="fa-solid fa-clock" style={{ color: '#e6192c' }} /> RTC: 16:31:13</div>
+          </div>
 
-            <a href="https://github.com/POLARI-S/masked-flipper" target="_blank" rel="noopener noreferrer" className="mf-hero-btn">
-              View on GitHub <i className="fa-solid fa-arrow-right" />
-            </a>
-          </main>
+          {/* Section header */}
+          <div>
+            <h2 className="mfd-section-title">SYSTEM OVERVIEW</h2>
+            <p className="mfd-section-sub">Real-time module health and active background scanning states</p>
+          </div>
 
-          {/* Modules */}
-          <section className="mf-modules" id="modules">
-            <div className="mf-section-label">// HARDWARE MODULES</div>
-            <div className="mf-section-title">SIX MODULES. ONE BACKEND.</div>
-            <div className="mf-section-desc">
-              Every module shares one lifecycle interface — the same Flask + Socket.IO backend drives both the on-device screen and the browser dashboard.
-            </div>
-
-            <div className="mf-grid">
-              {modules.map(m => (
-                <div key={m.name} className="mf-card">
-                  <div className="mf-card-header">
-                    <span className="mf-card-name">{m.name}</span>
-                    <i className={`fa-solid ${m.icon} mf-card-icon`} />
+          {/* Module cards */}
+          <div className="mfd-modules-grid">
+            {moduleCards.map(m => (
+              <div key={m.name} className="mfd-mod-card">
+                <div className="mfd-mod-header">
+                  <div className="mfd-mod-icon-name">
+                    <i className={`fa-solid ${m.icon} mfd-mod-icon`} />
                   </div>
-                  <div className="mf-card-desc">{m.desc}</div>
+                  <span className={`mfd-mod-badge ${m.status === 'RUNNING' ? 'running' : 'idle'}`}>
+                    {m.status}
+                  </span>
                 </div>
-              ))}
-            </div>
-          </section>
+                <div className="mfd-mod-name">{m.name}</div>
+                <div className="mfd-mod-info">{m.info}</div>
+                <span className="mfd-mod-sim">{m.badge}</span>
+              </div>
+            ))}
+          </div>
 
-          {/* Footer */}
-          <footer className="mf-footer">
-            <div>Masked Flipper — 2026 Hackathon Project</div>
-            <div>By Arindam Maity</div>
-          </footer>
-        </div>
+          {/* Bottom: Captures + Quick Controls */}
+          <div className="mfd-bottom-grid">
+            <div className="mfd-panel">
+              <div className="mfd-panel-title"><i className="fa-solid fa-database" /> RECENT CAPTURES</div>
+              <table className="mfd-table">
+                <thead>
+                  <tr>
+                    <th>Module</th><th>Name</th><th>Type</th><th>Timestamp</th><th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colSpan={5} style={{ textAlign: 'center', color: '#5c5c5c', padding: '20px' }}>No recent captures saved.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mfd-panel">
+              <div className="mfd-panel-title"><i className="fa-solid fa-sliders" /> QUICK CONTROLS</div>
+              <div className="mfd-qc-grid">
+                <button className="mfd-qc-btn mfd-qc-green"><i className="fa-solid fa-rotate" /> Sync System RTC</button>
+                <button className="mfd-qc-btn mfd-qc-gray"><i className="fa-solid fa-volume-high" /> Test Piezo Audio (440Hz)</button>
+                <button className="mfd-qc-btn mfd-qc-gray"><i className="fa-solid fa-gear" /> Test Haptic Motors</button>
+                <button className="mfd-qc-btn mfd-qc-red"><i className="fa-solid fa-power-off" /> Safe Device Shutdown</button>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
 
-      {/* Font Awesome */}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     </>
   );
