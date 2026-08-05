@@ -50,4 +50,17 @@ export const projects: Project[] = [
     team: ['Karthik Kumar'],
     highlight: '>90% classification accuracy across 4 waste categories with custom-trained YOLO.',
   },
+  {
+  slug: 'masked-flipper',
+  name: 'MASKED FLIPPER',
+  subtitle: 'RASPBERRY PI SECURITY MULTI-TOOL',
+  year: '2026',
+  status: 'ACTIVE',
+  description: 'A pocket-sized Raspberry Pi 4 multi-tool for testing and understanding your own devices and networks — IR, NFC, sub-GHz, WiFi auditing, and BadUSB, controlled through both a physical on-device screen and a live web dashboard.',
+  longDescription: 'Built for a 2026 hackathon, Masked Flipper combines six hardware modules — infrared, NFC/RFID, sub-GHz radio, WiFi auditing, BadUSB HID, and onboard telemetry — behind a single Flask + Socket.IO backend. Every module shares one lifecycle interface, so the same backend drives both a 240x240 on-device screen navigated by a 4x4 keypad and a full browser dashboard over LAN. Active-tier actions — deauth testing, rogue AP, BadUSB firing — are gated behind an explicit scope-confirmation flow with a timestamped SQLite audit log, so every test against a real target is deliberate and recorded, not accidental.',
+  stack: ['PYTHON', 'FLASK', 'FLASK-SOCKETIO', 'SQLITE', 'RASPBERRY PI 4', 'AIRCRACK-NG', 'ST7789 LCD'],
+  github: 'https://github.com/POLARI-S',
+  team: ['Arindam Maity'],
+  highlight: 'One backend drives both a physical on-device screen and a live web dashboard — active-tier network tests are gated behind an expiring, audit-logged scope confirmation.',
+},
 ]
