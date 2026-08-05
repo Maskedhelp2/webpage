@@ -388,15 +388,56 @@ export default function MaskedFlipperPage() {
              <h2 className="mfd-section-title">PROJECT OVERVIEW</h2>
              <p className="mfd-section-sub">Executive project proposal, architecture matrix, hardware breakdown, and responsible-use design</p>
              
-             <div className="mfd-card" style={{marginTop:'20px', lineHeight:1.6, fontSize:'14px', color:'#d4d4d4'}}>
-               <h3 style={{color:'#06b6d4', fontSize:'16px', marginBottom:'8px'}}><i className="fa-solid fa-bullseye"></i> 1. Executive Summary & Pitch</h3>
-               <p style={{marginBottom:'24px'}}><strong>Masked Flipper</strong> is a pocket-sized, Raspberry Pi–powered hardware multi-tool for inspecting, understanding, and testing your own physical devices and wireless networks, controlled through both a physical on-device screen and a live web dashboard.</p>
-               
-               <h3 style={{color:'#3ba55c', fontSize:'16px', marginBottom:'8px'}}><i className="fa-solid fa-diagram-project"></i> 2. System Architecture: Two Interfaces, One Brain</h3>
-               <p style={{marginBottom:'24px'}}>Masked Flipper operates through two synchronized interfaces sharing a single Python backend: a physical 240x240 color screen driven by a 4x4 keypad for field use, and a full web dashboard over LAN for rich table reviews and spectrum graphs.</p>
+             <div style={{display:'flex', flexDirection:'column', gap:'16px', marginTop:'20px'}}>
+               <div className="mfd-card" style={{lineHeight:1.6, fontSize:'14px', color:'#d4d4d4'}}>
+                 <h3 style={{color:'#06b6d4', fontSize:'16px', marginBottom:'12px'}}><i className="fa-solid fa-bullseye"></i> 1. Executive Summary & Concept</h3>
+                 <p><strong>Masked Flipper</strong> is a pocket-sized, Raspberry Pi–powered hardware multi-tool engineered for inspecting, understanding, and testing your own physical devices and wireless networks. Built as an open-source educational platform, it demystifies radio protocols, network security, and access control systems. It is controlled through both a physical on-device screen (for portable field use) and a rich live web dashboard (for deep analysis over LAN).</p>
+               </div>
 
-               <h3 style={{color:'#e6a219', fontSize:'16px', marginBottom:'8px'}}><i className="fa-solid fa-shield-halved"></i> 3. Responsible-Use Design</h3>
-               <p>Safety is designed directly into the user experience: all active operations (Deauth, Rogue AP, BadUSB Fire) strictly require an explicit target scope confirmation. The backend issues a single-use token that expires in 5 minutes, and every action is recorded in a timestamped SQLite audit log.</p>
+               <div className="mfd-grid-2">
+                 <div className="mfd-card" style={{lineHeight:1.6, fontSize:'14px', color:'#d4d4d4'}}>
+                   <h3 style={{color:'#3ba55c', fontSize:'16px', marginBottom:'12px'}}><i className="fa-solid fa-microchip"></i> 2. Hardware Specifications</h3>
+                   <ul style={{listStyleType:'none', padding:0, margin:0, display:'flex', flexDirection:'column', gap:'8px'}}>
+                     <li><i className="fa-solid fa-check" style={{color:'#3ba55c', width:'20px'}}></i> <strong>Core:</strong> Raspberry Pi 4 Model B (4GB RAM)</li>
+                     <li><i className="fa-solid fa-check" style={{color:'#3ba55c', width:'20px'}}></i> <strong>Display:</strong> 1.54" ST7789 SPI LCD (240x240)</li>
+                     <li><i className="fa-solid fa-check" style={{color:'#3ba55c', width:'20px'}}></i> <strong>Input:</strong> Custom 4x4 Matrix Membrane Keypad</li>
+                     <li><i className="fa-solid fa-check" style={{color:'#3ba55c', width:'20px'}}></i> <strong>Sub-GHz:</strong> CC1101 Transceiver Module (315/433/868/915 MHz)</li>
+                     <li><i className="fa-solid fa-check" style={{color:'#3ba55c', width:'20px'}}></i> <strong>NFC/RFID:</strong> PN532 / RC522 13.56MHz Reader</li>
+                     <li><i className="fa-solid fa-check" style={{color:'#3ba55c', width:'20px'}}></i> <strong>Power:</strong> PiSugar 3 Battery (1200mAh LiPo) with RTC</li>
+                   </ul>
+                 </div>
+
+                 <div className="mfd-card" style={{lineHeight:1.6, fontSize:'14px', color:'#d4d4d4'}}>
+                   <h3 style={{color:'#a855f7', fontSize:'16px', marginBottom:'12px'}}><i className="fa-solid fa-layer-group"></i> 3. Software Stack & Architecture</h3>
+                   <ul style={{listStyleType:'none', padding:0, margin:0, display:'flex', flexDirection:'column', gap:'8px'}}>
+                     <li><i className="fa-solid fa-code" style={{color:'#a855f7', width:'20px'}}></i> <strong>Backend OS:</strong> Kali Linux ARM / Raspberry Pi OS</li>
+                     <li><i className="fa-solid fa-code" style={{color:'#a855f7', width:'20px'}}></i> <strong>Core Logic:</strong> Python 3 with AsyncIO threading</li>
+                     <li><i className="fa-solid fa-code" style={{color:'#a855f7', width:'20px'}}></i> <strong>API / Socket:</strong> Flask & Socket.IO for real-time LAN Sync</li>
+                     <li><i className="fa-solid fa-code" style={{color:'#a855f7', width:'20px'}}></i> <strong>Dashboard:</strong> React, Next.js, and Custom CSS Tokens</li>
+                     <li><i className="fa-solid fa-code" style={{color:'#a855f7', width:'20px'}}></i> <strong>Display Driver:</strong> Pillow (PIL) for SPI frame buffer rendering</li>
+                     <li><i className="fa-solid fa-code" style={{color:'#a855f7', width:'20px'}}></i> <strong>Audit Logging:</strong> SQLite3 with AES encryption</li>
+                   </ul>
+                 </div>
+               </div>
+
+               <div className="mfd-card" style={{lineHeight:1.6, fontSize:'14px', color:'#d4d4d4'}}>
+                 <h3 style={{color:'#e6a219', fontSize:'16px', marginBottom:'12px'}}><i className="fa-solid fa-shield-halved"></i> 4. Responsible-Use & Compliance Design</h3>
+                 <p style={{marginBottom:'16px'}}>Unlike pure offensive tools, Masked Flipper prioritizes safety, logging, and explicit consent mechanisms built directly into the UX.</p>
+                 <div style={{background:'#0a0a0a', border:'1px solid #1e1e1e', padding:'16px', borderRadius:'8px', display:'flex', flexWrap:'wrap', gap:'20px'}}>
+                   <div style={{flex:1, minWidth:'200px'}}>
+                     <h4 style={{color:'#fff', fontSize:'13px', marginBottom:'6px'}}>Scope Confirmation Tokens</h4>
+                     <p style={{fontSize:'12px', color:'#9a9a9a'}}>All active operations (Deauth, Rogue AP, BadUSB Fire) strictly require a single-use token that expires in 5 minutes.</p>
+                   </div>
+                   <div style={{flex:1, minWidth:'200px'}}>
+                     <h4 style={{color:'#fff', fontSize:'13px', marginBottom:'6px'}}>Immutable Audit Trail</h4>
+                     <p style={{fontSize:'12px', color:'#9a9a9a'}}>Every scan start, script execution, and scope target is permanently recorded in a local SQLite audit database.</p>
+                   </div>
+                   <div style={{flex:1, minWidth:'200px'}}>
+                     <h4 style={{color:'#fff', fontSize:'13px', marginBottom:'6px'}}>Kill Switch</h4>
+                     <p style={{fontSize:'12px', color:'#9a9a9a'}}>A global "STOP ALL SCANS" hardware interrupt halts all radio transmissions immediately.</p>
+                   </div>
+                 </div>
+               </div>
              </div>
           </div>
         );
