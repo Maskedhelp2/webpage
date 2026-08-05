@@ -210,7 +210,7 @@ export default function MaskedFlipperPage() {
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
         .mfd * { box-sizing:border-box; margin:0; padding:0; }
-        .mfd { display:flex; min-height:100vh; background:#0a0a0a; color:#f2f2f2; font-family:'Outfit',system-ui,sans-serif; }
+        .mfd { display:flex; min-height:100vh; background:#0a0a0a; color:#f2f2f2; font-family:'Outfit',system-ui,sans-serif; padding-top: 90px; padding-bottom: 60px; }
 
         /* Sidebar */
         .mfd-sidebar { width:220px; flex-shrink:0; display:flex; flex-direction:column; padding:20px 16px; border-right:1px solid #1e1e1e; background:#0c0c0c; }
