@@ -17,17 +17,18 @@ const STATUS_COLORS: Record<string, string> = {
   RESEARCH: '#a78bfa',
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = projects.find(p => p.slug === params.slug)
+export default async function ProjectPage({ params }: { params: { slug: string } | Promise<{ slug: string }> }) {
+  const resolvedParams = await params
+  const project = projects.find(p => p.slug === resolvedParams.slug)
   if (!project) notFound()
 
-  if (params.slug === "desk-helper") {
-  return <DeskHelper />;
-}
+  if (resolvedParams.slug === "desk-helper") {
+    return <DeskHelper />;
+  }
 
-  if (params.slug === "slam-nav") {
-  return <SlamNav />;
-}
+  if (resolvedParams.slug === "slam-nav") {
+    return <SlamNav />;
+  }
 
   const color = STATUS_COLORS[project.status]
 
