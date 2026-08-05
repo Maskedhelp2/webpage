@@ -6,6 +6,7 @@ import { projects } from '@/data/projects'
 import { team } from '@/data/team'
 import DeskHelper from "@/app/projects/desk-helper/page";
 import SlamNav from "@/app/projects/slam-nav/page";
+import MaskedFlipper from "@/app/projects/masked-flipper/page";
 
 export async function generateStaticParams() {
   return projects.map(p => ({ slug: p.slug }))
@@ -28,6 +29,10 @@ export default async function ProjectPage({ params }: { params: { slug: string }
 
   if (resolvedParams.slug === "slam-nav") {
     return <SlamNav />;
+  }
+
+  if (resolvedParams.slug === "masked-flipper") {
+    return <MaskedFlipper />;
   }
 
   const color = STATUS_COLORS[project.status]
