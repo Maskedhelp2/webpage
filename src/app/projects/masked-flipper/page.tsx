@@ -4,13 +4,13 @@ import OverviewTab from './OverviewTab';
 
 /* ── Data ── */
 const moduleCards = [
-  { icon: 'fa-keyboard', name: 'BadUSB HID', status: 'IDLE', statusColor: '#5c5c5c', info: 'Disarmed (Safe)', badge: 'simulated' },
-  { icon: 'fa-gear', name: 'Hardware & Telemetry', status: 'RUNNING', statusColor: '#e6192c', info: 'Temp: 41.0°C | Batt: 3.84V (63%)', badge: 'simulated' },
-  { icon: 'fa-bolt', name: 'Infrared (IR)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle', badge: 'simulated' },
-  { icon: 'fa-address-card', name: 'NFC / RFID', status: 'IDLE', statusColor: '#5c5c5c', info: 'Present a Tag …', badge: 'simulated' },
-  { icon: 'fa-tower-broadcast', name: 'Sub-GHz RF', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle (433.92MHz)', badge: 'simulated' },
-  { icon: 'fa-shield-halved', name: 'WiFi Audit (Active)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle (Scope Protected)', badge: 'simulated' },
-  { icon: 'fa-wifi', name: 'WiFi Recon (Passive)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Passive Scan Active (14 networks, 3 BLE)', badge: 'simulated' },
+  { icon: 'fa-keyboard', name: 'BadUSB HID', status: 'IDLE', statusColor: '#5c5c5c', info: 'Disarmed (Safe)', badge: 'simulated', targetTab: 'badusb' },
+  { icon: 'fa-gear', name: 'Hardware & Telemetry', status: 'RUNNING', statusColor: '#e6192c', info: 'Temp: 41.0°C | Batt: 3.84V (63%)', badge: 'simulated', targetTab: 'hardware' },
+  { icon: 'fa-bolt', name: 'Infrared (IR)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle', badge: 'simulated', targetTab: 'rf' },
+  { icon: 'fa-address-card', name: 'NFC / RFID', status: 'IDLE', statusColor: '#5c5c5c', info: 'Present a Tag …', badge: 'simulated', targetTab: 'nfc' },
+  { icon: 'fa-tower-broadcast', name: 'Sub-GHz RF', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle (433.92MHz)', badge: 'simulated', targetTab: 'rf' },
+  { icon: 'fa-shield-halved', name: 'WiFi Audit (Active)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Idle (Scope Protected)', badge: 'simulated', targetTab: 'wifi', targetWifiTab: 'audit' },
+  { icon: 'fa-wifi', name: 'WiFi Recon (Passive)', status: 'IDLE', statusColor: '#5c5c5c', info: 'Passive Scan Active (14 networks, 3 BLE)', badge: 'simulated', targetTab: 'wifi', targetWifiTab: 'recon' },
 ];
 
 const navItems = [
@@ -54,7 +54,15 @@ export default function MaskedFlipperPage() {
 
             <div className="mfd-modules-grid">
               {moduleCards.map(m => (
-                <div key={m.name} className="mfd-mod-card">
+                <div 
+                  key={m.name} 
+                  className="mfd-mod-card"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    setActiveTab(m.targetTab);
+                    if (m.targetWifiTab) setActiveWifiTab(m.targetWifiTab);
+                  }}
+                >
                   <div className="mfd-mod-header">
                     <div className="mfd-mod-icon-name">
                       <i className={`fa-solid ${m.icon} mfd-mod-icon`} />
