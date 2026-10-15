@@ -1,10 +1,20 @@
 
 import { NextResponse } from "next/server";
+import { createHash } from "node:crypto";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET() {
   const token = process.env.MASKEDFLIPPER_TOKEN;
+
+  console.log("MF_DIAGNOSTIC", {
+    configured: Boolean(token),
+    length: token?.length ?? 0,
+    fingerprint: token
+      ? createHash("sha256").update(token).digest("hex").slice(0, 12)
+      : "missing",
+  });
 
   if (!token) {
     return NextResponse.json(
@@ -28,23 +38,29 @@ export async function GET() {
     );
 
     if (!response.ok) {
+      console.error("MF_UPSTREAM_STATUS", response.status);
+
       return NextResponse.json(
         {
           error: "Gateway unavailable",
           gatewayStatus: response.status,
         },
-        { status: 502 }
+        {
+          status: 502,
+          headers: { "Cache-Control": "no-store" },
+        }
       );
     }
 
-    const status: unknown = await response.json();
-
-    return NextResponse.json(status, {
-      headers: {
-        "Cache-Control": "no-store, max-age=0",
-      },
+    return NextResponse.json(await response.json(), {
+      headers: { "Cache-Control": "no-store, max-age=0" },
     });
-  } catch {
+  } catch (error) {
+    console.error(
+      "MF_FETCH_ERROR",
+      error instanceof Error ? error.name : "UnknownError"
+    );
+
     return NextResponse.json(
       { error: "Could not reach Raspberry Pi gateway" },
       { status: 502 }

@@ -8,7 +8,7 @@
     "build:cloudflare": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "next build && wrangler pages deploy out"
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@emnapi/core": "^1.11.2",
