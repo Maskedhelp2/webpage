@@ -154,4 +154,37 @@ export const team: TeamMember[] = [
     accentFaint: 'rgba(6,182,212,0.07)',
     accentDim: 'rgba(6,182,212,0.3)',
   },
+
+
+  {
+    slug: 'alisha',
+    name: 'ALISHA AGARWAL',
+    firstName: 'ALISHA',
+    lastName: 'AGARWAL',
+    role: '3D MODELLER // AEROCADASTRA',
+    eyebrow: 'FRIENDS // AEROCADASTRA PROJECT',
+    bio: 'Alisha Agarwal is a contributor to the AeroCadastra project, focusing on 3D modelling and the visual design of project components. Her work helps bring the project’s concepts to life through detailed three-dimensional models, supporting the development and visualization of its aerial surveying and drone-fleet systems.',
+    skills: ['3D MODELLING', '3D VISUALIZATION', 'SPATIAL DESIGN', 'AEROCADASTRA'],
+    funFact: 'Turns ideas and concepts into three-dimensional models, helping transform a project vision into something you can see.',
+    accent: '#fb7185',
+    accentGlow: 'rgba(251,113,133,0.35)',
+    accentFaint: 'rgba(251,113,133,0.07)',
+    accentDim: 'rgba(251,113,133,0.3)',
+  },
+  {
+    slug: 'vidushi',
+    name: 'VIDUSHI JAIN',
+    firstName: 'VIDUSHI',
+    lastName: 'JAIN',
+    role: 'SOFTWARE CONTRIBUTOR // AEROCADASTRA',
+    eyebrow: 'FRIENDS // AEROCADASTRA PROJECT',
+    bio: 'Vidushi Jain is a contributor to the AeroCadastra project, supporting its software development and implementation. Her contributions help bring the project’s software components together, supporting the development of a unified system for drone-fleet coordination and aerial surveying.',
+    skills: ['SOFTWARE DEVELOPMENT', 'SOFTWARE INTEGRATION', 'PROBLEM SOLVING', 'AEROCADASTRA'],
+    funFact: 'Believes that great software is built through collaboration, thoughtful problem-solving, and turning ideas into working solutions.',
+    accent: '#a3e635',
+    accentGlow: 'rgba(163,230,53,0.35)',
+    accentFaint: 'rgba(163,230,53,0.07)',
+    accentDim: 'rgba(163,230,53,0.3)',
+  },
+
 ]

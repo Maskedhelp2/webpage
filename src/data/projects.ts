@@ -35,7 +35,7 @@ export const projects: Project[] = [
     description: 'Real-time SLAM pipeline using 2D LiDAR with a custom-built 3D module for full volumetric point-cloud generation in unknown environments.',
     longDescription: 'Designed and implemented a real-time SLAM (Simultaneous Localization and Mapping) pipeline using 2D LiDAR sensors, enabling a mobile robot to autonomously map and navigate unknown environments. Extended the system with a custom-fabricated 3D LiDAR module — achieved full volumetric point-cloud generation by mechanically rotating a 2D sensor and fusing scan data across axes. Integrated ROS2, pose-graph optimization, and sensor-fusion algorithms to achieve sub-centimetre mapping accuracy in dynamic indoor environments.',
     stack: ['ROS2', 'PYTHON', 'C++', 'PCL', 'SLAM TOOLBOX', 'RPLIDAR'],
-    team: ['Karthik Kumar'],
+    team: ['Karthik Kumar', 'Aahana Hajariwala', 'Rohan Alex Basil', 'Sparsh Tyagi'],
     highlight: 'Sub-centimetre mapping accuracy using a DIY 3D LiDAR built from a rotating 2D sensor.',
   },
   {
@@ -63,4 +63,36 @@ export const projects: Project[] = [
     team: ['Arindam Maity', 'Ayush Sharma', 'Akshat Bisht', 'Karthik Kumar', 'Aahana Hajariwala'],
     highlight: 'One backend drives both a physical on-device screen and a live web dashboard — active-tier network tests are gated behind an expiring, audit-logged scope confirmation.',
   },
+
+
+  {
+    slug: 'aerocadastra',
+    name: 'AEROCADASTRA',
+    subtitle: 'AI-POWERED AUTONOMOUS DRONE SURVEYING',
+    year: '2026',
+    status: 'ACTIVE',
+    description:
+      'A desktop drone-fleet ground station for coordinating one fixed-wing mothership and two autonomous child drones, combining fleet telemetry, aerial imagery, AI-assisted person detection, and GIS-based land surveying.',
+    longDescription:
+      'AeroCadastra is a desktop ground station concept designed to coordinate a three-drone fleet consisting of one fixed-wing mothership and two autonomous child drones. The system brings fleet monitoring, multiple video feeds, shared telemetry, and AI-assisted aerial surveying into a unified interface. Its planned geospatial workflow uses GIS tools to analyze surveyed land parcels and compare cadastral boundaries. The computer-vision pipeline includes YOLO-based person detection and ByteTrack tracking for image and video inference. Live drone-camera integration, real-drone validation, and GNSS-based georeferencing remain future integration steps.',
+    stack: [
+      'REACT',
+      'TYPESCRIPT',
+      'VITE',
+      'TAILWIND CSS',
+      'TAURI',
+      'ZUSTAND',
+      'PYTHON',
+      'PYTORCH',
+      'OPENCV',
+      'YOLO',
+      'BYTETRACK',
+      'GEOPANDAS',
+      'SHAPELY',
+    ],
+    team: ['Karthik Kumar', 'Aahana Hajariwala', 'Rohan Alex Basil', 'Alisha Agarwal', 'Ayush Sharma', 'Vidushi Jain'],
+    highlight:
+      'A unified drone-fleet ground station combining AI-based person detection, multi-drone telemetry, aerial surveying, and cadastral GIS analysis.',
+  },
+
 ]
