@@ -16,18 +16,27 @@ Object.defineProperty = function(o, p, a) {
 
   
   
-  globalThis.openNextDebug = false;globalThis.openNextVersion = "4.1.0";globalThis.nextVersion = "16.2.11";
+  globalThis.openNextDebug = false;globalThis.openNextVersion = "4.1.11";globalThis.nextVersion = "16.2.11";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+var __esm = (fn, res, err) => function __init() {
+  if (err) throw err[0];
+  try {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  } catch (e) {
+    throw err = [e], e;
+  }
 };
 var __commonJS = (cb, mod) => function __require() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  try {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  } catch (e) {
+    throw mod = 0, e;
+  }
 };
 var __export = (target, all) => {
   for (var name in all)
@@ -50,7 +59,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// node_modules/@opennextjs/aws/dist/utils/error.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/error.js
 function isOpenNextError(e) {
   try {
     return "__openNextInternal" in e;
@@ -59,11 +68,11 @@ function isOpenNextError(e) {
   }
 }
 var init_error = __esm({
-  "node_modules/@opennextjs/aws/dist/utils/error.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/error.js"() {
   }
 });
 
-// node_modules/@opennextjs/aws/dist/adapters/logger.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/logger.js
 function debug(...args) {
   if (globalThis.openNextDebug) {
     console.log(...args);
@@ -106,7 +115,7 @@ function getOpenNextErrorLogLevel() {
 }
 var DOWNPLAYED_ERROR_LOGS, isDownplayedErrorLog;
 var init_logger = __esm({
-  "node_modules/@opennextjs/aws/dist/adapters/logger.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/logger.js"() {
     init_error();
     DOWNPLAYED_ERROR_LOGS = [
       {
@@ -119,9 +128,9 @@ var init_logger = __esm({
   }
 });
 
-// node_modules/cookie/dist/index.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/cookie/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/cookie/dist/index.js"(exports) {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/cookie/dist/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.parseCookie = parseCookie;
@@ -368,7 +377,7 @@ var require_dist = __commonJS({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/http/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/http/util.js
 function parseSetCookieHeader(cookies) {
   if (!cookies) {
     return [];
@@ -394,22 +403,22 @@ function getQueryFromIterator(it) {
   return query;
 }
 var init_util = __esm({
-  "node_modules/@opennextjs/aws/dist/http/util.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/http/util.js"() {
     init_logger();
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/converters/utils.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/converters/utils.js
 function getQueryFromSearchParams(searchParams) {
   return getQueryFromIterator(searchParams.entries());
 }
 var init_utils = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/converters/utils.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/converters/utils.js"() {
     init_util();
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/converters/edge.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/converters/edge.js
 var edge_exports = {};
 __export(edge_exports, {
   default: () => edge_default
@@ -417,7 +426,7 @@ __export(edge_exports, {
 import { Buffer as Buffer2 } from "node:buffer";
 var import_cookie, NULL_BODY_STATUSES, converter, edge_default;
 var init_edge = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/converters/edge.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/converters/edge.js"() {
     import_cookie = __toESM(require_dist(), 1);
     init_util();
     init_utils();
@@ -499,14 +508,14 @@ var init_edge = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/wrappers/cloudflare-edge.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/wrappers/cloudflare-edge.js
 var cloudflare_edge_exports = {};
 __export(cloudflare_edge_exports, {
   default: () => cloudflare_edge_default
 });
 var cfPropNameMapping, handler, cloudflare_edge_default;
 var init_cloudflare_edge = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/wrappers/cloudflare-edge.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/wrappers/cloudflare-edge.js"() {
     cfPropNameMapping = {
       // The city name is percent-encoded.
       // See https://github.com/vercel/vercel/blob/4cb6143/packages/functions/src/headers.ts#L94C19-L94C37
@@ -547,7 +556,7 @@ var init_cloudflare_edge = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/originResolver/pattern-env.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/originResolver/pattern-env.js
 var pattern_env_exports = {};
 __export(pattern_env_exports, {
   default: () => pattern_env_default
@@ -576,7 +585,7 @@ function initializeOnce() {
 }
 var cachedOrigins, cachedPatterns, initialized, envLoader, pattern_env_default;
 var init_pattern_env = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/originResolver/pattern-env.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/originResolver/pattern-env.js"() {
     init_logger();
     cachedPatterns = [];
     initialized = false;
@@ -612,14 +621,14 @@ var init_pattern_env = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js
 var dummy_exports = {};
 __export(dummy_exports, {
   default: () => dummy_default
 });
 var resolver, dummy_default;
 var init_dummy = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js"() {
     resolver = {
       name: "dummy"
     };
@@ -627,7 +636,7 @@ var init_dummy = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/utils/stream.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/stream.js
 import { ReadableStream } from "node:stream/web";
 function toReadableStream(value, isBase64) {
   return new ReadableStream({
@@ -655,18 +664,18 @@ function emptyReadableStream() {
 }
 var maybeSomethingBuffer;
 var init_stream = __esm({
-  "node_modules/@opennextjs/aws/dist/utils/stream.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/stream.js"() {
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/proxyExternalRequest/fetch.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/proxyExternalRequest/fetch.js
 var fetch_exports = {};
 __export(fetch_exports, {
   default: () => fetch_default
 });
 var fetchProxy, fetch_default;
 var init_fetch = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/proxyExternalRequest/fetch.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/proxyExternalRequest/fetch.js"() {
     init_stream();
     fetchProxy = {
       name: "fetch-proxy",
@@ -703,7 +712,7 @@ var init_fetch = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/core/edgeFunctionHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/edgeFunctionHandler.js
 var edgeFunctionHandler_exports = {};
 __export(edgeFunctionHandler_exports, {
   default: () => edgeFunctionHandler
@@ -738,17 +747,33 @@ async function edgeFunctionHandler(request) {
   return response;
 }
 var init_edgeFunctionHandler = __esm({
-  "node_modules/@opennextjs/aws/dist/core/edgeFunctionHandler.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/edgeFunctionHandler.js"() {
     globalThis._ENTRIES = {};
     globalThis.self = globalThis;
     globalThis._ROUTES = [];
   }
 });
 
-// node_modules/@opennextjs/aws/dist/utils/promise.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/cacheHeaders.js
+var CACHE_CONTROL_HEADER = "cache-control";
+var OPEN_NEXT_CACHE_HEADER = "x-opennext-cache";
+var CACHE_TAGS_HEADER = "x-next-cache-tags";
+var ISR_HEADER = "x-isr";
+var PRERENDER_REVALIDATE_HEADER = "x-prerender-revalidate";
+var NO_STORE_CACHE_CONTROL = "private, no-cache, no-store, max-age=0, must-revalidate";
+function fixCacheControlForError(headers, statusCode) {
+  if (process.env.OPEN_NEXT_DANGEROUSLY_SET_ERROR_HEADERS === "true") {
+    return;
+  }
+  if (statusCode === 404 || statusCode === 500) {
+    headers[CACHE_CONTROL_HEADER] = NO_STORE_CACHE_CONTROL;
+  }
+}
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/promise.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/utils/requestCache.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/requestCache.js
 var RequestCache = class {
   _caches = /* @__PURE__ */ new Map();
   /**
@@ -766,7 +791,7 @@ var RequestCache = class {
   }
 };
 
-// node_modules/@opennextjs/aws/dist/utils/promise.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/promise.js
 var DetachedPromise = class {
   resolve;
   reject;
@@ -784,23 +809,40 @@ var DetachedPromise = class {
 };
 var DetachedPromiseRunner = class {
   promises = [];
+  /**
+   * Create a deferred promise tracked by this runner.
+   *
+   * @returns The tracked promise and its resolve/reject functions.
+   */
   withResolvers() {
     const detachedPromise = new DetachedPromise();
-    this.promises.push(detachedPromise);
+    this.add(detachedPromise.promise);
     return detachedPromise;
   }
+  /**
+   * Track background work and handle failures immediately.
+   *
+   * @param promise Work to await, including work registered during an active drain.
+   * @returns Nothing; failures are logged rather than propagated.
+   */
   add(promise) {
-    const detachedPromise = new DetachedPromise();
-    this.promises.push(detachedPromise);
-    promise.then(detachedPromise.resolve, detachedPromise.reject);
+    this.promises.push(promise.then(() => {
+    }, error));
   }
+  /**
+   * Drain tracked work, including additions made while earlier work is pending.
+   *
+   * Work started after the drain has settled still needs a new runtime waitUntil.
+   * @returns Resolves when all work registered during this drain has settled.
+   */
   async await() {
     debug(`Awaiting ${this.promises.length} detached promises`);
-    const results = await Promise.allSettled(this.promises.map((p) => p.promise));
-    const rejectedPromises = results.filter((r) => r.status === "rejected");
-    rejectedPromises.forEach((r) => {
-      error(r.reason);
-    });
+    let awaited = 0;
+    while (awaited < this.promises.length) {
+      const batch = this.promises.slice(awaited);
+      awaited = this.promises.length;
+      await Promise.all(batch);
+    }
   }
 };
 async function awaitAllDetachedPromise() {
@@ -813,14 +855,15 @@ async function awaitAllDetachedPromise() {
   await promisesToAwait;
 }
 function provideNextAfterProvider() {
-  const NEXT_REQUEST_CONTEXT_SYMBOL = Symbol.for("@next/request-context");
-  const VERCEL_REQUEST_CONTEXT_SYMBOL = Symbol.for("@vercel/request-context");
-  const store = globalThis.__openNextAls.getStore();
-  const waitUntil = store?.waitUntil ?? ((promise) => store?.pendingPromiseRunner.add(promise));
+  const NEXT_REQUEST_CONTEXT_SYMBOL = /* @__PURE__ */ Symbol.for("@next/request-context");
+  const VERCEL_REQUEST_CONTEXT_SYMBOL = /* @__PURE__ */ Symbol.for("@vercel/request-context");
   const nextAfterContext = {
-    get: () => ({
-      waitUntil
-    })
+    get: () => {
+      const store = globalThis.__openNextAls.getStore();
+      return {
+        waitUntil: store?.waitUntil ?? ((promise) => store?.pendingPromiseRunner.add(promise))
+      };
+    }
   };
   globalThis[NEXT_REQUEST_CONTEXT_SYMBOL] = nextAfterContext;
   if (process.env.EMULATE_VERCEL_REQUEST_CONTEXT) {
@@ -847,13 +890,13 @@ function runWithOpenNextRequestContext({ isISRRevalidation, waitUntil, requestId
   });
 }
 
-// node_modules/@opennextjs/aws/dist/adapters/middleware.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/middleware.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/createGenericHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/createGenericHandler.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/resolve.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/resolve.js
 async function resolveConverter(converter2) {
   if (typeof converter2 === "function") {
     return converter2();
@@ -890,7 +933,7 @@ async function resolveProxyRequest(proxyRequest) {
   return m_1.default;
 }
 
-// node_modules/@opennextjs/aws/dist/core/createGenericHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/createGenericHandler.js
 async function createGenericHandler(handler3) {
   const config = await import("./open-next.config.mjs").then((m) => m.default);
   globalThis.openNextConfig = config;
@@ -902,41 +945,42 @@ async function createGenericHandler(handler3) {
   return wrapper(handler3.handler, converter2);
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/util.js
 import crypto from "node:crypto";
 import { parse as parseQs, stringify as stringifyQs } from "node:querystring";
 
-// node_modules/@opennextjs/aws/dist/adapters/config/index.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/config/index.js
 init_logger();
 import path from "node:path";
 globalThis.__dirname ??= "";
 var NEXT_DIR = path.join(__dirname, ".next");
 var OPEN_NEXT_DIR = path.join(__dirname, ".open-next");
 debug({ NEXT_DIR, OPEN_NEXT_DIR });
-var NextConfig = { "env": {}, "webpack": null, "typescript": { "ignoreBuildErrors": false }, "typedRoutes": false, "distDir": ".next", "cleanDistDir": true, "assetPrefix": "", "cacheMaxMemorySize": 52428800, "configOrigin": "next.config.ts", "useFileSystemPublicRoutes": true, "generateEtags": true, "pageExtensions": ["tsx", "ts", "jsx", "js"], "poweredByHeader": true, "compress": true, "images": { "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840], "imageSizes": [32, 48, 64, 96, 128, 256, 384], "path": "/_next/image", "loader": "default", "loaderFile": "", "domains": [], "disableStaticImages": false, "minimumCacheTTL": 14400, "formats": ["image/webp"], "maximumRedirects": 3, "maximumResponseBody": 5e7, "dangerouslyAllowLocalIP": false, "dangerouslyAllowSVG": false, "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;", "contentDispositionType": "attachment", "localPatterns": [{ "pathname": "**", "search": "" }], "remotePatterns": [], "qualities": [75], "unoptimized": false, "customCacheHandler": false }, "devIndicators": { "position": "bottom-left" }, "onDemandEntries": { "maxInactiveAge": 6e4, "pagesBufferLength": 5 }, "basePath": "", "sassOptions": {}, "trailingSlash": false, "i18n": null, "productionBrowserSourceMaps": false, "excludeDefaultMomentLocales": true, "reactProductionProfiling": false, "reactStrictMode": null, "reactMaxHeadersLength": 6e3, "httpAgentOptions": { "keepAlive": true }, "logging": { "serverFunctions": true, "browserToTerminal": "warn" }, "compiler": {}, "expireTime": 31536e3, "staticPageGenerationTimeout": 60, "output": "standalone", "modularizeImports": { "@mui/icons-material": { "transform": "@mui/icons-material/{{member}}" }, "lodash": { "transform": "lodash/{{member}}" } }, "outputFileTracingRoot": "C:\\Users\\Karthik\\Desktop\\h\\webpage\\webpage", "allowedDevOrigins": ["192.168.0.111"], "cacheComponents": false, "cacheLife": { "default": { "stale": 300, "revalidate": 900, "expire": 4294967294 }, "seconds": { "stale": 30, "revalidate": 1, "expire": 60 }, "minutes": { "stale": 300, "revalidate": 60, "expire": 3600 }, "hours": { "stale": 300, "revalidate": 3600, "expire": 86400 }, "days": { "stale": 300, "revalidate": 86400, "expire": 604800 }, "weeks": { "stale": 300, "revalidate": 604800, "expire": 2592e3 }, "max": { "stale": 300, "revalidate": 2592e3, "expire": 31536e3 } }, "cacheHandlers": {}, "experimental": { "appNewScrollHandler": false, "useSkewCookie": false, "cssChunking": true, "multiZoneDraftMode": false, "appNavFailHandling": false, "prerenderEarlyExit": true, "serverMinification": true, "linkNoTouchStart": false, "caseSensitiveRoutes": false, "cachedNavigations": false, "partialFallbacks": false, "dynamicOnHover": false, "varyParams": false, "prefetchInlining": false, "preloadEntriesOnStart": true, "clientRouterFilter": true, "clientRouterFilterRedirects": false, "fetchCacheKeyPrefix": "", "proxyPrefetch": "flexible", "optimisticClientCache": true, "manualClientBasePath": false, "cpus": 15, "memoryBasedWorkersCount": false, "imgOptConcurrency": null, "imgOptTimeoutInSeconds": 7, "imgOptMaxInputPixels": 268402689, "imgOptSequentialRead": null, "isrFlushToDisk": true, "workerThreads": false, "optimizeCss": false, "nextScriptWorkers": false, "scrollRestoration": false, "externalDir": false, "disableOptimizedLoading": false, "gzipSize": true, "craCompat": false, "esmExternals": true, "fullySpecified": false, "swcTraceProfiling": false, "forceSwcTransforms": false, "largePageDataBytes": 128e3, "typedEnv": false, "parallelServerCompiles": false, "parallelServerBuildTraces": false, "ppr": false, "authInterrupts": false, "webpackMemoryOptimizations": false, "optimizeServerReact": true, "strictRouteTypes": false, "viewTransition": false, "removeUncaughtErrorAndRejectionListeners": false, "validateRSCRequestHeaders": false, "staleTimes": { "dynamic": 0, "static": 300 }, "reactDebugChannel": true, "serverComponentsHmrCache": true, "staticGenerationMaxConcurrency": 8, "staticGenerationMinPagesPerWorker": 25, "transitionIndicator": false, "gestureTransition": false, "inlineCss": false, "useCache": false, "globalNotFound": false, "browserDebugInfoInTerminal": "warn", "lockDistDir": true, "proxyClientMaxBodySize": 10485760, "hideLogsAfterAbort": false, "mcpServer": true, "turbopackFileSystemCacheForDev": true, "turbopackFileSystemCacheForBuild": false, "turbopackInferModuleSideEffects": true, "turbopackPluginRuntimeStrategy": "childProcesses", "optimizePackageImports": ["lucide-react", "date-fns", "lodash-es", "ramda", "antd", "react-bootstrap", "ahooks", "@ant-design/icons", "@headlessui/react", "@headlessui-float/react", "@heroicons/react/20/solid", "@heroicons/react/24/solid", "@heroicons/react/24/outline", "@visx/visx", "@tremor/react", "rxjs", "@mui/material", "@mui/icons-material", "recharts", "react-use", "effect", "@effect/schema", "@effect/platform", "@effect/platform-node", "@effect/platform-browser", "@effect/platform-bun", "@effect/sql", "@effect/sql-mssql", "@effect/sql-mysql2", "@effect/sql-pg", "@effect/sql-sqlite-node", "@effect/sql-sqlite-bun", "@effect/sql-sqlite-wasm", "@effect/sql-sqlite-react-native", "@effect/rpc", "@effect/rpc-http", "@effect/typeclass", "@effect/experimental", "@effect/opentelemetry", "@material-ui/core", "@material-ui/icons", "@tabler/icons-react", "mui-core", "react-icons/ai", "react-icons/bi", "react-icons/bs", "react-icons/cg", "react-icons/ci", "react-icons/di", "react-icons/fa", "react-icons/fa6", "react-icons/fc", "react-icons/fi", "react-icons/gi", "react-icons/go", "react-icons/gr", "react-icons/hi", "react-icons/hi2", "react-icons/im", "react-icons/io", "react-icons/io5", "react-icons/lia", "react-icons/lib", "react-icons/lu", "react-icons/md", "react-icons/pi", "react-icons/ri", "react-icons/rx", "react-icons/si", "react-icons/sl", "react-icons/tb", "react-icons/tfi", "react-icons/ti", "react-icons/vsc", "react-icons/wi"], "trustHostHeader": false, "isExperimentalCompile": false }, "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight", "bundlePagesRouterDependencies": false, "configFileName": "next.config.ts", "turbopack": { "root": "C:\\Users\\Karthik\\Desktop\\h\\webpage\\webpage" }, "distDirRoot": ".next" };
-var BuildId = "LT257hZuuZOrAoK51hFOz";
-var RoutesManifest = { "basePath": "", "rewrites": { "beforeFiles": [], "afterFiles": [], "fallback": [] }, "redirects": [{ "source": "/:path+/", "destination": "/:path+", "internal": true, "priority": true, "statusCode": 308, "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$" }], "routes": { "static": [{ "page": "/", "regex": "^/(?:/)?$", "routeKeys": {}, "namedRegex": "^/(?:/)?$" }, { "page": "/_global-error", "regex": "^/_global\\-error(?:/)?$", "routeKeys": {}, "namedRegex": "^/_global\\-error(?:/)?$" }, { "page": "/_not-found", "regex": "^/_not\\-found(?:/)?$", "routeKeys": {}, "namedRegex": "^/_not\\-found(?:/)?$" }, { "page": "/experience", "regex": "^/experience(?:/)?$", "routeKeys": {}, "namedRegex": "^/experience(?:/)?$" }, { "page": "/friends", "regex": "^/friends(?:/)?$", "routeKeys": {}, "namedRegex": "^/friends(?:/)?$" }, { "page": "/print", "regex": "^/print(?:/)?$", "routeKeys": {}, "namedRegex": "^/print(?:/)?$" }, { "page": "/privacy", "regex": "^/privacy(?:/)?$", "routeKeys": {}, "namedRegex": "^/privacy(?:/)?$" }, { "page": "/projects", "regex": "^/projects(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects(?:/)?$" }, { "page": "/projects/desk-helper", "regex": "^/projects/desk\\-helper(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/desk\\-helper(?:/)?$" }, { "page": "/projects/slam-nav", "regex": "^/projects/slam\\-nav(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/slam\\-nav(?:/)?$" }, { "page": "/skills", "regex": "^/skills(?:/)?$", "routeKeys": {}, "namedRegex": "^/skills(?:/)?$" }, { "page": "/team", "regex": "^/team(?:/)?$", "routeKeys": {}, "namedRegex": "^/team(?:/)?$" }, { "page": "/terms", "regex": "^/terms(?:/)?$", "routeKeys": {}, "namedRegex": "^/terms(?:/)?$" }], "dynamic": [{ "page": "/friends/[slug]", "regex": "^/friends/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/friends/(?<nxtPslug>[^/]+?)(?:/)?$" }, { "page": "/projects/[slug]", "regex": "^/projects/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/projects/(?<nxtPslug>[^/]+?)(?:/)?$" }, { "page": "/team/[slug]", "regex": "^/team/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/team/(?<nxtPslug>[^/]+?)(?:/)?$" }], "data": { "static": [], "dynamic": [] } }, "locales": [] };
+var NextConfig = { "env": {}, "webpack": null, "typescript": { "ignoreBuildErrors": false }, "typedRoutes": false, "distDir": ".next", "cleanDistDir": true, "assetPrefix": "", "cacheMaxMemorySize": 52428800, "configOrigin": "next.config.ts", "useFileSystemPublicRoutes": true, "generateEtags": true, "pageExtensions": ["tsx", "ts", "jsx", "js"], "poweredByHeader": true, "compress": true, "images": { "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840], "imageSizes": [32, 48, 64, 96, 128, 256, 384], "path": "/_next/image", "loader": "default", "loaderFile": "", "domains": [], "disableStaticImages": false, "minimumCacheTTL": 14400, "formats": ["image/webp"], "maximumRedirects": 3, "maximumResponseBody": 5e7, "dangerouslyAllowLocalIP": false, "dangerouslyAllowSVG": false, "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;", "contentDispositionType": "attachment", "localPatterns": [{ "pathname": "**", "search": "" }], "remotePatterns": [], "qualities": [75], "unoptimized": true, "customCacheHandler": false }, "devIndicators": { "position": "bottom-left" }, "onDemandEntries": { "maxInactiveAge": 6e4, "pagesBufferLength": 5 }, "basePath": "", "sassOptions": {}, "trailingSlash": false, "i18n": null, "productionBrowserSourceMaps": false, "excludeDefaultMomentLocales": true, "reactProductionProfiling": false, "reactStrictMode": null, "reactMaxHeadersLength": 6e3, "httpAgentOptions": { "keepAlive": true }, "logging": { "serverFunctions": true, "browserToTerminal": "warn" }, "compiler": {}, "expireTime": 31536e3, "staticPageGenerationTimeout": 60, "output": "standalone", "modularizeImports": { "@mui/icons-material": { "transform": "@mui/icons-material/{{member}}" }, "lodash": { "transform": "lodash/{{member}}" } }, "outputFileTracingRoot": "C:\\Users\\Karthik\\Desktop\\h\\webpage\\webpage", "allowedDevOrigins": ["192.168.0.111"], "cacheComponents": false, "cacheLife": { "default": { "stale": 300, "revalidate": 900, "expire": 4294967294 }, "seconds": { "stale": 30, "revalidate": 1, "expire": 60 }, "minutes": { "stale": 300, "revalidate": 60, "expire": 3600 }, "hours": { "stale": 300, "revalidate": 3600, "expire": 86400 }, "days": { "stale": 300, "revalidate": 86400, "expire": 604800 }, "weeks": { "stale": 300, "revalidate": 604800, "expire": 2592e3 }, "max": { "stale": 300, "revalidate": 2592e3, "expire": 31536e3 } }, "cacheHandlers": {}, "experimental": { "appNewScrollHandler": false, "useSkewCookie": false, "cssChunking": true, "multiZoneDraftMode": false, "appNavFailHandling": false, "prerenderEarlyExit": true, "serverMinification": true, "linkNoTouchStart": false, "caseSensitiveRoutes": false, "cachedNavigations": false, "partialFallbacks": false, "dynamicOnHover": false, "varyParams": false, "prefetchInlining": false, "preloadEntriesOnStart": true, "clientRouterFilter": true, "clientRouterFilterRedirects": false, "fetchCacheKeyPrefix": "", "proxyPrefetch": "flexible", "optimisticClientCache": true, "manualClientBasePath": false, "cpus": 15, "memoryBasedWorkersCount": false, "imgOptConcurrency": null, "imgOptTimeoutInSeconds": 7, "imgOptMaxInputPixels": 268402689, "imgOptSequentialRead": null, "isrFlushToDisk": true, "workerThreads": false, "optimizeCss": false, "nextScriptWorkers": false, "scrollRestoration": false, "externalDir": false, "disableOptimizedLoading": false, "gzipSize": true, "craCompat": false, "esmExternals": true, "fullySpecified": false, "swcTraceProfiling": false, "forceSwcTransforms": false, "largePageDataBytes": 128e3, "typedEnv": false, "parallelServerCompiles": false, "parallelServerBuildTraces": false, "ppr": false, "authInterrupts": false, "webpackMemoryOptimizations": false, "optimizeServerReact": true, "strictRouteTypes": false, "viewTransition": false, "removeUncaughtErrorAndRejectionListeners": false, "validateRSCRequestHeaders": false, "staleTimes": { "dynamic": 0, "static": 300 }, "reactDebugChannel": true, "serverComponentsHmrCache": true, "staticGenerationMaxConcurrency": 8, "staticGenerationMinPagesPerWorker": 25, "transitionIndicator": false, "gestureTransition": false, "inlineCss": false, "useCache": false, "globalNotFound": false, "browserDebugInfoInTerminal": "warn", "lockDistDir": true, "proxyClientMaxBodySize": 10485760, "hideLogsAfterAbort": false, "mcpServer": true, "turbopackFileSystemCacheForDev": true, "turbopackFileSystemCacheForBuild": false, "turbopackInferModuleSideEffects": true, "turbopackPluginRuntimeStrategy": "childProcesses", "optimizePackageImports": ["lucide-react", "date-fns", "lodash-es", "ramda", "antd", "react-bootstrap", "ahooks", "@ant-design/icons", "@headlessui/react", "@headlessui-float/react", "@heroicons/react/20/solid", "@heroicons/react/24/solid", "@heroicons/react/24/outline", "@visx/visx", "@tremor/react", "rxjs", "@mui/material", "@mui/icons-material", "recharts", "react-use", "effect", "@effect/schema", "@effect/platform", "@effect/platform-node", "@effect/platform-browser", "@effect/platform-bun", "@effect/sql", "@effect/sql-mssql", "@effect/sql-mysql2", "@effect/sql-pg", "@effect/sql-sqlite-node", "@effect/sql-sqlite-bun", "@effect/sql-sqlite-wasm", "@effect/sql-sqlite-react-native", "@effect/rpc", "@effect/rpc-http", "@effect/typeclass", "@effect/experimental", "@effect/opentelemetry", "@material-ui/core", "@material-ui/icons", "@tabler/icons-react", "mui-core", "react-icons/ai", "react-icons/bi", "react-icons/bs", "react-icons/cg", "react-icons/ci", "react-icons/di", "react-icons/fa", "react-icons/fa6", "react-icons/fc", "react-icons/fi", "react-icons/gi", "react-icons/go", "react-icons/gr", "react-icons/hi", "react-icons/hi2", "react-icons/im", "react-icons/io", "react-icons/io5", "react-icons/lia", "react-icons/lib", "react-icons/lu", "react-icons/md", "react-icons/pi", "react-icons/ri", "react-icons/rx", "react-icons/si", "react-icons/sl", "react-icons/tb", "react-icons/tfi", "react-icons/ti", "react-icons/vsc", "react-icons/wi"], "trustHostHeader": false, "isExperimentalCompile": false }, "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight", "bundlePagesRouterDependencies": false, "configFileName": "next.config.ts", "turbopack": { "root": "C:\\Users\\Karthik\\Desktop\\h\\webpage\\webpage" }, "distDirRoot": ".next" };
+var BuildId = "7ouBk0hJXks_rZSOhyWU0";
+var RoutesManifest = { "basePath": "", "rewrites": { "beforeFiles": [], "afterFiles": [], "fallback": [] }, "redirects": [{ "source": "/:path+/", "destination": "/:path+", "internal": true, "priority": true, "statusCode": 308, "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$" }], "routes": { "static": [{ "page": "/", "regex": "^/(?:/)?$", "routeKeys": {}, "namedRegex": "^/(?:/)?$" }, { "page": "/_global-error", "regex": "^/_global\\-error(?:/)?$", "routeKeys": {}, "namedRegex": "^/_global\\-error(?:/)?$" }, { "page": "/_not-found", "regex": "^/_not\\-found(?:/)?$", "routeKeys": {}, "namedRegex": "^/_not\\-found(?:/)?$" }, { "page": "/experience", "regex": "^/experience(?:/)?$", "routeKeys": {}, "namedRegex": "^/experience(?:/)?$" }, { "page": "/friends", "regex": "^/friends(?:/)?$", "routeKeys": {}, "namedRegex": "^/friends(?:/)?$" }, { "page": "/print", "regex": "^/print(?:/)?$", "routeKeys": {}, "namedRegex": "^/print(?:/)?$" }, { "page": "/privacy", "regex": "^/privacy(?:/)?$", "routeKeys": {}, "namedRegex": "^/privacy(?:/)?$" }, { "page": "/projects", "regex": "^/projects(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects(?:/)?$" }, { "page": "/projects/aerocadastra", "regex": "^/projects/aerocadastra(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/aerocadastra(?:/)?$" }, { "page": "/projects/desk-helper", "regex": "^/projects/desk\\-helper(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/desk\\-helper(?:/)?$" }, { "page": "/projects/masked-flipper", "regex": "^/projects/masked\\-flipper(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/masked\\-flipper(?:/)?$" }, { "page": "/projects/slam-nav", "regex": "^/projects/slam\\-nav(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/slam\\-nav(?:/)?$" }, { "page": "/skills", "regex": "^/skills(?:/)?$", "routeKeys": {}, "namedRegex": "^/skills(?:/)?$" }, { "page": "/team", "regex": "^/team(?:/)?$", "routeKeys": {}, "namedRegex": "^/team(?:/)?$" }, { "page": "/terms", "regex": "^/terms(?:/)?$", "routeKeys": {}, "namedRegex": "^/terms(?:/)?$" }], "dynamic": [{ "page": "/friends/[slug]", "regex": "^/friends/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/friends/(?<nxtPslug>[^/]+?)(?:/)?$" }, { "page": "/projects/[slug]", "regex": "^/projects/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/projects/(?<nxtPslug>[^/]+?)(?:/)?$" }, { "page": "/team/[slug]", "regex": "^/team/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/team/(?<nxtPslug>[^/]+?)(?:/)?$" }], "data": { "static": [], "dynamic": [] } }, "locales": [] };
 var ConfigHeaders = [];
-var PrerenderManifest = { "version": 4, "routes": { "/": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/", "dataRoute": "/index.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_global-error": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_global-error", "dataRoute": "/_global-error.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_not-found": { "initialStatus": 404, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_not-found", "dataRoute": "/_not-found.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/experience": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/experience", "dataRoute": "/experience.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends", "dataRoute": "/friends.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/aahana": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/aahana.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/abhiroop": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/abhiroop.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/rohan": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/rohan.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/sparsh": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/sparsh.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/print": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/print", "dataRoute": "/print.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/privacy": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/privacy", "dataRoute": "/privacy.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects", "dataRoute": "/projects.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/aria": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/[slug]", "dataRoute": "/projects/aria.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/desk-helper": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/desk-helper", "dataRoute": "/projects/desk-helper.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/slam-nav": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/slam-nav", "dataRoute": "/projects/slam-nav.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/skills": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/skills", "dataRoute": "/skills.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team", "dataRoute": "/team.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/aahana": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/aahana.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/abhiroop": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/abhiroop.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/rohan": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/rohan.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/sparsh": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/sparsh.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/terms": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/terms", "dataRoute": "/terms.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "dynamicRoutes": { "/friends/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/friends/([^/]+?)(?:/)?$", "dataRoute": "/friends/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/friends/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/projects/([^/]+?)(?:/)?$", "dataRoute": "/projects/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/projects/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/team/([^/]+?)(?:/)?$", "dataRoute": "/team/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/team/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "notFoundRoutes": [], "preview": { "previewModeId": "ec612c1f9050d74e3269794c8883808c", "previewModeSigningKey": "67e966028c630f1cc2ac2de423b9ce90c2f4244f5bf12f30f2632163a4f9ebd1", "previewModeEncryptionKey": "e6bcfdbd7a41e0de6fbcc79e5093a1722db9517223092da7501771288cdd6fd6" } };
+var PrerenderManifest = { "version": 4, "routes": { "/": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/", "dataRoute": "/index.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_global-error": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_global-error", "dataRoute": "/_global-error.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_not-found": { "initialStatus": 404, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_not-found", "dataRoute": "/_not-found.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/experience": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/experience", "dataRoute": "/experience.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends", "dataRoute": "/friends.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/aahana": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/aahana.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/abhiroop": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/abhiroop.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/akshat": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/akshat.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/alisha": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/alisha.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/arindam": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/arindam.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/ayush": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/ayush.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/karthik": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/karthik.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/rohan": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/rohan.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/sparsh": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/sparsh.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/vidushi": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/vidushi.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/print": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/print", "dataRoute": "/print.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/privacy": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/privacy", "dataRoute": "/privacy.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects", "dataRoute": "/projects.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/aerocadastra": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/aerocadastra", "dataRoute": "/projects/aerocadastra.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/aria": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/[slug]", "dataRoute": "/projects/aria.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/desk-helper": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/desk-helper", "dataRoute": "/projects/desk-helper.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/masked-flipper": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/masked-flipper", "dataRoute": "/projects/masked-flipper.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/slam-nav": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/slam-nav", "dataRoute": "/projects/slam-nav.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/skills": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/skills", "dataRoute": "/skills.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team", "dataRoute": "/team.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/aahana": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/aahana.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/abhiroop": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/abhiroop.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/akshat": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/akshat.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/alisha": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/alisha.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/arindam": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/arindam.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/ayush": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/ayush.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/karthik": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/karthik.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/rohan": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/rohan.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/sparsh": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/sparsh.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/vidushi": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/vidushi.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/terms": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/terms", "dataRoute": "/terms.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "dynamicRoutes": { "/friends/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/friends/([^/]+?)(?:/)?$", "dataRoute": "/friends/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/friends/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/projects/([^/]+?)(?:/)?$", "dataRoute": "/projects/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/projects/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/team/([^/]+?)(?:/)?$", "dataRoute": "/team/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/team/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "notFoundRoutes": [], "preview": { "previewModeId": "f891945f550abea529460717971a972a", "previewModeSigningKey": "e09ad3ed2c12542b12a9dc2af7aae4ab1a1c0e1bd2bba71c4dfa952ce9738995", "previewModeEncryptionKey": "6d4f0d110e335e978112d15749087ebbc13d6d644beb326d521b1a1308d5f3dc" } };
 var MiddlewareManifest = { "version": 3, "middleware": {}, "sortedMiddleware": [], "functions": {} };
-var AppPathRoutesManifest = { "/_global-error/page": "/_global-error", "/_not-found/page": "/_not-found", "/experience/page": "/experience", "/friends/[slug]/page": "/friends/[slug]", "/friends/page": "/friends", "/page": "/", "/print/page": "/print", "/privacy/page": "/privacy", "/projects/[slug]/page": "/projects/[slug]", "/projects/desk-helper/page": "/projects/desk-helper", "/projects/page": "/projects", "/projects/slam-nav/page": "/projects/slam-nav", "/skills/page": "/skills", "/team/[slug]/page": "/team/[slug]", "/team/page": "/team", "/terms/page": "/terms" };
+var AppPathsManifest = { "/_global-error/page": "app/_global-error/page.js", "/_not-found/page": "app/_not-found/page.js", "/experience/page": "app/experience/page.js", "/friends/[slug]/page": "app/friends/[slug]/page.js", "/friends/page": "app/friends/page.js", "/page": "app/page.js", "/print/page": "app/print/page.js", "/privacy/page": "app/privacy/page.js", "/projects/[slug]/page": "app/projects/[slug]/page.js", "/projects/aerocadastra/page": "app/projects/aerocadastra/page.js", "/projects/desk-helper/page": "app/projects/desk-helper/page.js", "/projects/masked-flipper/page": "app/projects/masked-flipper/page.js", "/projects/page": "app/projects/page.js", "/projects/slam-nav/page": "app/projects/slam-nav/page.js", "/skills/page": "app/skills/page.js", "/team/[slug]/page": "app/team/[slug]/page.js", "/team/page": "app/team/page.js", "/terms/page": "app/terms/page.js" };
+var AppPathRoutesManifest = { "/_global-error/page": "/_global-error", "/_not-found/page": "/_not-found", "/experience/page": "/experience", "/friends/[slug]/page": "/friends/[slug]", "/friends/page": "/friends", "/page": "/", "/print/page": "/print", "/privacy/page": "/privacy", "/projects/[slug]/page": "/projects/[slug]", "/projects/aerocadastra/page": "/projects/aerocadastra", "/projects/desk-helper/page": "/projects/desk-helper", "/projects/masked-flipper/page": "/projects/masked-flipper", "/projects/page": "/projects", "/projects/slam-nav/page": "/projects/slam-nav", "/skills/page": "/skills", "/team/[slug]/page": "/team/[slug]", "/team/page": "/team", "/terms/page": "/terms" };
 var FunctionsConfigManifest = { "version": 1, "functions": {} };
 var PagesManifest = { "/404": "pages/404.html", "/500": "pages/500.html" };
 process.env.NEXT_BUILD_ID = BuildId;
 process.env.OPEN_NEXT_BUILD_ID = NextConfig.deploymentId ?? BuildId;
 process.env.NEXT_PREVIEW_MODE_ID = PrerenderManifest?.preview?.previewModeId;
 
-// node_modules/@opennextjs/aws/dist/http/openNextResponse.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/http/openNextResponse.js
 init_logger();
-init_util();
 import { Transform } from "node:stream";
+init_util();
 
-// node_modules/@opennextjs/aws/dist/core/routing/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/util.js
 init_util();
 init_logger();
 import { ReadableStream as ReadableStream2 } from "node:stream/web";
 
-// node_modules/@opennextjs/aws/dist/utils/binary.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/binary.js
 var commonBinaryMimeTypes = /* @__PURE__ */ new Set([
   "application/octet-stream",
   // Docs
@@ -1004,11 +1048,11 @@ function isBinaryContentType(contentType) {
   return commonBinaryMimeTypes.has(value);
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/i18n/index.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/i18n/index.js
 init_stream();
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/routing/i18n/accept-header.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/i18n/accept-header.js
 function parse(raw, preferences, options) {
   const lowers = /* @__PURE__ */ new Map();
   const header = raw.replace(/[ \t]/g, "");
@@ -1108,7 +1152,7 @@ function acceptLanguage(header = "", preferences) {
   })[0] || void 0;
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/i18n/index.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/i18n/index.js
 function isLocalizedPath(path3) {
   return NextConfig.i18n?.locales.includes(path3.split("/")[1].toLowerCase()) ?? false;
 }
@@ -1206,7 +1250,7 @@ function handleLocaleRedirect(internalEvent) {
   return false;
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/queue.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/queue.js
 function generateShardId(rawPath, maxConcurrency, prefix) {
   let a = cyrb128(rawPath);
   let t = a += 1831565813;
@@ -1240,7 +1284,7 @@ function cyrb128(str) {
   return h1 >>> 0;
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/util.js
 function isExternal(url, host) {
   if (!url)
     return false;
@@ -1260,25 +1304,25 @@ function isExternal(url, host) {
 function convertFromQueryString(query) {
   if (query === "")
     return {};
-  const queryParts = query.split("&");
-  return getQueryFromIterator(queryParts.map((p) => {
-    const [key, value] = p.split("=");
-    return [key, value];
-  }));
+  return getQueryFromIterator(new URLSearchParams(query).entries());
 }
 function getUrlParts(url, isExternal2) {
+  const hashIndex = url.indexOf("#");
+  const hash = hashIndex === -1 ? "" : url.slice(hashIndex);
+  const urlWithoutHash = hashIndex === -1 ? url : url.slice(0, hashIndex);
   if (!isExternal2) {
     const regex2 = /\/([^?]*)\??(.*)/;
-    const match3 = url.match(regex2);
+    const match3 = urlWithoutHash.match(regex2);
     return {
       hostname: "",
-      pathname: match3?.[1] ? `/${match3[1]}` : url,
+      pathname: urlWithoutHash.startsWith("/") ? `/${match3?.[1] ?? ""}` : "",
       protocol: "",
-      queryString: match3?.[2] ?? ""
+      queryString: match3?.[2] ?? "",
+      hash
     };
   }
-  const regex = /^(https?:)\/\/?([^\/\s]+)(\/[^?]*)?(\?.*)?/;
-  const match2 = url.match(regex);
+  const regex = /^(https?:)\/\/?([^\/\s?]+)(\/[^?]*)?(\?.*)?/;
+  const match2 = urlWithoutHash.match(regex);
   if (!match2) {
     throw new Error(`Invalid external URL: ${url}`);
   }
@@ -1286,7 +1330,8 @@ function getUrlParts(url, isExternal2) {
     protocol: match2[1] ?? "https:",
     hostname: match2[2],
     pathname: match2[3] ?? "",
-    queryString: match2[4]?.slice(1) ?? ""
+    queryString: match2[4]?.slice(1) ?? "",
+    hash
   };
 }
 function constructNextUrl(baseUrl, path3) {
@@ -1295,15 +1340,16 @@ function constructNextUrl(baseUrl, path3) {
   return url.href;
 }
 function convertToQueryString(query) {
-  const queryStrings = [];
+  const searchParams = new URLSearchParams();
   Object.entries(query).forEach(([key, value]) => {
     if (Array.isArray(value)) {
-      value.forEach((entry) => queryStrings.push(`${key}=${entry}`));
+      value.forEach((entry) => searchParams.append(key, entry));
     } else {
-      queryStrings.push(`${key}=${value}`);
+      searchParams.append(key, value);
     }
   });
-  return queryStrings.length > 0 ? `?${queryStrings.join("&")}` : "";
+  const queryString = searchParams.toString();
+  return queryString ? `?${queryString}` : "";
 }
 function getMiddlewareMatch(middlewareManifest2, functionsManifest) {
   if (functionsManifest?.functions?.["/_middleware"]) {
@@ -1333,11 +1379,6 @@ function convertBodyToReadableStream(method, body) {
     }
   });
 }
-var CommonHeaders;
-(function(CommonHeaders2) {
-  CommonHeaders2["CACHE_CONTROL"] = "cache-control";
-  CommonHeaders2["NEXT_CACHE"] = "x-nextjs-cache";
-})(CommonHeaders || (CommonHeaders = {}));
 function normalizeLocationHeader(location, baseUrl, encodeQuery = false) {
   if (!URL.canParse(location)) {
     return location;
@@ -1355,17 +1396,17 @@ function normalizeLocationHeader(location, baseUrl, encodeQuery = false) {
   return href;
 }
 
-// node_modules/@opennextjs/aws/dist/core/routingHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routingHandler.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
-import { createHash } from "node:crypto";
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
+import { createHash as createHash2 } from "node:crypto";
 init_stream();
 
-// node_modules/@opennextjs/aws/dist/utils/cache.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/cache.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/utils/semver.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/semver.js
 function compareSemver(v1, operator, v2) {
   let versionDiff = 0;
   if (v1 === "latest") {
@@ -1406,7 +1447,7 @@ function compareSemver(v1, operator, v2) {
   }
 }
 
-// node_modules/@opennextjs/aws/dist/utils/cache.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/cache.js
 async function isStale(key, tags, lastModified) {
   if (!compareSemver(globalThis.nextVersion, ">=", "16.0.0")) {
     return false;
@@ -1442,23 +1483,178 @@ function getTagsFromValue(value) {
     return [];
   }
   try {
-    const cacheTags = value.meta?.headers?.["x-next-cache-tags"]?.split(",") ?? [];
-    delete value.meta?.headers?.["x-next-cache-tags"];
+    const cacheTags = value.meta?.headers?.[CACHE_TAGS_HEADER]?.split(",") ?? [];
+    delete value.meta?.headers?.[CACHE_TAGS_HEADER];
     return cacheTags;
   } catch (e) {
     return [];
   }
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/routeCacheKey.js
+import { createHash } from "node:crypto";
+var ROUTE_CACHE_DIRECTORY = "route-cache";
+var DYNAMIC_ROUTE_REGEX = /\/\[[^/]+?\](?=\/|$)/;
+function useRouteCacheKeys(nextVersion) {
+  return compareSemver(nextVersion, ">=", "15.5.27") && compareSemver(nextVersion, "<", "16.0.0") || compareSemver(nextVersion, ">=", "16.3.8");
+}
+function normalizePagePath(page) {
+  if (/^\/index(\/|$)/.test(page) && !DYNAMIC_ROUTE_REGEX.test(page)) {
+    return `/index${page}`;
+  }
+  if (page === "/") {
+    return "/index";
+  }
+  return page.startsWith("/") ? page : `/${page}`;
+}
+function normalizeAppPath(entry) {
+  const pathname = entry.split("/").reduce((acc, segment, index, segments) => {
+    if (!segment)
+      return acc;
+    if (segment.startsWith("(") && segment.endsWith(")"))
+      return acc;
+    if (segment.startsWith("@"))
+      return acc;
+    if ((segment === "page" || segment === "route") && index === segments.length - 1) {
+      return acc;
+    }
+    return `${acc}/${segment}`;
+  }, "");
+  return pathname === "" ? "/" : pathname;
+}
+function compareAppPaths(a, b) {
+  const aHasSlot = a.includes("/@");
+  const bHasSlot = b.includes("/@");
+  if (aHasSlot && !bHasSlot)
+    return -1;
+  if (!aHasSlot && bHasSlot)
+    return 1;
+  return a.localeCompare(b);
+}
+function selectAppPageEntry(route, appPaths) {
+  let entry;
+  for (const appPath of appPaths) {
+    if (normalizeAppPath(appPath).replace(/%5F/g, "_") !== route)
+      continue;
+    if (entry === void 0 || compareAppPaths(entry, appPath) < 0) {
+      entry = appPath;
+    }
+  }
+  return entry;
+}
+function getRouteCacheOwner(sourceRoute, { appPaths, pagesManifest }) {
+  const appEntry = selectAppPageEntry(sourceRoute, appPaths);
+  if (appEntry) {
+    return {
+      kind: appEntry.endsWith("/route") ? "APP_ROUTE" : "APP_PAGE",
+      sourceRoute: appEntry
+    };
+  }
+  if (Object.hasOwn(pagesManifest, sourceRoute)) {
+    return { kind: "PAGES", sourceRoute };
+  }
+  return void 0;
+}
+function normalizeLocalePath(pathname, locales) {
+  const segment = pathname.split("/", 2)[1]?.toLowerCase();
+  const locale = locales?.find((l) => l.toLowerCase() === segment);
+  if (!locale) {
+    return pathname;
+  }
+  return pathname.slice(locale.length + 1) || "/";
+}
+function getDynamicRouteCachePathname(pathname, locales) {
+  if (normalizeLocalePath(pathname, locales) !== "/index") {
+    return pathname;
+  }
+  return pathname.slice(0, -"/index".length) || "/";
+}
+function getPrerenderRouteCacheKey(pathname, manifests) {
+  const { routes, dynamicRoutes } = manifests.prerenderManifest;
+  const prerender = Object.hasOwn(routes, pathname) ? routes[pathname] : void 0;
+  const fallback = !prerender && Object.hasOwn(dynamicRoutes, pathname) ? dynamicRoutes[pathname] : void 0;
+  if (!prerender && !fallback) {
+    return void 0;
+  }
+  const sourceRoute = prerender ? prerender.srcRoute : fallback?.fallbackSourceRoute ?? pathname;
+  let owner;
+  if (sourceRoute) {
+    owner = getRouteCacheOwner(sourceRoute, manifests);
+  } else {
+    owner = getRouteCacheOwner(pathname, manifests);
+    if (!owner && manifests.locales?.length) {
+      const pagesOwner = getRouteCacheOwner(normalizeLocalePath(pathname, manifests.locales), manifests);
+      owner = pagesOwner?.kind === "PAGES" ? pagesOwner : void 0;
+    }
+  }
+  return owner ? getRouteCacheKey(pathname, owner) : void 0;
+}
+function getRouteCacheKey(pathname, owner) {
+  const source = createHash("sha256").update(owner.sourceRoute).digest("hex");
+  return `/${ROUTE_CACHE_DIRECTORY}/${owner.kind}/${source}/$${normalizePagePath(pathname)}`;
+}
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
 init_logger();
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/routeMatcher.js
+var optionalLocalePrefixRegex = `^/(?:${RoutesManifest.locales.map((locale) => `${locale}/?`).join("|")})?`;
+var optionalBasepathPrefixRegex = RoutesManifest.basePath ? `^${RoutesManifest.basePath}/?` : "^/";
+var optionalPrefix = optionalLocalePrefixRegex.replace("^/", optionalBasepathPrefixRegex);
+function routeMatcher(routeDefinitions) {
+  const regexp = routeDefinitions.map((route) => ({
+    page: route.page,
+    regexp: new RegExp(route.regex.replace("^/", optionalPrefix))
+  }));
+  const appPathsSet = /* @__PURE__ */ new Set();
+  const routePathsSet = /* @__PURE__ */ new Set();
+  for (const [k, v] of Object.entries(AppPathRoutesManifest)) {
+    if (k.endsWith("page")) {
+      appPathsSet.add(v);
+    } else if (k.endsWith("route")) {
+      routePathsSet.add(v);
+    }
+  }
+  return function matchRoute(path3) {
+    const foundRoutes = regexp.filter((route) => route.regexp.test(path3));
+    return foundRoutes.map((foundRoute) => {
+      let routeType = "page";
+      if (appPathsSet.has(foundRoute.page)) {
+        routeType = "app";
+      } else if (routePathsSet.has(foundRoute.page)) {
+        routeType = "route";
+      }
+      return {
+        route: foundRoute.page,
+        type: routeType
+      };
+    });
+  };
+}
+var staticRouteMatcher = routeMatcher([
+  ...RoutesManifest.routes.static,
+  ...getStaticAPIRoutes()
+]);
+var dynamicRouteMatcher = routeMatcher(RoutesManifest.routes.dynamic);
+function getStaticAPIRoutes() {
+  const createRouteDefinition = (route) => ({
+    page: route,
+    regex: `^${route}(?:/)?$`
+  });
+  const dynamicRoutePages = new Set(RoutesManifest.routes.dynamic.map(({ page }) => page));
+  const pagesStaticAPIRoutes = Object.keys(PagesManifest).filter((route) => route.startsWith("/api/") && !dynamicRoutePages.has(route)).map(createRouteDefinition);
+  const appPathsStaticAPIRoutes = Object.values(AppPathRoutesManifest).filter((route) => (route.startsWith("/api/") || route === "/api") && !dynamicRoutePages.has(route)).map(createRouteDefinition);
+  return [...pagesStaticAPIRoutes, ...appPathsStaticAPIRoutes];
+}
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
 var CACHE_ONE_YEAR = 60 * 60 * 24 * 365;
 var CACHE_ONE_MONTH = 60 * 60 * 24 * 30;
 var VARY_HEADER = "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch, Next-Url";
 var NEXT_SEGMENT_PREFETCH_HEADER = "next-router-segment-prefetch";
 var NEXT_PRERENDER_HEADER = "x-nextjs-prerender";
 var NEXT_POSTPONED_HEADER = "x-nextjs-postponed";
-async function computeCacheControl(path3, body, host, revalidate, lastModified, isStaleFromTagCache = false) {
+async function computeCacheControl(path3, body, host, revalidate, lastModified, isStaleFromTagCache = false, revalidationPath = path3, revalidationKey = path3) {
   let finalRevalidate = CACHE_ONE_YEAR;
   const existingRoute = Object.entries(PrerenderManifest?.routes ?? {}).find((p) => p[0] === path3)?.[1];
   if (revalidate === void 0 && existingRoute) {
@@ -1467,12 +1663,12 @@ async function computeCacheControl(path3, body, host, revalidate, lastModified, 
     finalRevalidate = revalidate === false ? CACHE_ONE_YEAR : revalidate;
   }
   const age = Math.round((Date.now() - (lastModified ?? 0)) / 1e3);
-  const hash = (str) => createHash("md5").update(str).digest("hex");
-  const etag = hash(body);
+  const hash = (str) => createHash2("md5").update(str).digest("hex");
+  const etag = `"${hash(body)}"`;
   if (revalidate === 0) {
     return {
-      "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
-      "x-opennext-cache": "ERROR",
+      [CACHE_CONTROL_HEADER]: NO_STORE_CACHE_CONTROL,
+      [OPEN_NEXT_CACHE_HEADER]: "ERROR",
       etag
     };
   }
@@ -1490,7 +1686,7 @@ async function computeCacheControl(path3, body, host, revalidate, lastModified, 
       isStaleFromTagCache
     });
     if (isStale2) {
-      let url = NextConfig.trailingSlash ? `${path3}/` : path3;
+      let url = NextConfig.trailingSlash && revalidationPath !== "/" ? `${revalidationPath}/` : revalidationPath;
       if (NextConfig.basePath) {
         url = `${NextConfig.basePath}${url}`;
       }
@@ -1501,19 +1697,19 @@ async function computeCacheControl(path3, body, host, revalidate, lastModified, 
           eTag: etag,
           lastModified: lastModified ?? Date.now()
         },
-        MessageDeduplicationId: hash(`${path3}-${lastModified}-${etag}`),
-        MessageGroupId: generateMessageGroupId(path3)
+        MessageDeduplicationId: hash(`${revalidationKey}-${lastModified}-${etag}`),
+        MessageGroupId: generateMessageGroupId(revalidationKey)
       });
     }
     return {
-      "cache-control": `s-maxage=${sMaxAge}, stale-while-revalidate=${CACHE_ONE_MONTH}`,
-      "x-opennext-cache": isStale2 ? "STALE" : "HIT",
+      [CACHE_CONTROL_HEADER]: `s-maxage=${sMaxAge}, stale-while-revalidate=${CACHE_ONE_MONTH}`,
+      [OPEN_NEXT_CACHE_HEADER]: isStale2 ? "STALE" : "HIT",
       etag
     };
   }
   return {
-    "cache-control": `s-maxage=${CACHE_ONE_YEAR}, stale-while-revalidate=${CACHE_ONE_MONTH}`,
-    "x-opennext-cache": "HIT",
+    [CACHE_CONTROL_HEADER]: `s-maxage=${CACHE_ONE_YEAR}, stale-while-revalidate=${CACHE_ONE_MONTH}`,
+    [OPEN_NEXT_CACHE_HEADER]: "HIT",
     etag
   };
 }
@@ -1521,31 +1717,36 @@ function getBodyForAppRouter(event, cachedValue) {
   if (cachedValue.type !== "app") {
     throw new Error("getBodyForAppRouter called with non-app cache value");
   }
-  try {
-    const segmentHeader = `${event.headers[NEXT_SEGMENT_PREFETCH_HEADER]}`;
-    const isSegmentResponse = Boolean(segmentHeader) && segmentHeader in (cachedValue.segmentData || {}) && !NextConfig.experimental?.prefetchInlining;
-    const body = isSegmentResponse ? cachedValue.segmentData[segmentHeader] : cachedValue.rsc;
-    return {
-      body,
-      additionalHeaders: isSegmentResponse ? { [NEXT_PRERENDER_HEADER]: "1", [NEXT_POSTPONED_HEADER]: "2" } : {}
-    };
-  } catch (e) {
-    error("Error while getting body for app router from cache:", e);
-    return { body: cachedValue.rsc, additionalHeaders: {} };
+  const segmentHeader = event.headers[NEXT_SEGMENT_PREFETCH_HEADER];
+  if (typeof segmentHeader === "string" && cachedValue.segmentData) {
+    if (Object.hasOwn(cachedValue.segmentData, segmentHeader)) {
+      return {
+        body: cachedValue.segmentData[segmentHeader],
+        additionalHeaders: {
+          [NEXT_PRERENDER_HEADER]: "1",
+          [NEXT_POSTPONED_HEADER]: "2"
+        }
+      };
+    }
+    return void 0;
   }
+  if (cachedValue.rsc === void 0) {
+    return void 0;
+  }
+  return { body: cachedValue.rsc, additionalHeaders: {} };
 }
-async function generateResult(event, localizedPath, cachedValue, lastModified, isStaleFromTagCache = false) {
+async function generateResult(event, localizedPath, cachedValue, lastModified, isStaleFromTagCache = false, cacheKey = localizedPath, revalidationPath = localizedPath) {
   debug("Returning result from experimental cache");
-  let body = "";
+  let body;
   let type = "application/octet-stream";
   let isDataRequest = false;
   let additionalHeaders = {};
   if (cachedValue.type === "app") {
     isDataRequest = event.headers.rsc === "1";
     if (isDataRequest) {
-      const { body: appRouterBody, additionalHeaders: appHeaders } = getBodyForAppRouter(event, cachedValue);
-      body = appRouterBody;
-      additionalHeaders = appHeaders;
+      const appRouterResult = getBodyForAppRouter(event, cachedValue);
+      body = appRouterResult?.body;
+      additionalHeaders = appRouterResult?.additionalHeaders ?? {};
     } else {
       body = cachedValue.html;
     }
@@ -1557,25 +1758,33 @@ async function generateResult(event, localizedPath, cachedValue, lastModified, i
   } else {
     throw new Error("generateResult called with unsupported cache value type, only 'app' and 'page' are supported");
   }
-  const cacheControl = await computeCacheControl(localizedPath, body, event.headers.host, cachedValue.revalidate, lastModified, isStaleFromTagCache);
+  if (body === void 0) {
+    debug("Missing body in the cache entry, falling back to the server");
+    return void 0;
+  }
+  const cacheControl = await computeCacheControl(localizedPath, body, event.headers.host, cachedValue.revalidate, lastModified, isStaleFromTagCache, revalidationPath, cacheKey);
+  const statusCode = computeStatusCode(event.rewriteStatusCode, cachedValue.meta?.status);
+  const headers = {
+    ...cacheControl,
+    "content-type": type,
+    ...cachedValue.meta?.headers,
+    vary: VARY_HEADER,
+    ...additionalHeaders
+  };
+  fixCacheControlForError(headers, statusCode);
   return {
     type: "core",
-    // Sometimes other status codes can be cached, like 404. For these cases, we should return the correct status code
-    // Also set the status code to the rewriteStatusCode if defined
-    // This can happen in handleMiddleware in routingHandler.
-    // `NextResponse.rewrite(url, { status: xxx})
-    // The rewrite status code should take precedence over the cached one
-    statusCode: event.rewriteStatusCode ?? cachedValue.meta?.status ?? 200,
+    statusCode,
     body: toReadableStream(body, false),
     isBase64Encoded: false,
-    headers: {
-      ...cacheControl,
-      "content-type": type,
-      ...cachedValue.meta?.headers,
-      vary: VARY_HEADER,
-      ...additionalHeaders
-    }
+    headers
   };
+}
+function computeStatusCode(rewriteStatusCode, cachedStatusCode) {
+  if (cachedStatusCode !== void 0 && cachedStatusCode !== 200) {
+    return cachedStatusCode;
+  }
+  return rewriteStatusCode ?? cachedStatusCode ?? 200;
 }
 function escapePathDelimiters(segment, escapeEncoded) {
   return segment.replace(new RegExp(`([/#?]${escapeEncoded ? "|%(2f|23|3f|5c)" : ""})`, "gi"), (char) => encodeURIComponent(char));
@@ -1583,8 +1792,52 @@ function escapePathDelimiters(segment, escapeEncoded) {
 function decodePathParams(pathname) {
   return pathname.split("/").map((segment) => escapePathDelimiters(decodeURIComponent(segment), true)).join("/");
 }
-async function cacheInterceptor(event) {
-  if (Boolean(event.headers["next-action"]) || Boolean(event.headers["x-prerender-revalidate"]))
+var routeCacheManifests;
+function getRouteCacheManifests() {
+  routeCacheManifests ??= {
+    prerenderManifest: {
+      routes: PrerenderManifest?.routes ?? {},
+      dynamicRoutes: PrerenderManifest?.dynamicRoutes ?? {}
+    },
+    appPaths: Object.keys(AppPathsManifest ?? {}),
+    pagesManifest: PagesManifest ?? {},
+    locales: NextConfig.i18n?.locales
+  };
+  return routeCacheManifests;
+}
+function getCacheKey(event, localizedPath, resolvedRoutes) {
+  if (!useRouteCacheKeys(globalThis.nextVersion)) {
+    const isISR = Object.keys(PrerenderManifest?.routes ?? {}).includes(localizedPath) || Object.values(PrerenderManifest?.dynamicRoutes ?? {}).some((dr) => new RegExp(dr.routeRegex).test(localizedPath));
+    if (!isISR)
+      return void 0;
+    return localizedPath === "/" ? "/index" : localizedPath;
+  }
+  const manifests = getRouteCacheManifests();
+  if (Object.hasOwn(manifests.prerenderManifest.routes, localizedPath)) {
+    const manifestKey = getPrerenderRouteCacheKey(localizedPath, manifests);
+    const selectedRoute = resolvedRoutes?.[0];
+    if (resolvedRoutes && !selectedRoute)
+      return void 0;
+    if (!selectedRoute)
+      return manifestKey;
+    const selectedOwner = getRouteCacheOwner(selectedRoute.route, manifests);
+    if (!selectedOwner)
+      return void 0;
+    const selectedKey = getRouteCacheKey(localizedPath, selectedOwner);
+    return selectedKey === manifestKey ? manifestKey : void 0;
+  }
+  const dynamicRoute = resolvedRoutes ? resolvedRoutes[0] : dynamicRouteMatcher(event.rawPath)[0];
+  const dynamicPrerender = dynamicRoute ? manifests.prerenderManifest.dynamicRoutes[dynamicRoute.route] : void 0;
+  if (!dynamicRoute || !dynamicPrerender || dynamicPrerender.fallback !== null) {
+    return void 0;
+  }
+  const owner = getRouteCacheOwner(dynamicRoute.route, manifests);
+  return owner ? getRouteCacheKey(getDynamicRouteCachePathname(localizedPath, manifests.locales), owner) : void 0;
+}
+async function cacheInterceptor(event, resolvedRoutes) {
+  if (Boolean(event.headers["next-action"]) || Boolean(event.headers[PRERENDER_REVALIDATE_HEADER]))
+    return event;
+  if (event.method !== "GET" && event.method !== "HEAD")
     return event;
   const cookies = event.headers.cookie || "";
   const hasPreviewData = cookies.includes("__prerender_bypass") || cookies.includes("__next_preview_data");
@@ -1592,21 +1845,20 @@ async function cacheInterceptor(event) {
     debug("Preview mode detected, passing through to handler");
     return event;
   }
-  let localizedPath = localizePath(event);
-  if (NextConfig.basePath) {
-    localizedPath = localizedPath.replace(NextConfig.basePath, "");
-  }
+  const basePath = NextConfig.basePath;
+  const pathWithoutBasePath = !basePath ? event.rawPath : event.rawPath === basePath ? "/" : event.rawPath.startsWith(`${basePath}/`) ? event.rawPath.slice(basePath.length) : event.rawPath;
+  let localizedPath = localizePath({ ...event, rawPath: pathWithoutBasePath });
   localizedPath = localizedPath.replace(/\/$/, "");
+  const revalidationPath = localizedPath || "/";
   try {
     localizedPath = decodePathParams(localizedPath) || "/";
   } catch {
     return event;
   }
-  const cacheKey = localizedPath === "/" ? "/index" : localizedPath;
   debug("Checking cache for", localizedPath, PrerenderManifest);
-  const isISR = Object.keys(PrerenderManifest?.routes ?? {}).includes(localizedPath) || Object.values(PrerenderManifest?.dynamicRoutes ?? {}).some((dr) => new RegExp(dr.routeRegex).test(localizedPath));
-  debug("isISR", isISR);
-  if (isISR) {
+  const cacheKey = getCacheKey(event, localizedPath, resolvedRoutes);
+  debug("cacheKey", cacheKey);
+  if (cacheKey) {
     try {
       const cachedData = await globalThis.incrementalCache.get(cacheKey);
       debug("cached data in interceptor", cachedData);
@@ -1624,10 +1876,12 @@ async function cacheInterceptor(event) {
       const host = event.headers.host;
       switch (cachedData?.value?.type) {
         case "app":
-        case "page":
-          return generateResult(event, localizedPath, cachedData.value, cachedData.lastModified, _isStale);
+        case "page": {
+          const result = await generateResult(event, localizedPath, cachedData.value, cachedData.lastModified, _isStale, cacheKey, revalidationPath);
+          return result ?? event;
+        }
         case "redirect": {
-          const cacheControl = await computeCacheControl(localizedPath, "", host, cachedData.value.revalidate, cachedData.lastModified, _isStale);
+          const cacheControl = await computeCacheControl(localizedPath, "", host, cachedData.value.revalidate, cachedData.lastModified, _isStale, revalidationPath, cacheKey);
           return {
             type: "core",
             statusCode: cachedData.value.meta?.status ?? 307,
@@ -1640,17 +1894,20 @@ async function cacheInterceptor(event) {
           };
         }
         case "route": {
-          const cacheControl = await computeCacheControl(localizedPath, cachedData.value.body, host, cachedData.value.revalidate, cachedData.lastModified, _isStale);
+          const cacheControl = await computeCacheControl(localizedPath, cachedData.value.body, host, cachedData.value.revalidate, cachedData.lastModified, _isStale, revalidationPath, cacheKey);
           const isBinary = isBinaryContentType(String(cachedData.value.meta?.headers?.["content-type"]));
+          const statusCode = computeStatusCode(event.rewriteStatusCode, cachedData.value.meta?.status);
+          const headers = {
+            ...cacheControl,
+            ...cachedData.value.meta?.headers,
+            vary: VARY_HEADER
+          };
+          fixCacheControlForError(headers, statusCode);
           return {
             type: "core",
-            statusCode: event.rewriteStatusCode ?? cachedData.value.meta?.status ?? 200,
+            statusCode,
             body: toReadableStream(cachedData.value.body, isBinary),
-            headers: {
-              ...cacheControl,
-              ...cachedData.value.meta?.headers,
-              vary: VARY_HEADER
-            },
+            headers,
             isBase64Encoded: isBinary
           };
         }
@@ -1665,7 +1922,7 @@ async function cacheInterceptor(event) {
   return event;
 }
 
-// node_modules/path-to-regexp/dist.es2015/index.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/path-to-regexp/dist.es2015/index.js
 function lexer(str) {
   var tokens = [];
   var i = 0;
@@ -2041,78 +2298,51 @@ function pathToRegexp(path3, keys, options) {
   return stringToRegexp(path3, keys, options);
 }
 
-// node_modules/@opennextjs/aws/dist/utils/normalize-path.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/normalize-path.js
 import path2 from "node:path";
 function normalizeRepeatedSlashes(url) {
   const urlNoQuery = url.host + url.pathname;
   return `${url.protocol}//${urlNoQuery.replace(/\\/g, "/").replace(/\/\/+/g, "/")}${url.search}`;
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/matcher.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/matcher.js
 init_stream();
 init_logger();
-
-// node_modules/@opennextjs/aws/dist/core/routing/routeMatcher.js
-var optionalLocalePrefixRegex = `^/(?:${RoutesManifest.locales.map((locale) => `${locale}/?`).join("|")})?`;
-var optionalBasepathPrefixRegex = RoutesManifest.basePath ? `^${RoutesManifest.basePath}/?` : "^/";
-var optionalPrefix = optionalLocalePrefixRegex.replace("^/", optionalBasepathPrefixRegex);
-function routeMatcher(routeDefinitions) {
-  const regexp = routeDefinitions.map((route) => ({
-    page: route.page,
-    regexp: new RegExp(route.regex.replace("^/", optionalPrefix))
-  }));
-  const appPathsSet = /* @__PURE__ */ new Set();
-  const routePathsSet = /* @__PURE__ */ new Set();
-  for (const [k, v] of Object.entries(AppPathRoutesManifest)) {
-    if (k.endsWith("page")) {
-      appPathsSet.add(v);
-    } else if (k.endsWith("route")) {
-      routePathsSet.add(v);
-    }
+var compiledRegExps = /* @__PURE__ */ new Map();
+function getCompiledRegExp(pattern, flags2 = "") {
+  const key = `/${pattern}/${flags2}`;
+  let regExp = compiledRegExps.get(key);
+  if (!regExp) {
+    regExp = new RegExp(pattern, flags2);
+    compiledRegExps.set(key, regExp);
   }
-  return function matchRoute(path3) {
-    const foundRoutes = regexp.filter((route) => route.regexp.test(path3));
-    return foundRoutes.map((foundRoute) => {
-      let routeType = "page";
-      if (appPathsSet.has(foundRoute.page)) {
-        routeType = "app";
-      } else if (routePathsSet.has(foundRoute.page)) {
-        routeType = "route";
-      }
-      return {
-        route: foundRoute.page,
-        type: routeType
-      };
-    });
-  };
+  regExp.lastIndex = 0;
+  return regExp;
 }
-var staticRouteMatcher = routeMatcher([
-  ...RoutesManifest.routes.static,
-  ...getStaticAPIRoutes()
-]);
-var dynamicRouteMatcher = routeMatcher(RoutesManifest.routes.dynamic);
-function getStaticAPIRoutes() {
-  const createRouteDefinition = (route) => ({
-    page: route,
-    regex: `^${route}(?:/)?$`
-  });
-  const dynamicRoutePages = new Set(RoutesManifest.routes.dynamic.map(({ page }) => page));
-  const pagesStaticAPIRoutes = Object.keys(PagesManifest).filter((route) => route.startsWith("/api/") && !dynamicRoutePages.has(route)).map(createRouteDefinition);
-  const appPathsStaticAPIRoutes = Object.values(AppPathRoutesManifest).filter((route) => (route.startsWith("/api/") || route === "/api") && !dynamicRoutePages.has(route)).map(createRouteDefinition);
-  return [...pagesStaticAPIRoutes, ...appPathsStaticAPIRoutes];
+function matchHasValue(value, pattern) {
+  if (!value)
+    return false;
+  if (!pattern)
+    return true;
+  const candidate = Array.isArray(value) ? value.at(-1) : value;
+  return candidate !== void 0 && getCompiledRegExp(`^${pattern}$`).test(candidate);
 }
-
-// node_modules/@opennextjs/aws/dist/core/routing/matcher.js
+function getHostname(headers) {
+  return headers.host?.split(":", 1)[0].toLowerCase();
+}
+function getSafeParamName(name) {
+  return name.replaceAll(/[^a-zA-Z]/g, "");
+}
 var routeHasMatcher = (headers, cookies, query) => (redirect) => {
   switch (redirect.type) {
     case "header":
-      return !!headers?.[redirect.key.toLowerCase()] && new RegExp(redirect.value ?? "").test(headers[redirect.key.toLowerCase()] ?? "");
+      return matchHasValue(headers[redirect.key.toLowerCase()], redirect.value);
     case "cookie":
-      return !!cookies?.[redirect.key] && new RegExp(redirect.value ?? "").test(cookies[redirect.key] ?? "");
+      return matchHasValue(cookies[redirect.key], redirect.value);
     case "query":
-      return query[redirect.key] && Array.isArray(redirect.value) ? redirect.value.reduce((prev, current) => prev || new RegExp(current).test(query[redirect.key]), false) : new RegExp(redirect.value ?? "").test(query[redirect.key] ?? "");
+      return matchHasValue(query[redirect.key], redirect.value);
     case "host":
-      return headers?.host !== "" && new RegExp(redirect.value ?? "").test(headers.host);
+      return matchHasValue(getHostname(headers), redirect.value);
     default:
       return false;
   }
@@ -2130,12 +2360,33 @@ var getParamsFromSource = (source) => (value) => {
   return _match ? _match.params : {};
 };
 var computeParamHas = (headers, cookies, query) => (has) => {
-  if (!has.value)
-    return {};
-  const matcher = new RegExp(`^${has.value}$`);
-  const fromSource = (value) => {
+  if (!has.value) {
+    let key;
+    let value;
+    switch (has.type) {
+      case "header":
+        key = has.key.toLowerCase();
+        value = headers[key];
+        break;
+      case "cookie":
+        key = has.key;
+        value = cookies[key];
+        break;
+      case "query":
+        key = has.key;
+        value = query[key];
+        break;
+      case "host":
+        return {};
+    }
+    return value ? { [getSafeParamName(key)]: value } : {};
+  }
+  const matcher = getCompiledRegExp(`^${has.value}$`);
+  const fromSource = (value, implicitKey) => {
     const matches = value.match(matcher);
-    return matches?.groups ?? {};
+    if (matches?.groups)
+      return matches.groups;
+    return implicitKey && matches?.[0] ? { [implicitKey]: matches[0] } : {};
   };
   switch (has.type) {
     case "header":
@@ -2143,35 +2394,57 @@ var computeParamHas = (headers, cookies, query) => (has) => {
     case "cookie":
       return fromSource(cookies[has.key] ?? "");
     case "query":
-      return Array.isArray(query[has.key]) ? fromSource(query[has.key].join(",")) : fromSource(query[has.key] ?? "");
+      return fromSource(Array.isArray(query[has.key]) ? query[has.key].at(-1) ?? "" : query[has.key] ?? "");
     case "host":
-      return fromSource(headers.host ?? "");
+      return fromSource(getHostname(headers) ?? "", "host");
   }
 };
-function convertMatch(match2, toDestination, destination) {
-  if (!match2) {
-    return destination;
+function compileNonPath(value, params) {
+  if (!value.includes(":"))
+    return value;
+  let compiledValue = value;
+  for (const key of Object.keys(params)) {
+    if (!compiledValue.includes(`:${key}`))
+      continue;
+    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    compiledValue = compiledValue.replace(getCompiledRegExp(`:${escapedKey}\\*`, "g"), `:${key}--ESCAPED_PARAM_ASTERISKS`).replace(getCompiledRegExp(`:${escapedKey}\\?`, "g"), `:${key}--ESCAPED_PARAM_QUESTION`).replace(getCompiledRegExp(`:${escapedKey}\\+`, "g"), `:${key}--ESCAPED_PARAM_PLUS`).replace(getCompiledRegExp(`:${escapedKey}(?!\\w)`, "g"), `--ESCAPED_PARAM_COLON${key}`);
   }
-  const { params } = match2;
-  const isUsingParams = Object.keys(params).length > 0;
-  return isUsingParams ? toDestination(params) : destination;
+  compiledValue = compiledValue.replace(/(:|\*|\?|\+|\(|\)|\{|\})/g, "\\$1").replaceAll("--ESCAPED_PARAM_PLUS", "+").replaceAll("--ESCAPED_PARAM_COLON", ":").replaceAll("--ESCAPED_PARAM_QUESTION", "?").replaceAll("--ESCAPED_PARAM_ASTERISKS", "*");
+  return compile(`/${compiledValue}`, { validate: false })(params).slice(1);
+}
+function compileQueryString(queryString, params) {
+  return queryString.split("&").map((part) => {
+    const separator = part.indexOf("=");
+    if (separator === -1)
+      return part;
+    const key = part.slice(0, separator + 1);
+    return `${key}${compileNonPath(part.slice(separator + 1), params)}`;
+  }).join("&");
 }
 function getNextConfigHeaders(event, configHeaders) {
   if (!configHeaders) {
     return {};
   }
   const matcher = routeHasMatcher(event.headers, event.cookies, event.query);
+  const computeHas = computeParamHas(event.headers, event.cookies, event.query);
   const requestHeaders = {};
   const localizedRawPath = localizePath(event);
   for (const { headers, has, missing, regex, source, locale } of configHeaders) {
     const path3 = locale === false ? event.rawPath : localizedRawPath;
-    if (new RegExp(regex).test(path3) && checkHas(matcher, has) && checkHas(matcher, missing, true)) {
+    if (getCompiledRegExp(regex).test(path3) && checkHas(matcher, has) && checkHas(matcher, missing, true)) {
       const fromSource = match(source);
       const _match = fromSource(path3);
+      const params = {
+        ..._match ? _match.params : {},
+        ...has?.reduce((acc, cur) => {
+          return Object.assign(acc, computeHas(cur));
+        }, {})
+      };
+      const hasParams = Object.keys(params).length > 0;
       headers.forEach((h) => {
         try {
-          const key = convertMatch(_match, compile(h.key), h.key);
-          const value = convertMatch(_match, compile(h.value), h.value);
+          const key = hasParams ? compileNonPath(h.key, params) : h.key;
+          const value = hasParams ? compileNonPath(h.value, params) : h.value;
           requestHeaders[key] = value;
         } catch {
           debug(`Error matching header ${h.key} with value ${h.value}`);
@@ -2182,59 +2455,67 @@ function getNextConfigHeaders(event, configHeaders) {
   }
   return requestHeaders;
 }
-function handleRewrites(event, rewrites) {
+function handleRewrites(event, rewrites, appendParamsToQuery = true) {
   const { rawPath, headers, query, cookies, url } = event;
   const localizedRawPath = localizePath(event);
   const matcher = routeHasMatcher(headers, cookies, query);
   const computeHas = computeParamHas(headers, cookies, query);
   const rewrite = rewrites.find((route) => {
     const path3 = route.locale === false ? rawPath : localizedRawPath;
-    return new RegExp(route.regex).test(path3) && checkHas(matcher, route.has) && checkHas(matcher, route.missing, true);
+    return getCompiledRegExp(route.regex).test(path3) && checkHas(matcher, route.has) && checkHas(matcher, route.missing, true);
   });
   let finalQuery = query;
   let rewrittenUrl = url;
   const isExternalRewrite = isExternal(rewrite?.destination);
   debug("isExternalRewrite", isExternalRewrite);
   if (rewrite) {
-    const { pathname, protocol, hostname, queryString } = getUrlParts(rewrite.destination, isExternalRewrite);
+    const { pathname, protocol, hostname, queryString, hash } = getUrlParts(rewrite.destination, isExternalRewrite);
     const pathToUse = rewrite.locale === false ? rawPath : localizedRawPath;
-    debug("urlParts", { pathname, protocol, hostname, queryString });
-    const toDestinationPath = compile(escapeRegex(pathname, { isPath: true }));
-    const toDestinationHost = compile(escapeRegex(hostname));
-    const toDestinationQuery = compile(escapeRegex(queryString));
+    debug("urlParts", { pathname, protocol, hostname, queryString, hash });
+    const compileOptions = { validate: false };
+    const toDestinationPath = compile(escapeRegex(pathname, { isPath: true }), compileOptions);
+    const toDestinationHost = compile(escapeRegex(hostname).replace(/:(\d+)$/, "\\:$1"), { ...compileOptions, encode: encodeURIComponent });
     const params = {
       // params for the source
       ...getParamsFromSource(match(escapeRegex(rewrite.source, { isPath: true })))(pathToUse),
       // params for the has
       ...rewrite.has?.reduce((acc, cur) => {
         return Object.assign(acc, computeHas(cur));
-      }, {}),
-      // params for the missing
-      ...rewrite.missing?.reduce((acc, cur) => {
-        return Object.assign(acc, computeHas(cur));
       }, {})
     };
     const isUsingParams = Object.keys(params).length > 0;
+    const queryParams = Object.fromEntries(Object.entries(params).filter(([key]) => key !== "nextInternalLocale"));
+    const destinationParams = [
+      ...parse2(escapeRegex(`${pathname}${hash}`, { isPath: true })),
+      ...hostname ? parse2(escapeRegex(hostname).replace(/:(\d+)$/, "\\:$1")) : []
+    ].flatMap((token) => typeof token === "string" ? [] : [String(token.name)]);
     let rewrittenQuery = queryString;
     let rewrittenHost = hostname;
-    let rewrittenPath = pathname;
+    let rewrittenHash = hash;
+    let rewrittenPath = unescapeRegex(toDestinationPath(params));
+    if (pathname.startsWith("/") && !rewrittenPath.startsWith("/")) {
+      rewrittenPath = `/${rewrittenPath}`;
+    }
     if (isUsingParams) {
-      rewrittenPath = unescapeRegex(toDestinationPath(params));
       rewrittenHost = unescapeRegex(toDestinationHost(params));
-      rewrittenQuery = unescapeRegex(toDestinationQuery(params));
+      rewrittenQuery = compileQueryString(queryString, params);
+      rewrittenHash = compileNonPath(hash, params);
     }
     if (NextConfig.i18n && !isExternalRewrite) {
-      const strippedPathLocale = rewrittenPath.replace(new RegExp(`^/(${NextConfig.i18n.locales.join("|")})`), "");
+      const strippedPathLocale = rewrittenPath.replace(getCompiledRegExp(`^/(${NextConfig.i18n.locales.join("|")})`), "");
       if (strippedPathLocale.startsWith("/api/")) {
         rewrittenPath = strippedPathLocale;
       }
     }
     rewrittenUrl = isExternalRewrite ? `${protocol}//${rewrittenHost}${rewrittenPath}` : new URL(rewrittenPath, event.url).href;
+    const destinationQuery = convertFromQueryString(rewrittenQuery);
     finalQuery = {
       ...query,
-      ...convertFromQueryString(rewrittenQuery)
+      ...!appendParamsToQuery || Object.keys(queryParams).some((key) => destinationParams.includes(key)) ? {} : queryParams,
+      ...destinationQuery
     };
     rewrittenUrl += convertToQueryString(finalQuery);
+    rewrittenUrl += rewrittenHash;
     debug("rewrittenUrl", { rewrittenUrl, finalQuery, isUsingParams });
   }
   return {
@@ -2247,6 +2528,22 @@ function handleRewrites(event, rewrites) {
     __rewrite: rewrite,
     isExternalRewrite
   };
+}
+function handleBeforeFilesRewrites(event, rewrites) {
+  let result = {
+    internalEvent: event,
+    __rewrite: void 0,
+    isExternalRewrite: false
+  };
+  for (const rewrite of rewrites) {
+    const rewriteResult = handleRewrites(result.internalEvent, [rewrite]);
+    if (!rewriteResult.__rewrite)
+      continue;
+    result = rewriteResult;
+    if (result.isExternalRewrite)
+      break;
+  }
+  return result;
 }
 function handleRepeatedSlashRedirect(event) {
   if (event.rawPath.match(/(\\|\/\/)/)) {
@@ -2308,7 +2605,7 @@ function handleRedirects(event, redirects) {
   const localeRedirect = handleLocaleRedirect(event);
   if (localeRedirect)
     return localeRedirect;
-  const { internalEvent, __rewrite } = handleRewrites(event, redirects.filter((r) => !r.internal));
+  const { internalEvent, __rewrite } = handleRewrites(event, redirects.filter((r) => !r.internal), false);
   if (__rewrite && !__rewrite.internal) {
     return {
       type: event.type,
@@ -2356,10 +2653,7 @@ function handleFallbackFalse(internalEvent, prerenderManifest) {
   const { rawPath } = internalEvent;
   const { dynamicRoutes = {}, routes = {} } = prerenderManifest ?? {};
   const prerenderedFallbackRoutes = Object.entries(dynamicRoutes).filter(([, { fallback }]) => fallback === false);
-  const routeFallback = prerenderedFallbackRoutes.some(([, { routeRegex }]) => {
-    const routeRegexExp = new RegExp(routeRegex);
-    return routeRegexExp.test(rawPath);
-  });
+  const routeFallback = prerenderedFallbackRoutes.some(([, { routeRegex }]) => getCompiledRegExp(routeRegex).test(rawPath));
   const locales = NextConfig.i18n?.locales;
   const routesAlreadyHaveLocale = locales?.includes(rawPath.split("/")[1]) || // If we don't use locales, we don't need to add the default locale
   locales === void 0;
@@ -2394,7 +2688,8 @@ function handleFallbackFalse(internalEvent, prerenderManifest) {
   };
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/middleware.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/middleware.js
+init_util();
 init_stream();
 init_utils();
 var middlewareManifest = MiddlewareManifest;
@@ -2406,7 +2701,7 @@ function defaultMiddlewareLoader() {
 }
 async function handleMiddleware(internalEvent, initialSearch, middlewareLoader = defaultMiddlewareLoader) {
   const headers = internalEvent.headers;
-  if (headers["x-isr"] && headers["x-prerender-revalidate"] === PrerenderManifest?.preview?.previewModeId)
+  if (headers[ISR_HEADER] && headers[PRERENDER_REVALIDATE_HEADER] === PrerenderManifest?.preview?.previewModeId)
     return internalEvent;
   const normalizedPath = localizePath(internalEvent);
   let decodedPath;
@@ -2455,21 +2750,29 @@ async function handleMiddleware(internalEvent, initialSearch, middlewareLoader =
   ];
   const xMiddlewareKey = "x-middleware-request-";
   responseHeaders.forEach((value, key) => {
-    if (key.startsWith(xMiddlewareKey)) {
-      const k = key.substring(xMiddlewareKey.length);
+    const normalizedKey = key.toLowerCase();
+    if (normalizedKey.startsWith(xMiddlewareKey)) {
+      const k = normalizedKey.substring(xMiddlewareKey.length);
       reqHeaders[k] = value;
     } else {
-      if (filteredHeaders.includes(key.toLowerCase()))
+      if (filteredHeaders.includes(normalizedKey))
         return;
-      if (key.toLowerCase() === "set-cookie") {
-        resHeaders[key] = resHeaders[key] ? [...resHeaders[key], value] : [value];
-      } else if (REDIRECTS.has(statusCode) && key.toLowerCase() === "location") {
-        resHeaders[key] = normalizeLocationHeader(value, internalEvent.url);
+      if (normalizedKey === "set-cookie")
+        return;
+      if (REDIRECTS.has(statusCode) && normalizedKey === "location") {
+        resHeaders[normalizedKey] = normalizeLocationHeader(value, internalEvent.url);
       } else {
-        resHeaders[key] = value;
+        resHeaders[normalizedKey] = value;
       }
     }
   });
+  const setCookies = responseHeaders.getSetCookie().flatMap((maybeCompoundCookie) => parseSetCookieHeader(maybeCompoundCookie));
+  if (setCookies.length > 0) {
+    resHeaders["set-cookie"] = setCookies;
+  }
+  const overrideHeaders = responseHeaders.get("x-middleware-override-headers");
+  const overriddenHeaders = overrideHeaders === null ? void 0 : new Set(overrideHeaders.split(",").map((key) => key.trim().toLowerCase()));
+  const newHeaders = Object.fromEntries([...Object.entries(internalEvent.headers), ...Object.entries(reqHeaders)].map(([key, value]) => [key.toLowerCase(), value]).filter(([key]) => !overriddenHeaders || overriddenHeaders.has(key)));
   const rewriteUrl = responseHeaders.get("x-middleware-rewrite");
   let isExternalRewrite = false;
   let middlewareQuery = internalEvent.query;
@@ -2501,7 +2804,7 @@ async function handleMiddleware(internalEvent, initialSearch, middlewareLoader =
     url: newUrl,
     rawPath: new URL(newUrl).pathname,
     type: internalEvent.type,
-    headers: { ...internalEvent.headers, ...reqHeaders },
+    headers: newHeaders,
     body: internalEvent.body,
     method: internalEvent.method,
     query: middlewareQuery,
@@ -2512,7 +2815,7 @@ async function handleMiddleware(internalEvent, initialSearch, middlewareLoader =
   };
 }
 
-// node_modules/@opennextjs/aws/dist/core/routingHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routingHandler.js
 var MIDDLEWARE_HEADER_PREFIX = "x-middleware-response-";
 var MIDDLEWARE_HEADER_PREFIX_LEN = MIDDLEWARE_HEADER_PREFIX.length;
 var INTERNAL_HEADER_PREFIX = "x-opennext-";
@@ -2600,7 +2903,7 @@ async function routingHandler(event, { assetResolver }) {
     let isExternalRewrite = middlewareEventOrResult.isExternalRewrite ?? false;
     eventOrResult = middlewareEventOrResult;
     if (!isExternalRewrite) {
-      const beforeRewrite = handleRewrites(eventOrResult, RoutesManifest.rewrites.beforeFiles);
+      const beforeRewrite = handleBeforeFilesRewrites(eventOrResult, RoutesManifest.rewrites.beforeFiles);
       eventOrResult = beforeRewrite.internalEvent;
       isExternalRewrite = beforeRewrite.isExternalRewrite;
       if (!isExternalRewrite) {
@@ -2633,6 +2936,10 @@ async function routingHandler(event, { assetResolver }) {
     }
     const isNextImageRoute = eventOrResult.rawPath.startsWith("/_next/image");
     const isRouteFoundBeforeAllRewrites = isStaticRoute || isDynamicRoute || isExternalRewrite;
+    const resolvedRoutes = [
+      ...staticRouteMatcher(eventOrResult.rawPath),
+      ...dynamicRouteMatcher(eventOrResult.rawPath)
+    ];
     if (!(isRouteFoundBeforeAllRewrites || isNextImageRoute || // We need to check again once all rewrites have been applied
     staticRouteMatcher(eventOrResult.rawPath).length > 0 || dynamicRouteMatcher(eventOrResult.rawPath).length > 0)) {
       eventOrResult = {
@@ -2641,23 +2948,19 @@ async function routingHandler(event, { assetResolver }) {
         url: constructNextUrl(eventOrResult.url, "/404"),
         headers: {
           ...eventOrResult.headers,
-          "x-middleware-response-cache-control": "private, no-cache, no-store, max-age=0, must-revalidate"
+          "x-middleware-response-cache-control": NO_STORE_CACHE_CONTROL
         }
       };
     }
-    if (globalThis.openNextConfig.dangerous?.enableCacheInterception && !isInternalResult(eventOrResult)) {
+    if (globalThis.openNextConfig.dangerous?.enableCacheInterception && !isExternalRewrite && !isInternalResult(eventOrResult)) {
       debug("Cache interception enabled");
-      eventOrResult = await cacheInterceptor(eventOrResult);
+      eventOrResult = await cacheInterceptor(eventOrResult, resolvedRoutes);
       if (isInternalResult(eventOrResult)) {
         applyMiddlewareHeaders(eventOrResult, headers);
         return eventOrResult;
       }
     }
     applyMiddlewareHeaders(eventOrResult, headers);
-    const resolvedRoutes = [
-      ...foundStaticRoute,
-      ...foundDynamicRoute
-    ];
     debug("resolvedRoutes", resolvedRoutes);
     return {
       internalEvent: eventOrResult,
@@ -2697,7 +3000,7 @@ function isInternalResult(eventOrResult) {
   return eventOrResult != null && "statusCode" in eventOrResult;
 }
 
-// node_modules/@opennextjs/aws/dist/adapters/middleware.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/middleware.js
 globalThis.internalFetch = fetch;
 globalThis.__openNextAls = new AsyncLocalStorage();
 var defaultHandler = async (internalEvent, options) => {
@@ -2707,7 +3010,7 @@ var defaultHandler = async (internalEvent, options) => {
   const assetResolver = await resolveAssetResolver(middlewareConfig?.assetResolver);
   const requestId = Math.random().toString(36);
   return runWithOpenNextRequestContext({
-    isISRRevalidation: internalEvent.headers["x-isr"] === "1",
+    isISRRevalidation: internalEvent.headers[ISR_HEADER] === "1",
     waitUntil: options?.waitUntil,
     requestId
   }, async () => {

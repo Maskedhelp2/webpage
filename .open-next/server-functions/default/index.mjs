@@ -1,4 +1,4 @@
-globalThis.monorepoPackagePath = "";globalThis.openNextDebug = false;globalThis.openNextVersion = "4.1.0";globalThis.nextVersion = "16.2.11";
+globalThis.monorepoPackagePath = "";globalThis.openNextDebug = false;globalThis.openNextVersion = "4.1.11";globalThis.nextVersion = "16.2.11";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -11,11 +11,20 @@ var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require
   if (typeof require !== "undefined") return require.apply(this, arguments);
   throw Error('Dynamic require of "' + x + '" is not supported');
 });
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+var __esm = (fn, res, err) => function __init() {
+  if (err) throw err[0];
+  try {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  } catch (e) {
+    throw err = [e], e;
+  }
 };
 var __commonJS = (cb, mod3) => function __require2() {
-  return mod3 || (0, cb[__getOwnPropNames(cb)[0]])((mod3 = { exports: {} }).exports, mod3), mod3.exports;
+  try {
+    return mod3 || (0, cb[__getOwnPropNames(cb)[0]])((mod3 = { exports: {} }).exports, mod3), mod3.exports;
+  } catch (e) {
+    throw mod3 = 0, e;
+  }
 };
 var __export = (target, all) => {
   for (var name in all)
@@ -40,7 +49,7 @@ var __toESM = (mod3, isNodeMode, target) => (target = mod3 != null ? __create(__
 ));
 var __toCommonJS = (mod3) => __copyProps(__defProp({}, "__esModule", { value: true }), mod3);
 
-// node_modules/@opennextjs/aws/dist/utils/error.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/error.js
 function isOpenNextError(e) {
   try {
     return "__openNextInternal" in e;
@@ -50,7 +59,7 @@ function isOpenNextError(e) {
 }
 var IgnorableError, FatalError;
 var init_error = __esm({
-  "node_modules/@opennextjs/aws/dist/utils/error.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/error.js"() {
     IgnorableError = class extends Error {
       __openNextInternal = true;
       canIgnore = true;
@@ -72,7 +81,7 @@ var init_error = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/adapters/logger.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/logger.js
 function debug(...args) {
   if (globalThis.openNextDebug) {
     console.log(...args);
@@ -115,7 +124,7 @@ function getOpenNextErrorLogLevel() {
 }
 var DOWNPLAYED_ERROR_LOGS, isDownplayedErrorLog;
 var init_logger = __esm({
-  "node_modules/@opennextjs/aws/dist/adapters/logger.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/logger.js"() {
     init_error();
     DOWNPLAYED_ERROR_LOGS = [
       {
@@ -128,7 +137,7 @@ var init_logger = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/http/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/http/util.js
 function parseSetCookieHeader(cookies) {
   if (!cookies) {
     return [];
@@ -155,7 +164,7 @@ function getQueryFromIterator(it) {
 }
 var parseHeaders, convertHeader;
 var init_util = __esm({
-  "node_modules/@opennextjs/aws/dist/http/util.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/http/util.js"() {
     init_logger();
     parseHeaders = (headers) => {
       const result = {};
@@ -201,7 +210,7 @@ var init_node_module = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/utils/stream.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/stream.js
 import { ReadableStream as ReadableStream2 } from "node:stream/web";
 function emptyReadableStream() {
   if (process.env.OPEN_NEXT_FORCE_NON_EMPTY_RESPONSE === "true") {
@@ -221,23 +230,23 @@ function emptyReadableStream() {
 }
 var maybeSomethingBuffer;
 var init_stream = __esm({
-  "node_modules/@opennextjs/aws/dist/utils/stream.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/stream.js"() {
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/converters/utils.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/converters/utils.js
 function getQueryFromSearchParams(searchParams) {
   return getQueryFromIterator(searchParams.entries());
 }
 var init_utils = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/converters/utils.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/converters/utils.js"() {
     init_util();
   }
 });
 
-// node_modules/cookie/dist/index.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/cookie/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/cookie/dist/index.js"(exports) {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/cookie/dist/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.parseCookie = parseCookie;
@@ -484,7 +493,7 @@ var require_dist = __commonJS({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/converters/edge.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/converters/edge.js
 var edge_exports = {};
 __export(edge_exports, {
   default: () => edge_default
@@ -492,7 +501,7 @@ __export(edge_exports, {
 import { Buffer as Buffer2 } from "node:buffer";
 var import_cookie, NULL_BODY_STATUSES, converter, edge_default;
 var init_edge = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/converters/edge.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/converters/edge.js"() {
     import_cookie = __toESM(require_dist(), 1);
     init_util();
     init_utils();
@@ -574,7 +583,7 @@ var init_edge = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/wrappers/cloudflare-node.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/wrappers/cloudflare-node.js
 var cloudflare_node_exports = {};
 __export(cloudflare_node_exports, {
   default: () => cloudflare_node_default
@@ -582,7 +591,7 @@ __export(cloudflare_node_exports, {
 import { Writable } from "node:stream";
 var NULL_BODY_STATUSES2, handler, cloudflare_node_default;
 var init_cloudflare_node = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/wrappers/cloudflare-node.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/wrappers/cloudflare-node.js"() {
     NULL_BODY_STATUSES2 = /* @__PURE__ */ new Set([101, 204, 205, 304]);
     handler = async (handler3, converter2) => async (request, env, ctx, abortSignal) => {
       globalThis.process = process;
@@ -674,14 +683,14 @@ var init_cloudflare_node = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/tagCache/dummy.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/tagCache/dummy.js
 var dummy_exports = {};
 __export(dummy_exports, {
   default: () => dummy_default
 });
 var dummyTagCache, dummy_default;
 var init_dummy = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/tagCache/dummy.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/tagCache/dummy.js"() {
     dummyTagCache = {
       name: "dummy",
       mode: "original",
@@ -705,14 +714,14 @@ var init_dummy = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/queue/dummy.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/queue/dummy.js
 var dummy_exports2 = {};
 __export(dummy_exports2, {
   default: () => dummy_default2
 });
 var dummyQueue, dummy_default2;
 var init_dummy2 = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/queue/dummy.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/queue/dummy.js"() {
     init_error();
     dummyQueue = {
       name: "dummy",
@@ -724,14 +733,14 @@ var init_dummy2 = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/incrementalCache/dummy.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/incrementalCache/dummy.js
 var dummy_exports3 = {};
 __export(dummy_exports3, {
   default: () => dummy_default3
 });
 var dummyIncrementalCache, dummy_default3;
 var init_dummy3 = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/incrementalCache/dummy.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/incrementalCache/dummy.js"() {
     init_error();
     dummyIncrementalCache = {
       name: "dummy",
@@ -749,14 +758,14 @@ var init_dummy3 = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js
 var dummy_exports4 = {};
 __export(dummy_exports4, {
   default: () => dummy_default4
 });
 var resolver, dummy_default4;
 var init_dummy4 = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js"() {
     resolver = {
       name: "dummy"
     };
@@ -764,14 +773,14 @@ var init_dummy4 = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/proxyExternalRequest/fetch.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/proxyExternalRequest/fetch.js
 var fetch_exports = {};
 __export(fetch_exports, {
   default: () => fetch_default
 });
 var fetchProxy, fetch_default;
 var init_fetch = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/proxyExternalRequest/fetch.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/proxyExternalRequest/fetch.js"() {
     init_stream();
     fetchProxy = {
       name: "fetch-proxy",
@@ -808,14 +817,14 @@ var init_fetch = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/overrides/cdnInvalidation/dummy.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/cdnInvalidation/dummy.js
 var dummy_exports5 = {};
 __export(dummy_exports5, {
   default: () => dummy_default5
 });
 var dummy_default5;
 var init_dummy5 = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/cdnInvalidation/dummy.js"() {
+  "../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/overrides/cdnInvalidation/dummy.js"() {
     dummy_default5 = {
       name: "dummy",
       invalidatePaths: (_) => {
@@ -825,10 +834,10 @@ var init_dummy5 = __esm({
   }
 });
 
-// node_modules/@opennextjs/aws/dist/core/createMainHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/createMainHandler.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/adapters/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/util.js
 function setNodeEnv() {
   const processEnv = process.env;
   processEnv.NODE_ENV = process.env.NODE_ENV ?? "production";
@@ -837,13 +846,29 @@ function generateUniqueId() {
   return Math.random().toString(36).slice(2, 8);
 }
 
-// node_modules/@opennextjs/aws/dist/core/requestHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/requestHandler.js
 import { AsyncLocalStorage } from "node:async_hooks";
 
-// node_modules/@opennextjs/aws/dist/http/openNextResponse.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/http/openNextResponse.js
 init_logger();
-init_util();
 import { Transform } from "node:stream";
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/cacheHeaders.js
+var CACHE_CONTROL_HEADER = "cache-control";
+var NEXTJS_CACHE_HEADER = "x-nextjs-cache";
+var ISR_HEADER = "x-isr";
+var NO_STORE_CACHE_CONTROL = "private, no-cache, no-store, max-age=0, must-revalidate";
+function fixCacheControlForError(headers, statusCode) {
+  if (process.env.OPEN_NEXT_DANGEROUSLY_SET_ERROR_HEADERS === "true") {
+    return;
+  }
+  if (statusCode === 404 || statusCode === 500) {
+    headers[CACHE_CONTROL_HEADER] = NO_STORE_CACHE_CONTROL;
+  }
+}
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/http/openNextResponse.js
+init_util();
 var SET_COOKIE_HEADER = "set-cookie";
 var CANNOT_BE_USED = "This cannot be used in OpenNext";
 var OpenNextNodeResponse = class extends Transform {
@@ -1116,16 +1141,11 @@ var OpenNextNodeResponse = class extends Transform {
   // For some reason, next returns the 500 error page with some cache-control headers
   // We need to fix that
   fixHeadersForError() {
-    if (process.env.OPEN_NEXT_DANGEROUSLY_SET_ERROR_HEADERS === "true") {
-      return;
-    }
-    if (this.statusCode === 404 || this.statusCode === 500) {
-      this.headers["cache-control"] = "private, no-cache, no-store, max-age=0, must-revalidate";
-    }
+    fixCacheControlForError(this.headers, this.statusCode);
   }
 };
 
-// node_modules/@opennextjs/aws/dist/http/request.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/http/request.js
 import http from "node:http";
 var IncomingMessage = class extends http.IncomingMessage {
   constructor({ method, url, headers, body, remoteAddress }) {
@@ -1158,10 +1178,10 @@ var IncomingMessage = class extends http.IncomingMessage {
   }
 };
 
-// node_modules/@opennextjs/aws/dist/utils/promise.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/promise.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/utils/requestCache.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/requestCache.js
 var RequestCache = class {
   _caches = /* @__PURE__ */ new Map();
   /**
@@ -1179,7 +1199,7 @@ var RequestCache = class {
   }
 };
 
-// node_modules/@opennextjs/aws/dist/utils/promise.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/promise.js
 var DetachedPromise = class {
   resolve;
   reject;
@@ -1197,23 +1217,40 @@ var DetachedPromise = class {
 };
 var DetachedPromiseRunner = class {
   promises = [];
+  /**
+   * Create a deferred promise tracked by this runner.
+   *
+   * @returns The tracked promise and its resolve/reject functions.
+   */
   withResolvers() {
     const detachedPromise = new DetachedPromise();
-    this.promises.push(detachedPromise);
+    this.add(detachedPromise.promise);
     return detachedPromise;
   }
+  /**
+   * Track background work and handle failures immediately.
+   *
+   * @param promise Work to await, including work registered during an active drain.
+   * @returns Nothing; failures are logged rather than propagated.
+   */
   add(promise) {
-    const detachedPromise = new DetachedPromise();
-    this.promises.push(detachedPromise);
-    promise.then(detachedPromise.resolve, detachedPromise.reject);
+    this.promises.push(promise.then(() => {
+    }, error));
   }
+  /**
+   * Drain tracked work, including additions made while earlier work is pending.
+   *
+   * Work started after the drain has settled still needs a new runtime waitUntil.
+   * @returns Resolves when all work registered during this drain has settled.
+   */
   async await() {
     debug(`Awaiting ${this.promises.length} detached promises`);
-    const results = await Promise.allSettled(this.promises.map((p) => p.promise));
-    const rejectedPromises = results.filter((r) => r.status === "rejected");
-    rejectedPromises.forEach((r) => {
-      error(r.reason);
-    });
+    let awaited = 0;
+    while (awaited < this.promises.length) {
+      const batch = this.promises.slice(awaited);
+      awaited = this.promises.length;
+      await Promise.all(batch);
+    }
   }
 };
 async function awaitAllDetachedPromise() {
@@ -1226,14 +1263,15 @@ async function awaitAllDetachedPromise() {
   await promisesToAwait;
 }
 function provideNextAfterProvider() {
-  const NEXT_REQUEST_CONTEXT_SYMBOL = Symbol.for("@next/request-context");
-  const VERCEL_REQUEST_CONTEXT_SYMBOL = Symbol.for("@vercel/request-context");
-  const store = globalThis.__openNextAls.getStore();
-  const waitUntil = store?.waitUntil ?? ((promise) => store?.pendingPromiseRunner.add(promise));
+  const NEXT_REQUEST_CONTEXT_SYMBOL = /* @__PURE__ */ Symbol.for("@next/request-context");
+  const VERCEL_REQUEST_CONTEXT_SYMBOL = /* @__PURE__ */ Symbol.for("@vercel/request-context");
   const nextAfterContext = {
-    get: () => ({
-      waitUntil
-    })
+    get: () => {
+      const store = globalThis.__openNextAls.getStore();
+      return {
+        waitUntil: store?.waitUntil ?? ((promise) => store?.pendingPromiseRunner.add(promise))
+      };
+    }
   };
   globalThis[NEXT_REQUEST_CONTEXT_SYMBOL] = nextAfterContext;
   if (process.env.EMULATE_VERCEL_REQUEST_CONTEXT) {
@@ -1260,40 +1298,208 @@ function runWithOpenNextRequestContext({ isISRRevalidation, waitUntil, requestId
   });
 }
 
-// node_modules/@opennextjs/aws/dist/adapters/config/index.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/semver.js
+function compareSemver(v1, operator, v2) {
+  let versionDiff = 0;
+  if (v1 === "latest") {
+    versionDiff = 1;
+  } else {
+    if (/^[^\d]/.test(v1)) {
+      v1 = v1.substring(1);
+    }
+    if (/^[^\d]/.test(v2)) {
+      v2 = v2.substring(1);
+    }
+    const [major1, minor1 = 0, patch1 = 0] = v1.split(".").map(Number);
+    const [major2, minor2 = 0, patch2 = 0] = v2.split(".").map(Number);
+    if (Number.isNaN(major1) || Number.isNaN(major2)) {
+      throw new Error("The major version is required.");
+    }
+    if (major1 !== major2) {
+      versionDiff = major1 - major2;
+    } else if (minor1 !== minor2) {
+      versionDiff = minor1 - minor2;
+    } else if (patch1 !== patch2) {
+      versionDiff = patch1 - patch2;
+    }
+  }
+  switch (operator) {
+    case "=":
+      return versionDiff === 0;
+    case ">=":
+      return versionDiff >= 0;
+    case "<=":
+      return versionDiff <= 0;
+    case ">":
+      return versionDiff > 0;
+    case "<":
+      return versionDiff < 0;
+    default:
+      throw new Error(`Unsupported operator: ${operator}`);
+  }
+}
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/config/index.js
 init_logger();
 import path from "node:path";
 globalThis.__dirname ??= "";
 var NEXT_DIR = path.join(__dirname, ".next");
 var OPEN_NEXT_DIR = path.join(__dirname, ".open-next");
 debug({ NEXT_DIR, OPEN_NEXT_DIR });
-var NextConfig = { "env": {}, "webpack": null, "typescript": { "ignoreBuildErrors": false }, "typedRoutes": false, "distDir": ".next", "cleanDistDir": true, "assetPrefix": "", "cacheMaxMemorySize": 52428800, "configOrigin": "next.config.ts", "useFileSystemPublicRoutes": true, "generateEtags": true, "pageExtensions": ["tsx", "ts", "jsx", "js"], "poweredByHeader": true, "compress": true, "images": { "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840], "imageSizes": [32, 48, 64, 96, 128, 256, 384], "path": "/_next/image", "loader": "default", "loaderFile": "", "domains": [], "disableStaticImages": false, "minimumCacheTTL": 14400, "formats": ["image/webp"], "maximumRedirects": 3, "maximumResponseBody": 5e7, "dangerouslyAllowLocalIP": false, "dangerouslyAllowSVG": false, "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;", "contentDispositionType": "attachment", "localPatterns": [{ "pathname": "**", "search": "" }], "remotePatterns": [], "qualities": [75], "unoptimized": false, "customCacheHandler": false }, "devIndicators": { "position": "bottom-left" }, "onDemandEntries": { "maxInactiveAge": 6e4, "pagesBufferLength": 5 }, "basePath": "", "sassOptions": {}, "trailingSlash": false, "i18n": null, "productionBrowserSourceMaps": false, "excludeDefaultMomentLocales": true, "reactProductionProfiling": false, "reactStrictMode": null, "reactMaxHeadersLength": 6e3, "httpAgentOptions": { "keepAlive": true }, "logging": { "serverFunctions": true, "browserToTerminal": "warn" }, "compiler": {}, "expireTime": 31536e3, "staticPageGenerationTimeout": 60, "output": "standalone", "modularizeImports": { "@mui/icons-material": { "transform": "@mui/icons-material/{{member}}" }, "lodash": { "transform": "lodash/{{member}}" } }, "outputFileTracingRoot": "C:\\Users\\Karthik\\Desktop\\h\\webpage\\webpage", "allowedDevOrigins": ["192.168.0.111"], "cacheComponents": false, "cacheLife": { "default": { "stale": 300, "revalidate": 900, "expire": 4294967294 }, "seconds": { "stale": 30, "revalidate": 1, "expire": 60 }, "minutes": { "stale": 300, "revalidate": 60, "expire": 3600 }, "hours": { "stale": 300, "revalidate": 3600, "expire": 86400 }, "days": { "stale": 300, "revalidate": 86400, "expire": 604800 }, "weeks": { "stale": 300, "revalidate": 604800, "expire": 2592e3 }, "max": { "stale": 300, "revalidate": 2592e3, "expire": 31536e3 } }, "cacheHandlers": {}, "experimental": { "appNewScrollHandler": false, "useSkewCookie": false, "cssChunking": true, "multiZoneDraftMode": false, "appNavFailHandling": false, "prerenderEarlyExit": true, "serverMinification": true, "linkNoTouchStart": false, "caseSensitiveRoutes": false, "cachedNavigations": false, "partialFallbacks": false, "dynamicOnHover": false, "varyParams": false, "prefetchInlining": false, "preloadEntriesOnStart": true, "clientRouterFilter": true, "clientRouterFilterRedirects": false, "fetchCacheKeyPrefix": "", "proxyPrefetch": "flexible", "optimisticClientCache": true, "manualClientBasePath": false, "cpus": 15, "memoryBasedWorkersCount": false, "imgOptConcurrency": null, "imgOptTimeoutInSeconds": 7, "imgOptMaxInputPixels": 268402689, "imgOptSequentialRead": null, "isrFlushToDisk": true, "workerThreads": false, "optimizeCss": false, "nextScriptWorkers": false, "scrollRestoration": false, "externalDir": false, "disableOptimizedLoading": false, "gzipSize": true, "craCompat": false, "esmExternals": true, "fullySpecified": false, "swcTraceProfiling": false, "forceSwcTransforms": false, "largePageDataBytes": 128e3, "typedEnv": false, "parallelServerCompiles": false, "parallelServerBuildTraces": false, "ppr": false, "authInterrupts": false, "webpackMemoryOptimizations": false, "optimizeServerReact": true, "strictRouteTypes": false, "viewTransition": false, "removeUncaughtErrorAndRejectionListeners": false, "validateRSCRequestHeaders": false, "staleTimes": { "dynamic": 0, "static": 300 }, "reactDebugChannel": true, "serverComponentsHmrCache": true, "staticGenerationMaxConcurrency": 8, "staticGenerationMinPagesPerWorker": 25, "transitionIndicator": false, "gestureTransition": false, "inlineCss": false, "useCache": false, "globalNotFound": false, "browserDebugInfoInTerminal": "warn", "lockDistDir": true, "proxyClientMaxBodySize": 10485760, "hideLogsAfterAbort": false, "mcpServer": true, "turbopackFileSystemCacheForDev": true, "turbopackFileSystemCacheForBuild": false, "turbopackInferModuleSideEffects": true, "turbopackPluginRuntimeStrategy": "childProcesses", "optimizePackageImports": ["lucide-react", "date-fns", "lodash-es", "ramda", "antd", "react-bootstrap", "ahooks", "@ant-design/icons", "@headlessui/react", "@headlessui-float/react", "@heroicons/react/20/solid", "@heroicons/react/24/solid", "@heroicons/react/24/outline", "@visx/visx", "@tremor/react", "rxjs", "@mui/material", "@mui/icons-material", "recharts", "react-use", "effect", "@effect/schema", "@effect/platform", "@effect/platform-node", "@effect/platform-browser", "@effect/platform-bun", "@effect/sql", "@effect/sql-mssql", "@effect/sql-mysql2", "@effect/sql-pg", "@effect/sql-sqlite-node", "@effect/sql-sqlite-bun", "@effect/sql-sqlite-wasm", "@effect/sql-sqlite-react-native", "@effect/rpc", "@effect/rpc-http", "@effect/typeclass", "@effect/experimental", "@effect/opentelemetry", "@material-ui/core", "@material-ui/icons", "@tabler/icons-react", "mui-core", "react-icons/ai", "react-icons/bi", "react-icons/bs", "react-icons/cg", "react-icons/ci", "react-icons/di", "react-icons/fa", "react-icons/fa6", "react-icons/fc", "react-icons/fi", "react-icons/gi", "react-icons/go", "react-icons/gr", "react-icons/hi", "react-icons/hi2", "react-icons/im", "react-icons/io", "react-icons/io5", "react-icons/lia", "react-icons/lib", "react-icons/lu", "react-icons/md", "react-icons/pi", "react-icons/ri", "react-icons/rx", "react-icons/si", "react-icons/sl", "react-icons/tb", "react-icons/tfi", "react-icons/ti", "react-icons/vsc", "react-icons/wi"], "trustHostHeader": false, "isExperimentalCompile": false }, "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight", "bundlePagesRouterDependencies": false, "configFileName": "next.config.ts", "turbopack": { "root": "C:\\Users\\Karthik\\Desktop\\h\\webpage\\webpage" }, "distDirRoot": ".next" };
-var BuildId = "LT257hZuuZOrAoK51hFOz";
+var NextConfig = { "env": {}, "webpack": null, "typescript": { "ignoreBuildErrors": false }, "typedRoutes": false, "distDir": ".next", "cleanDistDir": true, "assetPrefix": "", "cacheMaxMemorySize": 52428800, "configOrigin": "next.config.ts", "useFileSystemPublicRoutes": true, "generateEtags": true, "pageExtensions": ["tsx", "ts", "jsx", "js"], "poweredByHeader": true, "compress": true, "images": { "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840], "imageSizes": [32, 48, 64, 96, 128, 256, 384], "path": "/_next/image", "loader": "default", "loaderFile": "", "domains": [], "disableStaticImages": false, "minimumCacheTTL": 14400, "formats": ["image/webp"], "maximumRedirects": 3, "maximumResponseBody": 5e7, "dangerouslyAllowLocalIP": false, "dangerouslyAllowSVG": false, "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;", "contentDispositionType": "attachment", "localPatterns": [{ "pathname": "**", "search": "" }], "remotePatterns": [], "qualities": [75], "unoptimized": true, "customCacheHandler": false }, "devIndicators": { "position": "bottom-left" }, "onDemandEntries": { "maxInactiveAge": 6e4, "pagesBufferLength": 5 }, "basePath": "", "sassOptions": {}, "trailingSlash": false, "i18n": null, "productionBrowserSourceMaps": false, "excludeDefaultMomentLocales": true, "reactProductionProfiling": false, "reactStrictMode": null, "reactMaxHeadersLength": 6e3, "httpAgentOptions": { "keepAlive": true }, "logging": { "serverFunctions": true, "browserToTerminal": "warn" }, "compiler": {}, "expireTime": 31536e3, "staticPageGenerationTimeout": 60, "output": "standalone", "modularizeImports": { "@mui/icons-material": { "transform": "@mui/icons-material/{{member}}" }, "lodash": { "transform": "lodash/{{member}}" } }, "outputFileTracingRoot": "C:\\Users\\Karthik\\Desktop\\h\\webpage\\webpage", "allowedDevOrigins": ["192.168.0.111"], "cacheComponents": false, "cacheLife": { "default": { "stale": 300, "revalidate": 900, "expire": 4294967294 }, "seconds": { "stale": 30, "revalidate": 1, "expire": 60 }, "minutes": { "stale": 300, "revalidate": 60, "expire": 3600 }, "hours": { "stale": 300, "revalidate": 3600, "expire": 86400 }, "days": { "stale": 300, "revalidate": 86400, "expire": 604800 }, "weeks": { "stale": 300, "revalidate": 604800, "expire": 2592e3 }, "max": { "stale": 300, "revalidate": 2592e3, "expire": 31536e3 } }, "cacheHandlers": {}, "experimental": { "appNewScrollHandler": false, "useSkewCookie": false, "cssChunking": true, "multiZoneDraftMode": false, "appNavFailHandling": false, "prerenderEarlyExit": true, "serverMinification": true, "linkNoTouchStart": false, "caseSensitiveRoutes": false, "cachedNavigations": false, "partialFallbacks": false, "dynamicOnHover": false, "varyParams": false, "prefetchInlining": false, "preloadEntriesOnStart": true, "clientRouterFilter": true, "clientRouterFilterRedirects": false, "fetchCacheKeyPrefix": "", "proxyPrefetch": "flexible", "optimisticClientCache": true, "manualClientBasePath": false, "cpus": 15, "memoryBasedWorkersCount": false, "imgOptConcurrency": null, "imgOptTimeoutInSeconds": 7, "imgOptMaxInputPixels": 268402689, "imgOptSequentialRead": null, "isrFlushToDisk": true, "workerThreads": false, "optimizeCss": false, "nextScriptWorkers": false, "scrollRestoration": false, "externalDir": false, "disableOptimizedLoading": false, "gzipSize": true, "craCompat": false, "esmExternals": true, "fullySpecified": false, "swcTraceProfiling": false, "forceSwcTransforms": false, "largePageDataBytes": 128e3, "typedEnv": false, "parallelServerCompiles": false, "parallelServerBuildTraces": false, "ppr": false, "authInterrupts": false, "webpackMemoryOptimizations": false, "optimizeServerReact": true, "strictRouteTypes": false, "viewTransition": false, "removeUncaughtErrorAndRejectionListeners": false, "validateRSCRequestHeaders": false, "staleTimes": { "dynamic": 0, "static": 300 }, "reactDebugChannel": true, "serverComponentsHmrCache": true, "staticGenerationMaxConcurrency": 8, "staticGenerationMinPagesPerWorker": 25, "transitionIndicator": false, "gestureTransition": false, "inlineCss": false, "useCache": false, "globalNotFound": false, "browserDebugInfoInTerminal": "warn", "lockDistDir": true, "proxyClientMaxBodySize": 10485760, "hideLogsAfterAbort": false, "mcpServer": true, "turbopackFileSystemCacheForDev": true, "turbopackFileSystemCacheForBuild": false, "turbopackInferModuleSideEffects": true, "turbopackPluginRuntimeStrategy": "childProcesses", "optimizePackageImports": ["lucide-react", "date-fns", "lodash-es", "ramda", "antd", "react-bootstrap", "ahooks", "@ant-design/icons", "@headlessui/react", "@headlessui-float/react", "@heroicons/react/20/solid", "@heroicons/react/24/solid", "@heroicons/react/24/outline", "@visx/visx", "@tremor/react", "rxjs", "@mui/material", "@mui/icons-material", "recharts", "react-use", "effect", "@effect/schema", "@effect/platform", "@effect/platform-node", "@effect/platform-browser", "@effect/platform-bun", "@effect/sql", "@effect/sql-mssql", "@effect/sql-mysql2", "@effect/sql-pg", "@effect/sql-sqlite-node", "@effect/sql-sqlite-bun", "@effect/sql-sqlite-wasm", "@effect/sql-sqlite-react-native", "@effect/rpc", "@effect/rpc-http", "@effect/typeclass", "@effect/experimental", "@effect/opentelemetry", "@material-ui/core", "@material-ui/icons", "@tabler/icons-react", "mui-core", "react-icons/ai", "react-icons/bi", "react-icons/bs", "react-icons/cg", "react-icons/ci", "react-icons/di", "react-icons/fa", "react-icons/fa6", "react-icons/fc", "react-icons/fi", "react-icons/gi", "react-icons/go", "react-icons/gr", "react-icons/hi", "react-icons/hi2", "react-icons/im", "react-icons/io", "react-icons/io5", "react-icons/lia", "react-icons/lib", "react-icons/lu", "react-icons/md", "react-icons/pi", "react-icons/ri", "react-icons/rx", "react-icons/si", "react-icons/sl", "react-icons/tb", "react-icons/tfi", "react-icons/ti", "react-icons/vsc", "react-icons/wi"], "trustHostHeader": false, "isExperimentalCompile": false }, "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight", "bundlePagesRouterDependencies": false, "configFileName": "next.config.ts", "turbopack": { "root": "C:\\Users\\Karthik\\Desktop\\h\\webpage\\webpage" }, "distDirRoot": ".next" };
+var BuildId = "7ouBk0hJXks_rZSOhyWU0";
 var HtmlPages = ["/404", "/500"];
-var RoutesManifest = { "basePath": "", "rewrites": { "beforeFiles": [], "afterFiles": [], "fallback": [] }, "redirects": [{ "source": "/:path+/", "destination": "/:path+", "internal": true, "priority": true, "statusCode": 308, "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$" }], "routes": { "static": [{ "page": "/", "regex": "^/(?:/)?$", "routeKeys": {}, "namedRegex": "^/(?:/)?$" }, { "page": "/_global-error", "regex": "^/_global\\-error(?:/)?$", "routeKeys": {}, "namedRegex": "^/_global\\-error(?:/)?$" }, { "page": "/_not-found", "regex": "^/_not\\-found(?:/)?$", "routeKeys": {}, "namedRegex": "^/_not\\-found(?:/)?$" }, { "page": "/experience", "regex": "^/experience(?:/)?$", "routeKeys": {}, "namedRegex": "^/experience(?:/)?$" }, { "page": "/friends", "regex": "^/friends(?:/)?$", "routeKeys": {}, "namedRegex": "^/friends(?:/)?$" }, { "page": "/print", "regex": "^/print(?:/)?$", "routeKeys": {}, "namedRegex": "^/print(?:/)?$" }, { "page": "/privacy", "regex": "^/privacy(?:/)?$", "routeKeys": {}, "namedRegex": "^/privacy(?:/)?$" }, { "page": "/projects", "regex": "^/projects(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects(?:/)?$" }, { "page": "/projects/desk-helper", "regex": "^/projects/desk\\-helper(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/desk\\-helper(?:/)?$" }, { "page": "/projects/slam-nav", "regex": "^/projects/slam\\-nav(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/slam\\-nav(?:/)?$" }, { "page": "/skills", "regex": "^/skills(?:/)?$", "routeKeys": {}, "namedRegex": "^/skills(?:/)?$" }, { "page": "/team", "regex": "^/team(?:/)?$", "routeKeys": {}, "namedRegex": "^/team(?:/)?$" }, { "page": "/terms", "regex": "^/terms(?:/)?$", "routeKeys": {}, "namedRegex": "^/terms(?:/)?$" }], "dynamic": [{ "page": "/friends/[slug]", "regex": "^/friends/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/friends/(?<nxtPslug>[^/]+?)(?:/)?$" }, { "page": "/projects/[slug]", "regex": "^/projects/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/projects/(?<nxtPslug>[^/]+?)(?:/)?$" }, { "page": "/team/[slug]", "regex": "^/team/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/team/(?<nxtPslug>[^/]+?)(?:/)?$" }], "data": { "static": [], "dynamic": [] } }, "locales": [] };
-var PrerenderManifest = { "version": 4, "routes": { "/": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/", "dataRoute": "/index.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_global-error": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_global-error", "dataRoute": "/_global-error.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_not-found": { "initialStatus": 404, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_not-found", "dataRoute": "/_not-found.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/experience": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/experience", "dataRoute": "/experience.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends", "dataRoute": "/friends.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/aahana": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/aahana.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/abhiroop": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/abhiroop.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/rohan": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/rohan.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/sparsh": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/sparsh.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/print": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/print", "dataRoute": "/print.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/privacy": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/privacy", "dataRoute": "/privacy.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects", "dataRoute": "/projects.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/aria": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/[slug]", "dataRoute": "/projects/aria.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/desk-helper": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/desk-helper", "dataRoute": "/projects/desk-helper.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/slam-nav": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/slam-nav", "dataRoute": "/projects/slam-nav.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/skills": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/skills", "dataRoute": "/skills.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team", "dataRoute": "/team.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/aahana": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/aahana.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/abhiroop": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/abhiroop.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/rohan": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/rohan.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/sparsh": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/sparsh.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/terms": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/terms", "dataRoute": "/terms.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "dynamicRoutes": { "/friends/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/friends/([^/]+?)(?:/)?$", "dataRoute": "/friends/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/friends/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/projects/([^/]+?)(?:/)?$", "dataRoute": "/projects/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/projects/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/team/([^/]+?)(?:/)?$", "dataRoute": "/team/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/team/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "notFoundRoutes": [], "preview": { "previewModeId": "ec612c1f9050d74e3269794c8883808c", "previewModeSigningKey": "67e966028c630f1cc2ac2de423b9ce90c2f4244f5bf12f30f2632163a4f9ebd1", "previewModeEncryptionKey": "e6bcfdbd7a41e0de6fbcc79e5093a1722db9517223092da7501771288cdd6fd6" } };
+var RoutesManifest = { "basePath": "", "rewrites": { "beforeFiles": [], "afterFiles": [], "fallback": [] }, "redirects": [{ "source": "/:path+/", "destination": "/:path+", "internal": true, "priority": true, "statusCode": 308, "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$" }], "routes": { "static": [{ "page": "/", "regex": "^/(?:/)?$", "routeKeys": {}, "namedRegex": "^/(?:/)?$" }, { "page": "/_global-error", "regex": "^/_global\\-error(?:/)?$", "routeKeys": {}, "namedRegex": "^/_global\\-error(?:/)?$" }, { "page": "/_not-found", "regex": "^/_not\\-found(?:/)?$", "routeKeys": {}, "namedRegex": "^/_not\\-found(?:/)?$" }, { "page": "/experience", "regex": "^/experience(?:/)?$", "routeKeys": {}, "namedRegex": "^/experience(?:/)?$" }, { "page": "/friends", "regex": "^/friends(?:/)?$", "routeKeys": {}, "namedRegex": "^/friends(?:/)?$" }, { "page": "/print", "regex": "^/print(?:/)?$", "routeKeys": {}, "namedRegex": "^/print(?:/)?$" }, { "page": "/privacy", "regex": "^/privacy(?:/)?$", "routeKeys": {}, "namedRegex": "^/privacy(?:/)?$" }, { "page": "/projects", "regex": "^/projects(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects(?:/)?$" }, { "page": "/projects/aerocadastra", "regex": "^/projects/aerocadastra(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/aerocadastra(?:/)?$" }, { "page": "/projects/desk-helper", "regex": "^/projects/desk\\-helper(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/desk\\-helper(?:/)?$" }, { "page": "/projects/masked-flipper", "regex": "^/projects/masked\\-flipper(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/masked\\-flipper(?:/)?$" }, { "page": "/projects/slam-nav", "regex": "^/projects/slam\\-nav(?:/)?$", "routeKeys": {}, "namedRegex": "^/projects/slam\\-nav(?:/)?$" }, { "page": "/skills", "regex": "^/skills(?:/)?$", "routeKeys": {}, "namedRegex": "^/skills(?:/)?$" }, { "page": "/team", "regex": "^/team(?:/)?$", "routeKeys": {}, "namedRegex": "^/team(?:/)?$" }, { "page": "/terms", "regex": "^/terms(?:/)?$", "routeKeys": {}, "namedRegex": "^/terms(?:/)?$" }], "dynamic": [{ "page": "/friends/[slug]", "regex": "^/friends/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/friends/(?<nxtPslug>[^/]+?)(?:/)?$" }, { "page": "/projects/[slug]", "regex": "^/projects/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/projects/(?<nxtPslug>[^/]+?)(?:/)?$" }, { "page": "/team/[slug]", "regex": "^/team/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/team/(?<nxtPslug>[^/]+?)(?:/)?$" }], "data": { "static": [], "dynamic": [] } }, "locales": [] };
+var PrerenderManifest = { "version": 4, "routes": { "/": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/", "dataRoute": "/index.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_global-error": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_global-error", "dataRoute": "/_global-error.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_not-found": { "initialStatus": 404, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_not-found", "dataRoute": "/_not-found.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/experience": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/experience", "dataRoute": "/experience.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends", "dataRoute": "/friends.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/aahana": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/aahana.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/abhiroop": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/abhiroop.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/akshat": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/akshat.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/alisha": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/alisha.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/arindam": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/arindam.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/ayush": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/ayush.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/karthik": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/karthik.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/rohan": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/rohan.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/sparsh": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/sparsh.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/friends/vidushi": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/friends/[slug]", "dataRoute": "/friends/vidushi.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/print": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/print", "dataRoute": "/print.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/privacy": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/privacy", "dataRoute": "/privacy.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects", "dataRoute": "/projects.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/aerocadastra": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/aerocadastra", "dataRoute": "/projects/aerocadastra.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/aria": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/[slug]", "dataRoute": "/projects/aria.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/desk-helper": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/desk-helper", "dataRoute": "/projects/desk-helper.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/masked-flipper": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/masked-flipper", "dataRoute": "/projects/masked-flipper.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/slam-nav": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/projects/slam-nav", "dataRoute": "/projects/slam-nav.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/skills": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/skills", "dataRoute": "/skills.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team", "dataRoute": "/team.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/aahana": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/aahana.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/abhiroop": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/abhiroop.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/akshat": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/akshat.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/alisha": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/alisha.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/arindam": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/arindam.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/ayush": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/ayush.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/karthik": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/karthik.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/rohan": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/rohan.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/sparsh": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/sparsh.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/vidushi": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/team/[slug]", "dataRoute": "/team/vidushi.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/terms": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/terms", "dataRoute": "/terms.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "dynamicRoutes": { "/friends/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/friends/([^/]+?)(?:/)?$", "dataRoute": "/friends/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/friends/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/projects/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/projects/([^/]+?)(?:/)?$", "dataRoute": "/projects/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/projects/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/team/[slug]": { "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/team/([^/]+?)(?:/)?$", "dataRoute": "/team/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/team/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "notFoundRoutes": [], "preview": { "previewModeId": "f891945f550abea529460717971a972a", "previewModeSigningKey": "e09ad3ed2c12542b12a9dc2af7aae4ab1a1c0e1bd2bba71c4dfa952ce9738995", "previewModeEncryptionKey": "6d4f0d110e335e978112d15749087ebbc13d6d644beb326d521b1a1308d5f3dc" } };
 var MiddlewareManifest = { "version": 3, "middleware": {}, "sortedMiddleware": [], "functions": {} };
-var AppPathRoutesManifest = { "/_global-error/page": "/_global-error", "/_not-found/page": "/_not-found", "/experience/page": "/experience", "/friends/[slug]/page": "/friends/[slug]", "/friends/page": "/friends", "/page": "/", "/print/page": "/print", "/privacy/page": "/privacy", "/projects/[slug]/page": "/projects/[slug]", "/projects/desk-helper/page": "/projects/desk-helper", "/projects/page": "/projects", "/projects/slam-nav/page": "/projects/slam-nav", "/skills/page": "/skills", "/team/[slug]/page": "/team/[slug]", "/team/page": "/team", "/terms/page": "/terms" };
+var AppPathsManifest = { "/_global-error/page": "app/_global-error/page.js", "/_not-found/page": "app/_not-found/page.js", "/experience/page": "app/experience/page.js", "/friends/[slug]/page": "app/friends/[slug]/page.js", "/friends/page": "app/friends/page.js", "/page": "app/page.js", "/print/page": "app/print/page.js", "/privacy/page": "app/privacy/page.js", "/projects/[slug]/page": "app/projects/[slug]/page.js", "/projects/aerocadastra/page": "app/projects/aerocadastra/page.js", "/projects/desk-helper/page": "app/projects/desk-helper/page.js", "/projects/masked-flipper/page": "app/projects/masked-flipper/page.js", "/projects/page": "app/projects/page.js", "/projects/slam-nav/page": "app/projects/slam-nav/page.js", "/skills/page": "app/skills/page.js", "/team/[slug]/page": "app/team/[slug]/page.js", "/team/page": "app/team/page.js", "/terms/page": "app/terms/page.js" };
+var AppPathRoutesManifest = { "/_global-error/page": "/_global-error", "/_not-found/page": "/_not-found", "/experience/page": "/experience", "/friends/[slug]/page": "/friends/[slug]", "/friends/page": "/friends", "/page": "/", "/print/page": "/print", "/privacy/page": "/privacy", "/projects/[slug]/page": "/projects/[slug]", "/projects/aerocadastra/page": "/projects/aerocadastra", "/projects/desk-helper/page": "/projects/desk-helper", "/projects/masked-flipper/page": "/projects/masked-flipper", "/projects/page": "/projects", "/projects/slam-nav/page": "/projects/slam-nav", "/skills/page": "/skills", "/team/[slug]/page": "/team/[slug]", "/team/page": "/team", "/terms/page": "/terms" };
 var FunctionsConfigManifest = { "version": 1, "functions": {} };
 var PagesManifest = { "/404": "pages/404.html", "/500": "pages/500.html" };
 process.env.NEXT_BUILD_ID = BuildId;
 process.env.OPEN_NEXT_BUILD_ID = NextConfig.deploymentId ?? BuildId;
 process.env.NEXT_PREVIEW_MODE_ID = PrerenderManifest?.preview?.previewModeId;
 
-// node_modules/@opennextjs/aws/dist/core/requestHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/requestHandler.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/patchAsyncStorage.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/patchAsyncStorage.js
 var mod = (init_node_module(), __toCommonJS(node_module_exports));
 var resolveFilename = mod._resolveFilename;
 
-// node_modules/@opennextjs/aws/dist/core/routing/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routeMatchMetadata.js
+import path2 from "node:path";
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/routeCacheKey.js
+function normalizeAppPath(entry) {
+  const pathname = entry.split("/").reduce((acc, segment, index, segments) => {
+    if (!segment)
+      return acc;
+    if (segment.startsWith("(") && segment.endsWith(")"))
+      return acc;
+    if (segment.startsWith("@"))
+      return acc;
+    if ((segment === "page" || segment === "route") && index === segments.length - 1) {
+      return acc;
+    }
+    return `${acc}/${segment}`;
+  }, "");
+  return pathname === "" ? "/" : pathname;
+}
+function compareAppPaths(a, b) {
+  const aHasSlot = a.includes("/@");
+  const bHasSlot = b.includes("/@");
+  if (aHasSlot && !bHasSlot)
+    return -1;
+  if (!aHasSlot && bHasSlot)
+    return 1;
+  return a.localeCompare(b);
+}
+function selectAppPageEntry(route, appPaths) {
+  let entry;
+  for (const appPath of appPaths) {
+    if (normalizeAppPath(appPath).replace(/%5F/g, "_") !== route)
+      continue;
+    if (entry === void 0 || compareAppPaths(entry, appPath) < 0) {
+      entry = appPath;
+    }
+  }
+  return entry;
+}
+function normalizeLocalePath(pathname, locales) {
+  const segment = pathname.split("/", 2)[1]?.toLowerCase();
+  const locale = locales?.find((l) => l.toLowerCase() === segment);
+  if (!locale) {
+    return pathname;
+  }
+  return pathname.slice(locale.length + 1) || "/";
+}
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routeMatchMetadata.js
+var DYNAMIC_SEGMENT_REGEX = /\[{1,2}(\.\.\.)?([^\]]+)\]{1,2}$/;
+function getRouteMatchMetadata(route, pathname) {
+  const definition = getRouteDefinition(route);
+  const params = definition ? getRouteParams(route, normalizePathname(pathname)) : null;
+  return {
+    match: definition && params !== null ? { definition, params } : void 0
+  };
+}
+function getRouteDefinition(route) {
+  const appPaths = Object.keys(AppPathRoutesManifest).filter((appPath) => AppPathRoutesManifest[appPath] === route);
+  const appPages = appPaths.filter((appPath) => appPath.endsWith("/page"));
+  const appPage = selectAppPageEntry(route, appPages);
+  if (appPage) {
+    return {
+      kind: "APP_PAGE",
+      pathname: route,
+      page: appPage,
+      filename: getFilename(AppPathsManifest[appPage]),
+      appPaths: appPages
+    };
+  }
+  const appRoute = appPaths.find((appPath) => appPath.endsWith("/route"));
+  if (appRoute) {
+    return {
+      kind: "APP_ROUTE",
+      pathname: route,
+      page: appRoute,
+      filename: getFilename(AppPathsManifest[appRoute])
+    };
+  }
+  if (PagesManifest[route]) {
+    return {
+      kind: route === "/api" || route.startsWith("/api/") ? "PAGES_API" : "PAGES",
+      pathname: route,
+      page: route,
+      filename: getFilename(PagesManifest[route])
+    };
+  }
+  return void 0;
+}
+function getFilename(manifestPath) {
+  return manifestPath ? path2.join(NEXT_DIR, "server", manifestPath) : "";
+}
+function normalizePathname(pathname) {
+  const basePath = NextConfig.basePath;
+  let normalized = pathname;
+  if (basePath && (normalized === basePath || normalized.startsWith(`${basePath}/`))) {
+    normalized = normalized.slice(basePath.length) || "/";
+  }
+  normalized = normalizeLocalePath(normalized, NextConfig.i18n?.locales);
+  return normalized !== "/" && normalized.endsWith("/") ? normalized.slice(0, -1) : normalized;
+}
+function getRouteParams(route, pathname) {
+  const dynamicRoute = RoutesManifest.routes.dynamic.find(({ page }) => page === route);
+  if (!dynamicRoute) {
+    return pathname === route ? void 0 : null;
+  }
+  const result = new RegExp(dynamicRoute.regex).exec(pathname);
+  if (!result) {
+    return null;
+  }
+  const params = {};
+  let group = 1;
+  for (const segment of route.split("/")) {
+    const dynamicSegment = DYNAMIC_SEGMENT_REGEX.exec(segment);
+    if (!dynamicSegment) {
+      continue;
+    }
+    const [, isCatchAll, name] = dynamicSegment;
+    const value = result[group++];
+    if (value !== void 0) {
+      params[name] = isCatchAll ? value.split("/").map(decodeURIComponent) : decodeURIComponent(value);
+    }
+  }
+  return params;
+}
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/util.js
 import crypto from "node:crypto";
 init_util();
 init_logger();
 import { ReadableStream as ReadableStream3 } from "node:stream/web";
 
-// node_modules/@opennextjs/aws/dist/utils/binary.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/binary.js
 var commonBinaryMimeTypes = /* @__PURE__ */ new Set([
   "application/octet-stream",
   // Docs
@@ -1361,11 +1567,11 @@ function isBinaryContentType(contentType) {
   return commonBinaryMimeTypes.has(value);
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/i18n/index.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/i18n/index.js
 init_stream();
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/routing/i18n/accept-header.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/i18n/accept-header.js
 function parse(raw, preferences, options) {
   const lowers = /* @__PURE__ */ new Map();
   const header = raw.replace(/[ \t]/g, "");
@@ -1465,9 +1671,9 @@ function acceptLanguage(header = "", preferences) {
   })[0] || void 0;
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/i18n/index.js
-function isLocalizedPath(path2) {
-  return NextConfig.i18n?.locales.includes(path2.split("/")[1].toLowerCase()) ?? false;
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/i18n/index.js
+function isLocalizedPath(path3) {
+  return NextConfig.i18n?.locales.includes(path3.split("/")[1].toLowerCase()) ?? false;
 }
 function getLocaleFromCookie(cookies) {
   const i18n = NextConfig.i18n;
@@ -1517,7 +1723,7 @@ function localizePath(internalEvent) {
   return `/${detectedLocale}${internalEvent.rawPath}`;
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/queue.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/queue.js
 function generateShardId(rawPath, maxConcurrency, prefix) {
   let a = cyrb128(rawPath);
   let t = a += 1831565813;
@@ -1551,10 +1757,10 @@ function cyrb128(str) {
   return h1 >>> 0;
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/util.js
-function constructNextUrl(baseUrl, path2) {
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/util.js
+function constructNextUrl(baseUrl, path3) {
   const nextBasePath = NextConfig.basePath ?? "";
-  const url = new URL(`${nextBasePath}${path2}`, baseUrl);
+  const url = new URL(`${nextBasePath}${path3}`, baseUrl);
   return url.href;
 }
 function convertRes(res) {
@@ -1578,17 +1784,6 @@ function convertRes(res) {
     isBase64Encoded
   };
 }
-function convertToQueryString(query) {
-  const queryStrings = [];
-  Object.entries(query).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
-      value.forEach((entry) => queryStrings.push(`${key}=${entry}`));
-    } else {
-      queryStrings.push(`${key}=${value}`);
-    }
-  });
-  return queryStrings.length > 0 ? `?${queryStrings.join("&")}` : "";
-}
 function convertToQuery(querystring) {
   if (!querystring)
     return {};
@@ -1609,26 +1804,18 @@ function getMiddlewareMatch(middlewareManifest2, functionsManifest) {
     return [];
   return rootMiddleware.matchers.map(({ regexp }) => new RegExp(regexp));
 }
-var CommonHeaders;
-(function(CommonHeaders2) {
-  CommonHeaders2["CACHE_CONTROL"] = "cache-control";
-  CommonHeaders2["NEXT_CACHE"] = "x-nextjs-cache";
-})(CommonHeaders || (CommonHeaders = {}));
 function fixCacheHeaderForHtmlPages(internalEvent, headers) {
   if (internalEvent.rawPath === "/404" || internalEvent.rawPath === "/500") {
-    if (process.env.OPEN_NEXT_DANGEROUSLY_SET_ERROR_HEADERS === "true") {
-      return;
-    }
-    headers[CommonHeaders.CACHE_CONTROL] = "private, no-cache, no-store, max-age=0, must-revalidate";
+    fixCacheControlForError(headers, internalEvent.rawPath === "/404" ? 404 : 500);
     return;
   }
   const localizedPath = localizePath(internalEvent);
   if (HtmlPages.includes(localizedPath) && !internalEvent.headers["x-middleware-prefetch"]) {
-    headers[CommonHeaders.CACHE_CONTROL] = "public, max-age=0, s-maxage=31536000, must-revalidate";
+    headers[CACHE_CONTROL_HEADER] = "public, max-age=0, s-maxage=31536000, must-revalidate";
   }
 }
 function fixSWRCacheHeader(headers) {
-  let cacheControl = headers[CommonHeaders.CACHE_CONTROL];
+  let cacheControl = headers[CACHE_CONTROL_HEADER];
   if (!cacheControl)
     return;
   if (Array.isArray(cacheControl)) {
@@ -1636,7 +1823,7 @@ function fixSWRCacheHeader(headers) {
   }
   if (typeof cacheControl !== "string")
     return;
-  headers[CommonHeaders.CACHE_CONTROL] = cacheControl.replace(/\bstale-while-revalidate(?!=)/, "stale-while-revalidate=2592000");
+  headers[CACHE_CONTROL_HEADER] = cacheControl.replace(/\bstale-while-revalidate(?!=)/, "stale-while-revalidate=2592000");
 }
 function addOpenNextHeader(headers) {
   if (NextConfig.poweredByHeader) {
@@ -1650,8 +1837,8 @@ function addOpenNextHeader(headers) {
   }
 }
 async function revalidateIfRequired(host, rawPath, headers, req) {
-  if (headers[CommonHeaders.NEXT_CACHE] === "STALE") {
-    const internalMeta = req?.[Symbol.for("NextInternalRequestMeta")];
+  if (headers[NEXTJS_CACHE_HEADER] === "STALE") {
+    const internalMeta = req?.[/* @__PURE__ */ Symbol.for("NextInternalRequestMeta")];
     const revalidateUrl = internalMeta?._nextDidRewrite ? rawPath.startsWith("/_next/data/") ? `/_next/data/${BuildId}${internalMeta?._nextRewroteUrl}.json` : internalMeta?._nextRewroteUrl : rawPath;
     try {
       const hash = (str) => crypto.createHash("md5").update(str).digest("hex");
@@ -1669,27 +1856,27 @@ async function revalidateIfRequired(host, rawPath, headers, req) {
 }
 function fixISRHeaders(headers) {
   const sMaxAgeRegex = /s-maxage=(\d+)/;
-  const match = headers[CommonHeaders.CACHE_CONTROL]?.match(sMaxAgeRegex);
+  const match = headers[CACHE_CONTROL_HEADER]?.match(sMaxAgeRegex);
   const sMaxAge = match ? Number.parseInt(match[1]) : void 0;
   if (!sMaxAge) {
     return;
   }
-  if (headers[CommonHeaders.NEXT_CACHE] === "REVALIDATED") {
-    headers[CommonHeaders.CACHE_CONTROL] = "private, no-cache, no-store, max-age=0, must-revalidate";
+  if (headers[NEXTJS_CACHE_HEADER] === "REVALIDATED") {
+    headers[CACHE_CONTROL_HEADER] = NO_STORE_CACHE_CONTROL;
     return;
   }
   const _lastModified = globalThis.__openNextAls.getStore()?.lastModified ?? 0;
-  if (headers[CommonHeaders.NEXT_CACHE] === "HIT" && _lastModified > 0) {
-    debug("cache-control", headers[CommonHeaders.CACHE_CONTROL], _lastModified, Date.now());
+  if (headers[NEXTJS_CACHE_HEADER] === "HIT" && _lastModified > 0) {
+    debug("cache-control", headers[CACHE_CONTROL_HEADER], _lastModified, Date.now());
     if (sMaxAge && sMaxAge !== 31536e3) {
       const age = Math.round((Date.now() - _lastModified) / 1e3);
       const remainingTtl = Math.max(sMaxAge - age, 1);
-      headers[CommonHeaders.CACHE_CONTROL] = `s-maxage=${remainingTtl}, stale-while-revalidate=2592000`;
+      headers[CACHE_CONTROL_HEADER] = `s-maxage=${remainingTtl}, stale-while-revalidate=2592000`;
     }
   }
-  if (headers[CommonHeaders.NEXT_CACHE] !== "STALE")
+  if (headers[NEXTJS_CACHE_HEADER] !== "STALE")
     return;
-  headers[CommonHeaders.CACHE_CONTROL] = "s-maxage=2, stale-while-revalidate=2592000";
+  headers[CACHE_CONTROL_HEADER] = "s-maxage=2, stale-while-revalidate=2592000";
 }
 function createServerResponse(routingResult, headers, responseStream) {
   const internalEvent = routingResult.internalEvent;
@@ -1706,8 +1893,8 @@ function createServerResponse(routingResult, headers, responseStream) {
 async function invalidateCDNOnRequest(params, headers) {
   const { internalEvent, resolvedRoutes, initialURL } = params;
   const initialPath = new URL(initialURL).pathname;
-  const isIsrRevalidation = internalEvent.headers["x-isr"] === "1";
-  if (!isIsrRevalidation && headers[CommonHeaders.NEXT_CACHE] === "REVALIDATED") {
+  const isIsrRevalidation = internalEvent.headers[ISR_HEADER] === "1";
+  if (!isIsrRevalidation && headers[NEXTJS_CACHE_HEADER] === "REVALIDATED") {
     await globalThis.cdnInvalidationHandler.invalidatePaths([
       {
         initialPath,
@@ -1718,25 +1905,19 @@ async function invalidateCDNOnRequest(params, headers) {
   }
 }
 
-// node_modules/@opennextjs/aws/dist/core/routingHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routingHandler.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
 init_stream();
 
-// node_modules/@opennextjs/aws/dist/utils/cache.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/cache.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
-init_logger();
-var CACHE_ONE_YEAR = 60 * 60 * 24 * 365;
-var CACHE_ONE_MONTH = 60 * 60 * 24 * 30;
-
-// node_modules/@opennextjs/aws/dist/core/routing/matcher.js
-init_stream();
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
 init_logger();
 
-// node_modules/@opennextjs/aws/dist/core/routing/routeMatcher.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/routeMatcher.js
 var optionalLocalePrefixRegex = `^/(?:${RoutesManifest.locales.map((locale) => `${locale}/?`).join("|")})?`;
 var optionalBasepathPrefixRegex = RoutesManifest.basePath ? `^${RoutesManifest.basePath}/?` : "^/";
 var optionalPrefix = optionalLocalePrefixRegex.replace("^/", optionalBasepathPrefixRegex);
@@ -1754,8 +1935,8 @@ function routeMatcher(routeDefinitions) {
       routePathsSet.add(v);
     }
   }
-  return function matchRoute(path2) {
-    const foundRoutes = regexp.filter((route) => route.regexp.test(path2));
+  return function matchRoute(path3) {
+    const foundRoutes = regexp.filter((route) => route.regexp.test(path3));
     return foundRoutes.map((foundRoute) => {
       let routeType = "page";
       if (appPathsSet.has(foundRoute.page)) {
@@ -1786,14 +1967,23 @@ function getStaticAPIRoutes() {
   return [...pagesStaticAPIRoutes, ...appPathsStaticAPIRoutes];
 }
 
-// node_modules/@opennextjs/aws/dist/core/routing/middleware.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
+var CACHE_ONE_YEAR = 60 * 60 * 24 * 365;
+var CACHE_ONE_MONTH = 60 * 60 * 24 * 30;
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/matcher.js
+init_stream();
+init_logger();
+
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routing/middleware.js
+init_util();
 init_stream();
 init_utils();
 var middlewareManifest = MiddlewareManifest;
 var functionsConfigManifest = FunctionsConfigManifest;
 var middleMatch = getMiddlewareMatch(middlewareManifest, functionsConfigManifest);
 
-// node_modules/@opennextjs/aws/dist/core/routingHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/routingHandler.js
 var MIDDLEWARE_HEADER_PREFIX = "x-middleware-response-";
 var MIDDLEWARE_HEADER_PREFIX_LEN = MIDDLEWARE_HEADER_PREFIX.length;
 var INTERNAL_HEADER_PREFIX = "x-opennext-";
@@ -1803,16 +1993,16 @@ var INTERNAL_HEADER_RESOLVED_ROUTES = `${INTERNAL_HEADER_PREFIX}resolved-routes`
 var INTERNAL_HEADER_REWRITE_STATUS_CODE = `${INTERNAL_HEADER_PREFIX}rewrite-status-code`;
 var INTERNAL_EVENT_REQUEST_ID = `${INTERNAL_HEADER_PREFIX}request-id`;
 
-// node_modules/@opennextjs/aws/dist/core/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/util.js
 init_logger();
 import NextServer from "next/dist/server/next-server.js";
 
-// node_modules/@opennextjs/aws/dist/core/require-hooks.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/require-hooks.js
 init_logger();
 var mod2 = (init_node_module(), __toCommonJS(node_module_exports));
 var resolveFilename2 = mod2._resolveFilename;
 
-// node_modules/@opennextjs/aws/dist/core/util.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/util.js
 var cacheHandlerPath = __require.resolve("./cache.cjs");
 var composableCacheHandlerPath = __require.resolve("./composable-cache.cjs");
 var nextServer = new NextServer.default({
@@ -1827,6 +2017,19 @@ var nextServer = new NextServer.default({
     cacheHandler: cacheHandlerPath,
     cacheMaxMemorySize: 0,
     // We need to disable memory cache
+    //#endOverride
+    // Next.js 16 promoted `cacheHandlers` out of `experimental` to a top-level
+    // config key. At runtime `route-module.js#loadCustomCacheHandlers` reads
+    // `nextConfig.cacheHandlers` (top-level) — the nested `experimental` copy
+    // below is ignored on Next >= 16, so the composable ("use cache") handler
+    // must also be registered here or Next falls back to its in-memory default
+    // and composable entries never reach the incremental cache override.
+    // Older Next versions ignore this unknown top-level key and read the
+    // `experimental` copy instead; setting both is safe across versions.
+    //#override topLevelComposableCache
+    cacheHandlers: {
+      default: composableCacheHandlerPath
+    },
     //#endOverride
     experimental: {
       ...NextConfig.experimental,
@@ -1882,13 +2085,13 @@ globalThis.__next_route_preloader = async (stage) => {
 };
 var requestHandler = (metadata) => "getRequestHandlerWithMetadata" in nextServer ? nextServer.getRequestHandlerWithMetadata(metadata) : nextServer.getRequestHandler();
 
-// node_modules/@opennextjs/aws/dist/core/requestHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/requestHandler.js
 globalThis.__openNextAls = new AsyncLocalStorage();
 async function openNextHandler(internalEvent, options) {
   const initialHeaders = internalEvent.headers;
   const requestId = globalThis.openNextConfig.middleware?.external ? internalEvent.headers[INTERNAL_EVENT_REQUEST_ID] : Math.random().toString(36);
   return runWithOpenNextRequestContext({
-    isISRRevalidation: initialHeaders["x-isr"] === "1",
+    isISRRevalidation: initialHeaders[ISR_HEADER] === "1",
     waitUntil: options?.waitUntil,
     requestId
   }, async () => {
@@ -2032,7 +2235,7 @@ async function processRequest(req, res, routingResult) {
     invokeStatus
   };
   try {
-    req.url = initialURL.pathname + convertToQueryString(routingResult.internalEvent.query);
+    req.url = initialURL.pathname + initialURL.search;
     await requestHandler(requestMetadata)(req, res);
   } catch (e) {
     if (e.constructor.name === "NoFallbackError") {
@@ -2043,8 +2246,9 @@ async function processRequest(req, res, routingResult) {
     }
   }
 }
+var MAX_RENDER_ATTEMPTS = 6;
 async function handleNoFallbackError(req, res, routingResult, metadata, index = 1) {
-  if (index >= 5) {
+  if (index >= MAX_RENDER_ATTEMPTS) {
     await tryRenderError("500", res, routingResult.internalEvent);
     return;
   }
@@ -2052,11 +2256,26 @@ async function handleNoFallbackError(req, res, routingResult, metadata, index = 
     await tryRenderError("404", res, routingResult.internalEvent);
     return;
   }
+  const route = routingResult.resolvedRoutes[index].route;
   try {
+    let routeMatchMetadata = {};
+    if (compareSemver(globalThis.nextVersion, ">=", "16.4.0")) {
+      try {
+        routeMatchMetadata = getRouteMatchMetadata(route, routingResult.internalEvent.rawPath);
+      } catch (e) {
+        if (!(e instanceof URIError)) {
+          throw e;
+        }
+        await tryRenderError("400", res, routingResult.internalEvent);
+        return;
+      }
+    }
     await requestHandler({
       ...routingResult,
-      invokeOutput: routingResult.resolvedRoutes[index].route,
-      ...metadata
+      invokeOutput: route,
+      ...metadata,
+      // Must come after `metadata` to override the stale `match` of the previous attempt.
+      ...routeMatchMetadata
     })(req, res);
   } catch (e) {
     if (e.constructor.name === "NoFallbackError") {
@@ -2078,8 +2297,8 @@ async function tryRenderError(type, res, internalEvent) {
     });
     const requestMetadata = {
       // By setting invokePath and invokeQuery we can bypass some of the routing logic in Next.js
-      invokePath: type === "404" ? "/404" : "/500",
-      invokeStatus: type === "404" ? 404 : 500,
+      invokePath: `/${type}`,
+      invokeStatus: Number(type),
       middlewareInvoke: false
     };
     await requestHandler(requestMetadata)(_req, res);
@@ -2094,7 +2313,7 @@ async function tryRenderError(type, res, internalEvent) {
   }
 }
 
-// node_modules/@opennextjs/aws/dist/core/resolve.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/resolve.js
 async function resolveConverter(converter2) {
   if (typeof converter2 === "function") {
     return converter2();
@@ -2152,7 +2371,7 @@ async function resolveCdnInvalidation(cdnInvalidation) {
   return m_1.default;
 }
 
-// node_modules/@opennextjs/aws/dist/core/createMainHandler.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/core/createMainHandler.js
 async function createMainHandler() {
   const config = await import("./open-next.config.mjs").then((m) => m.default);
   const thisFunction = globalThis.fnName ? config.functions[globalThis.fnName] : config.default;
@@ -2173,7 +2392,7 @@ async function createMainHandler() {
   return wrapper(openNextHandler, converter2);
 }
 
-// node_modules/@opennextjs/aws/dist/adapters/server-adapter.js
+// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/server-adapter.js
 setNodeEnv();
 setNextjsServerWorkingDirectory();
 globalThis.internalFetch = fetch;

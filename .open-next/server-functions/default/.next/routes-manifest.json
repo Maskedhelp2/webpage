@@ -97,10 +97,22 @@
       "namedRegex": "^/projects(?:/)?$"
     },
     {
+      "page": "/projects/aerocadastra",
+      "regex": "^/projects/aerocadastra(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/projects/aerocadastra(?:/)?$"
+    },
+    {
       "page": "/projects/desk-helper",
       "regex": "^/projects/desk\\-helper(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/projects/desk\\-helper(?:/)?$"
+    },
+    {
+      "page": "/projects/masked-flipper",
+      "regex": "^/projects/masked\\-flipper(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/projects/masked\\-flipper(?:/)?$"
     },
     {
       "page": "/projects/slam-nav",
