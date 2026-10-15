@@ -1,4 +1,4 @@
-globalThis.disableIncrementalCache = false;globalThis.disableDynamoDBCache = false;globalThis.openNextDebug = false;globalThis.openNextVersion = "4.1.11";globalThis.nextVersion = "16.2.11";
+globalThis.disableIncrementalCache = false;globalThis.disableDynamoDBCache = false;globalThis.openNextDebug = false;globalThis.openNextVersion = "4.1.0";globalThis.nextVersion = "16.2.11";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -17,7 +17,7 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/cache.js
+// node_modules/@opennextjs/aws/dist/adapters/cache.js
 var cache_exports = {};
 __export(cache_exports, {
   SOFT_TAG_PREFIX: () => SOFT_TAG_PREFIX,
@@ -25,7 +25,7 @@ __export(cache_exports, {
 });
 module.exports = __toCommonJS(cache_exports);
 
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/error.js
+// node_modules/@opennextjs/aws/dist/utils/error.js
 function isOpenNextError(e) {
   try {
     return "__openNextInternal" in e;
@@ -34,7 +34,7 @@ function isOpenNextError(e) {
   }
 }
 
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/logger.js
+// node_modules/@opennextjs/aws/dist/adapters/logger.js
 function debug(...args) {
   if (globalThis.openNextDebug) {
     console.log(...args);
@@ -84,10 +84,7 @@ function getOpenNextErrorLogLevel() {
   }
 }
 
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/cacheHeaders.js
-var CACHE_TAGS_HEADER = "x-next-cache-tags";
-
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/semver.js
+// node_modules/@opennextjs/aws/dist/utils/semver.js
 function compareSemver(v1, operator, v2) {
   let versionDiff = 0;
   if (v1 === "latest") {
@@ -128,7 +125,7 @@ function compareSemver(v1, operator, v2) {
   }
 }
 
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/cache.js
+// node_modules/@opennextjs/aws/dist/utils/cache.js
 async function isStale(key, tags, lastModified) {
   if (!compareSemver(globalThis.nextVersion, ">=", "16.0.0")) {
     return false;
@@ -140,15 +137,6 @@ async function isStale(key, tags, lastModified) {
     return tags.length === 0 ? false : await globalThis.tagCache.isStale?.(tags, lastModified) ?? false;
   }
   return await globalThis.tagCache.isStale?.(key, lastModified) ?? false;
-}
-function getStaleLastModified(revalidate) {
-  if (!compareSemver(globalThis.nextVersion, ">=", "16.3.0")) {
-    return 1;
-  }
-  if (typeof revalidate !== "number") {
-    return 1;
-  }
-  return Date.now() - revalidate * 1e3 - 1;
 }
 async function hasBeenRevalidated(key, tags, cacheEntry) {
   if (globalThis.openNextConfig.dangerous?.disableTagCache) {
@@ -173,8 +161,8 @@ function getTagsFromValue(value) {
     return [];
   }
   try {
-    const cacheTags = value.meta?.headers?.[CACHE_TAGS_HEADER]?.split(",") ?? [];
-    delete value.meta?.headers?.[CACHE_TAGS_HEADER];
+    const cacheTags = value.meta?.headers?.["x-next-cache-tags"]?.split(",") ?? [];
+    delete value.meta?.headers?.["x-next-cache-tags"];
     return cacheTags;
   } catch (e) {
     return [];
@@ -212,7 +200,7 @@ async function writeTags(tags) {
   await globalThis.tagCache.writeTags(tagsToWrite);
 }
 
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/binary.js
+// node_modules/@opennextjs/aws/dist/utils/binary.js
 var commonBinaryMimeTypes = /* @__PURE__ */ new Set([
   "application/octet-stream",
   // Docs
@@ -280,13 +268,7 @@ function isBinaryContentType(contentType) {
   return commonBinaryMimeTypes.has(value);
 }
 
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/utils/routeCacheKey.js
-var ROUTE_CACHE_KEY_PREFIX = /^\/?route-cache\/(?:PAGES|APP_PAGE|APP_ROUTE)\/[0-9a-f]{64}\/\$(?=\/)/;
-function getPathFromRouteCacheKey(key) {
-  return key.replace(ROUTE_CACHE_KEY_PREFIX, "");
-}
-
-// ../../../../AppData/Local/npm-cache/_npx/b8f71965aba33be8/node_modules/@opennextjs/aws/dist/adapters/cache.js
+// node_modules/@opennextjs/aws/dist/adapters/cache.js
 var SOFT_TAG_PREFIX = "_N_T_/";
 function isFetchCache(options) {
   if (typeof options === "boolean") {
@@ -353,9 +335,7 @@ var Cache = class {
       const store = globalThis.__openNextAls.getStore();
       if (store) {
         store.lastModified = _isStale ? 1 : _lastModified;
-      }
-      if (_isStale) {
-        _lastModified = getStaleLastModified(cacheData.revalidate);
+        _lastModified = store.lastModified;
       }
       if (cacheData?.type === "route") {
         return {
@@ -369,10 +349,6 @@ var Cache = class {
         };
       }
       if (cacheData?.type === "page" || cacheData?.type === "app") {
-        if (cacheData.html === void 0) {
-          warn("No html in the cache entry", key);
-          return null;
-        }
         if (compareSemver(globalThis.nextVersion, ">=", "15.0.0") && cacheData?.type === "app") {
           const segmentData = /* @__PURE__ */ new Map();
           if (cacheData.segmentData) {
@@ -385,11 +361,7 @@ var Cache = class {
             value: {
               kind: "APP_PAGE",
               html: cacheData.html,
-              // `rsc` is absent when the build collected neither a `.rsc` nor a
-              // `.prefetch.rsc` file, see `CachedFile`. An undefined value is expected: the
-              // Next.js file system cache also leaves `rscData` undefined for fallback
-              // shells, and on 16.2+ for postponed PPR routes.
-              rscData: cacheData.rsc === void 0 ? void 0 : Buffer.from(cacheData.rsc),
+              rscData: Buffer.from(cacheData.rsc),
               status: meta?.status,
               headers: meta?.headers,
               postponed: meta?.postponed,
@@ -397,17 +369,12 @@ var Cache = class {
             }
           };
         }
-        const pageData = cacheData.type === "page" ? cacheData.json : cacheData.rsc;
-        if (pageData === void 0) {
-          warn("No page data in the cache entry", key);
-          return null;
-        }
         return {
           lastModified: _lastModified,
           value: {
             kind: compareSemver(globalThis.nextVersion, ">=", "15.0.0") ? "PAGES" : "PAGE",
             html: cacheData.html,
-            pageData,
+            pageData: cacheData.type === "page" ? cacheData.json : cacheData.rsc,
             status: meta?.status,
             headers: meta?.headers
           }
@@ -433,16 +400,7 @@ var Cache = class {
     if (globalThis.openNextConfig.dangerous?.disableIncrementalCache) {
       return;
     }
-    const store = globalThis.__openNextAls.getStore();
-    const writePromise = this.writeCache(key, data, ctx);
-    if (store !== void 0) {
-      store.pendingPromiseRunner.add(writePromise);
-    }
-    if (data?.kind === "FETCH" || store === void 0) {
-      await writePromise;
-    }
-  }
-  async writeCache(key, data, ctx) {
+    const detachedPromise = globalThis.__openNextAls.getStore()?.pendingPromiseRunner.withResolvers();
     try {
       if (data === null || data === void 0) {
         await globalThis.incrementalCache.delete(key);
@@ -499,7 +457,7 @@ var Cache = class {
             await globalThis.incrementalCache.set(key, {
               type: "app",
               html,
-              rsc: rscData?.toString("utf8"),
+              rsc: rscData.toString("utf8"),
               meta: {
                 status,
                 headers,
@@ -528,6 +486,8 @@ var Cache = class {
       debug("Finished setting cache");
     } catch (e) {
       error("Failed to set cache", e);
+    } finally {
+      detachedPromise?.resolve();
     }
   }
   async revalidateTag(tags, durations) {
@@ -558,7 +518,7 @@ var Cache = class {
         });
         await writeTags(tagsToWrite);
         if (paths.length > 0) {
-          await globalThis.cdnInvalidationHandler.invalidatePaths(paths.map(getPathFromRouteCacheKey).map((path) => ({
+          await globalThis.cdnInvalidationHandler.invalidatePaths(paths.map((path) => ({
             initialPath: path,
             rawPath: path,
             resolvedRoutes: [
@@ -616,7 +576,7 @@ var Cache = class {
           }
         }
         await writeTags(toInsert);
-        const uniquePaths = Array.from(new Set(toInsert.filter((t) => t.tag.startsWith(SOFT_TAG_PREFIX)).map((t) => getPathFromRouteCacheKey(`/${t.path}`))));
+        const uniquePaths = Array.from(new Set(toInsert.filter((t) => t.tag.startsWith(SOFT_TAG_PREFIX)).map((t) => `/${t.path}`)));
         if (uniquePaths.length > 0) {
           await globalThis.cdnInvalidationHandler.invalidatePaths(uniquePaths.map((path) => ({
             initialPath: path,
@@ -642,11 +602,10 @@ var Cache = class {
     !data) {
       return;
     }
-    const pageCacheTags = data?.kind === "PAGE" || data?.kind === "APP_PAGE" ? data.headers?.[CACHE_TAGS_HEADER] : void 0;
     const derivedTags = data?.kind === "FETCH" ? (
       //@ts-expect-error - On older versions of next, ctx was a number, but for these cases we use data?.data?.tags
       ctx?.tags ?? data?.data?.tags ?? []
-    ) : typeof pageCacheTags === "string" ? pageCacheTags.split(",") : [];
+    ) : data?.kind === "PAGE" ? data.headers?.["x-next-cache-tags"]?.split(",") ?? [] : [];
     debug("derivedTags", derivedTags);
     const storedTags = await globalThis.tagCache.getByPath(key);
     const tagsToWrite = derivedTags.filter((tag) => !storedTags.includes(tag));
