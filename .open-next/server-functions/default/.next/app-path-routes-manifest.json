@@ -11,6 +11,7 @@
   "/projects/aerocadastra/page": "/projects/aerocadastra",
   "/projects/desk-helper/page": "/projects/desk-helper",
   "/projects/masked-flipper/page": "/projects/masked-flipper",
+  "/projects/masked-flipper/status/route": "/projects/masked-flipper/status",
   "/projects/page": "/projects",
   "/projects/slam-nav/page": "/projects/slam-nav",
   "/skills/page": "/skills",

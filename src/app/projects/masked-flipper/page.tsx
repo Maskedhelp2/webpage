@@ -20,6 +20,17 @@ type LogEntry = {
   message: string;
 };
 
+type GatewayStatus = {
+  hostname: string;
+  uptime_seconds: number;
+  cpu_load_1_5_15: number[];
+  memory: { total_kb: number; available_kb: number; used_percent: number | null };
+  cpu_temperature_c: number | null;
+  gateway: string;
+  hardware_control: string;
+  timestamp?: string;
+};
+
 const navGroups: { title: string; items: { id: TabId; icon: string; label: string }[] }[] = [
   {
     title: 'CONTROL',
@@ -136,8 +147,8 @@ export default function MaskedFlipperPage() {
   const [terminalLines, setTerminalLines] = useState<string[]>([
     'MASKED FLIPPER / DEVICE CONSOLE',
     'Web terminal UI initialized.',
-    'No Raspberry Pi gateway is configured.',
-    'Commands are local demo commands only; no shell is connected.',
+    'Telemetry proxy: /api/maskedflipper/status',
+    'Commands remain local demo commands; no remote shell is connected.',
     '',
   ]);
   const [wifiMode, setWifiMode] = useState<'passive' | 'scope'>('passive');
@@ -146,6 +157,9 @@ export default function MaskedFlipperPage() {
   const [screenText, setScreenText] = useState('MASKED\nFLIPPER');
   const [gatewayAddress, setGatewayAddress] = useState('');
   const [showGatewayHelp, setShowGatewayHelp] = useState(false);
+  const [gatewayStatus, setGatewayStatus] = useState<GatewayStatus | null>(null);
+  const [gatewayOnline, setGatewayOnline] = useState(false);
+  const [gatewayLatency, setGatewayLatency] = useState<number | null>(null);
 
   useEffect(() => {
     try {
@@ -171,6 +185,38 @@ export default function MaskedFlipperPage() {
     const timer = window.setInterval(update, 1000);
     return () => window.clearInterval(timer);
   }, []);
+
+  // Poll the server-side proxy; the gateway token never reaches browser code.
+  useEffect(() => {
+    let stopped = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const refresh = async () => {
+      const started = performance.now();
+      try {
+        const response = await fetch('/api/maskedflipper/status', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Gateway unavailable');
+        const data = (await response.json()) as GatewayStatus;
+        if (!stopped) {
+          setGatewayStatus(data);
+          setGatewayOnline(true);
+          setGatewayLatency(Math.round(performance.now() - started));
+        }
+      } catch {
+        if (!stopped) { setGatewayOnline(false); setGatewayLatency(null); }
+      }
+      if (!stopped) timer = setTimeout(refresh, 5000);
+    };
+    void refresh();
+    return () => { stopped = true; if (timer) clearTimeout(timer); };
+  }, []);
+
+  const formatUptime = (seconds: number) => {
+    const safe = Math.max(0, Math.floor(seconds || 0));
+    const days = Math.floor(safe / 86400);
+    const hours = Math.floor((safe % 86400) / 3600);
+    const minutes = Math.floor((safe % 3600) / 60);
+    return days ? `${days}d ${hours}h` : hours ? `${hours}h ${minutes}m` : `${minutes}m`;
+  };
 
   const addLog = (level: LogEntry['level'], message: string) => {
     const time = new Date().toLocaleTimeString('en-GB', { hour12: false });
@@ -220,19 +266,19 @@ export default function MaskedFlipperPage() {
           <div className="mf-device-antenna" />
           <div className="mf-device">
             <div className="mf-device-brand">MASKED<span>FLIPPER</span></div>
-            <div className="mf-device-screen"><span>MF / SYSTEM</span><b>READY_</b><small>GATEWAY OFFLINE</small></div>
+            <div className="mf-device-screen"><span>MF / SYSTEM</span><b>READY_</b><small>{gatewayOnline ? 'GATEWAY ONLINE' : 'GATEWAY OFFLINE'}</small></div>
             <div className="mf-device-pad"><i /><i /><i /><i /><i /></div>
             <div className="mf-device-port" />
           </div>
-          <div className="mf-art-label">HARDWARE LINK <b>NOT CONFIGURED</b></div>
+          <div className="mf-art-label">HARDWARE LINK <b>{gatewayOnline ? 'CONNECTED' : 'WAITING FOR API'}</b></div>
         </div>
       </div>
 
       <div className="mf-stat-grid">
-        <div className="mf-stat"><span className="mf-stat-icon">◉</span><span className="mf-stat-label">DEVICE STATUS</span><strong>Offline</strong><small>Waiting for gateway</small></div>
-        <div className="mf-stat"><span className="mf-stat-icon">⌁</span><span className="mf-stat-label">ACTIVE MODULES</span><strong>00 <em>/ 06</em></strong><small>No hardware actions running</small></div>
-        <div className="mf-stat"><span className="mf-stat-icon">⌁</span><span className="mf-stat-label">GATEWAY LATENCY</span><strong>— <em>ms</em></strong><small>Connection not available</small></div>
-        <div className="mf-stat"><span className="mf-stat-icon">▤</span><span className="mf-stat-label">SESSION EVENTS</span><strong>{String(logs.length).padStart(2, '0')}</strong><small>Local interface activity</small></div>
+        <div className="mf-stat"><span className="mf-stat-icon">◉</span><span className="mf-stat-label">DEVICE STATUS</span><strong>{gatewayOnline ? 'Online' : 'Offline'}</strong><small>{gatewayOnline ? `Pi: ${gatewayStatus?.hostname ?? 'maskedhelp'}` : 'Waiting for gateway API'}</small></div>
+        <div className="mf-stat"><span className="mf-stat-icon">⌁</span><span className="mf-stat-label">CPU TEMPERATURE</span><strong>{gatewayOnline && gatewayStatus?.cpu_temperature_c != null ? gatewayStatus.cpu_temperature_c.toFixed(1) : '—'} <em>{gatewayOnline && gatewayStatus?.cpu_temperature_c != null ? '°C' : ''}</em></strong><small>{gatewayOnline ? `Load: ${(gatewayStatus?.cpu_load_1_5_15?.[0] ?? 0).toFixed(2)}` : 'No live telemetry'}</small></div>
+        <div className="mf-stat"><span className="mf-stat-icon">⌁</span><span className="mf-stat-label">MEMORY USED</span><strong>{gatewayOnline && gatewayStatus?.memory?.used_percent != null ? `${gatewayStatus.memory.used_percent.toFixed(1)}` : '—'} <em>{gatewayOnline && gatewayStatus?.memory?.used_percent != null ? '%' : ''}</em></strong><small>{gatewayOnline ? `Uptime ${formatUptime(gatewayStatus?.uptime_seconds ?? 0)}` : 'Connection not available'}</small></div>
+        <div className="mf-stat"><span className="mf-stat-icon">▤</span><span className="mf-stat-label">GATEWAY LATENCY</span><strong>{gatewayLatency == null ? '—' : gatewayLatency} <em>{gatewayLatency == null ? '' : 'ms'}</em></strong><small>{gatewayOnline ? 'Live API response' : 'Gateway unreachable'}</small></div>
       </div>
 
       <div className="mf-section-heading"><div><div className="mf-eyebrow">WORKSPACE</div><h2>Modules & tools</h2></div><span>6 MODULES <i>·</i> DEVICE GATEWAY REQUIRED</span></div>
@@ -292,7 +338,7 @@ export default function MaskedFlipperPage() {
     if (tab === 'badusb') return <div className="mf-page-stack"><div className="mf-page-intro"><div><div className="mf-eyebrow">HID DEVELOPMENT</div><h2>BadUSB HID</h2><p>Draft and review keyboard-emulation scripts for devices you own or are authorized to test.</p></div><Pill tone="green">DISARMED</Pill></div><Panel title="Payload workspace" eyebrow="LOCAL DRAFT"><label className="mf-field-label" htmlFor="payload-name">Draft name</label><input id="payload-name" className="mf-input" value={payloadName} onChange={(event) => setPayloadName(event.target.value)} /><div className="mf-code-preview"><div><span>01</span> REM <em>MaskedFlipper HID script draft</em></div><div><span>02</span> REM <em>Review before exporting to your own test device</em></div><div><span>03</span> <em>Execution is not connected</em></div></div><div className="mf-inline-actions"><Pill tone="amber">NOT DEPLOYED</Pill><button className="mf-btn mf-btn-secondary" onClick={() => addLog('INFO', `HID draft reviewed: ${payloadName || 'Untitled'}`)}>Save review event</button></div></Panel><Panel title="Safety status" eyebrow="EXECUTION INTERLOCK"><div className="mf-check-list"><div><span className="mf-check-number">01</span><span><b>Device connection</b><small>No connected HID device is detected.</small></span><Pill>Offline</Pill></div><div><span className="mf-check-number">02</span><span><b>Execution</b><small>Payload execution is disabled in this interface.</small></span><Pill tone="green">Disarmed</Pill></div></div></Panel></div>;
     if (tab === 'rf') return <div className="mf-page-stack"><div className="mf-page-intro"><div><div className="mf-eyebrow">RADIO FREQUENCY / INFRARED</div><h2>Sub-GHz & IR</h2><p>Organize test captures and review radio hardware state.</p></div><Pill>STANDBY</Pill></div><div className="mf-stat-grid mf-stat-grid-three"><div className="mf-stat"><span className="mf-stat-label">RADIO</span><strong>Offline</strong><small>Gateway unavailable</small></div><div className="mf-stat"><span className="mf-stat-label">IR TRANSCEIVER</span><strong>Unknown</strong><small>Awaiting telemetry</small></div><div className="mf-stat"><span className="mf-stat-label">CAPTURES</span><strong>00</strong><small>No files loaded</small></div></div><Panel title="Capture library" eyebrow="LOCAL VIEW"><div className="mf-empty-state"><span>⌁</span><b>No captures available</b><p>Captured signals will appear here after the device integration is implemented and files are imported.</p></div></Panel></div>;
     if (tab === 'nfc') return <div className="mf-page-stack"><div className="mf-page-intro"><div><div className="mf-eyebrow">NEAR-FIELD COMMUNICATION</div><h2>NFC / RFID</h2><p>Reader status and tag inspection workspace.</p></div><Pill>STANDBY</Pill></div><div className="mf-stat-grid mf-stat-grid-three"><div className="mf-stat"><span className="mf-stat-label">READER</span><strong>Offline</strong><small>Not connected</small></div><div className="mf-stat"><span className="mf-stat-label">LAST TAG</span><strong>—</strong><small>No tag read</small></div><div className="mf-stat"><span className="mf-stat-label">SAVED RECORDS</span><strong>00</strong><small>No local records</small></div></div><Panel title="Tag inspector" eyebrow="WAITING FOR HARDWARE"><div className="mf-empty-state"><span>▤</span><b>Reader not connected</b><p>Presenting a tag will have no effect until a compatible reader is connected through the device gateway.</p></div></Panel></div>;
-    if (tab === 'hardware') return <div className="mf-page-stack"><div className="mf-page-intro"><div><div className="mf-eyebrow">DEVICE HEALTH</div><h2>Hardware & telemetry</h2><p>Sensor readings are shown as unavailable until real telemetry is received.</p></div><Pill tone="amber">NO LIVE DATA</Pill></div><div className="mf-stat-grid mf-stat-grid-three"><div className="mf-stat"><span className="mf-stat-label">CPU TEMPERATURE</span><strong>— <em>°C</em></strong><small>No sensor feed</small></div><div className="mf-stat"><span className="mf-stat-label">BATTERY VOLTAGE</span><strong>— <em>V</em></strong><small>No battery feed</small></div><div className="mf-stat"><span className="mf-stat-label">MEMORY</span><strong>— <em>%</em></strong><small>No system feed</small></div></div><Panel title="Sensor channels" eyebrow="TELEMETRY FEED"><div className="mf-table-wrap"><table className="mf-table"><thead><tr><th>Channel</th><th>Expected data</th><th>Latest reading</th><th>Status</th></tr></thead><tbody>{[['System temperature','°C'],['Battery monitor','V / %'],['IMU','Acceleration / gyro'],['GPIO health','Digital state']].map(([name,unit]) => <tr key={name}><td>{name}</td><td>{unit}</td><td>—</td><td><Pill>Waiting</Pill></td></tr>)}</tbody></table></div></Panel></div>;
+    if (tab === 'hardware') return <div className="mf-page-stack"><div className="mf-page-intro"><div><div className="mf-eyebrow">DEVICE HEALTH</div><h2>Hardware & telemetry</h2><p>Live Raspberry Pi system telemetry from the authenticated gateway.</p></div><Pill tone={gatewayOnline ? 'green' : 'amber'}>{gatewayOnline ? 'LIVE TELEMETRY' : 'WAITING FOR GATEWAY'}</Pill></div><div className="mf-stat-grid mf-stat-grid-three"><div className="mf-stat"><span className="mf-stat-label">CPU TEMPERATURE</span><strong>{gatewayStatus?.cpu_temperature_c == null ? '—' : gatewayStatus.cpu_temperature_c.toFixed(1)} <em>°C</em></strong><small>{gatewayOnline ? 'Raspberry Pi sensor' : 'No sensor feed'}</small></div><div className="mf-stat"><span className="mf-stat-label">MEMORY USED</span><strong>{gatewayStatus?.memory?.used_percent == null ? '—' : gatewayStatus.memory.used_percent.toFixed(1)} <em>%</em></strong><small>{gatewayStatus?.memory ? `${Math.round(gatewayStatus.memory.available_kb / 1024)} MB available` : 'No system feed'}</small></div><div className="mf-stat"><span className="mf-stat-label">SYSTEM UPTIME</span><strong>{gatewayStatus ? formatUptime(gatewayStatus.uptime_seconds) : '—'}</strong><small>{gatewayStatus?.hostname ?? 'Pi not connected'}</small></div></div><Panel title="System channels" eyebrow="LIVE TELEMETRY FEED"><div className="mf-table-wrap"><table className="mf-table"><thead><tr><th>Channel</th><th>Latest reading</th><th>Status</th></tr></thead><tbody><tr><td>Gateway</td><td>{gatewayOnline ? 'Connected' : 'Unavailable'}</td><td><Pill tone={gatewayOnline ? 'green' : 'red'}>{gatewayOnline ? 'Online' : 'Offline'}</Pill></td></tr><tr><td>CPU temperature</td><td>{gatewayStatus?.cpu_temperature_c == null ? '—' : `${gatewayStatus.cpu_temperature_c.toFixed(1)} °C`}</td><td><Pill>{gatewayStatus?.cpu_temperature_c == null ? 'No data' : 'Live'}</Pill></td></tr><tr><td>CPU load (1 min)</td><td>{gatewayStatus?.cpu_load_1_5_15?.[0] == null ? '—' : gatewayStatus.cpu_load_1_5_15[0].toFixed(2)}</td><td><Pill>{gatewayStatus ? 'Live' : 'Waiting'}</Pill></td></tr><tr><td>Memory</td><td>{gatewayStatus?.memory?.used_percent == null ? '—' : `${gatewayStatus.memory.used_percent.toFixed(1)}% used`}</td><td><Pill>{gatewayStatus?.memory ? 'Live' : 'Waiting'}</Pill></td></tr><tr><td>Hardware control</td><td>{gatewayStatus?.hardware_control ?? '—'}</td><td><Pill tone="amber">Read-only</Pill></td></tr></tbody></table></div><p className="mf-field-hint">Status refreshes automatically every 5 seconds. This integration reads telemetry only; it does not send hardware commands.</p></Panel></div>;
     if (tab === 'screen') return <div className="mf-page-stack"><div className="mf-page-intro"><div><div className="mf-eyebrow">DISPLAY SIMULATOR</div><h2>Screen & keypad</h2><p>Preview text on a mock ST7789 screen. This does not drive the physical display.</p></div><Pill>LOCAL PREVIEW</Pill></div><div className="mf-two-col"><Panel title="Display preview" eyebrow="ST7789 / MOCK"><div className="mf-screen-stage"><div className="mf-screen"><div className="mf-screen-status">MASKED FLIPPER <span>●</span></div><pre>{screenText || ' '}</pre><div className="mf-screen-bottom">LOCAL PREVIEW ONLY</div></div></div></Panel><Panel title="Display content" eyebrow="TEST TEXT"><label className="mf-field-label" htmlFor="screen-text">Screen text</label><textarea id="screen-text" className="mf-textarea" value={screenText} maxLength={120} onChange={(event) => setScreenText(event.target.value)} /><div className="mf-field-hint">{screenText.length}/120 characters · line breaks supported</div><button className="mf-btn mf-btn-secondary mf-btn-wide" onClick={() => { setScreenText('MASKED\\nFLIPPER'); addLog('INFO', 'Display preview reset'); }}>Reset preview</button><div className="mf-keypad">{['↑','←','OK','→','↓'].map((key) => <button key={key} onClick={() => addLog('INFO', `Virtual keypad ${key} pressed in preview mode`)}>{key}</button>)}</div><p className="mf-field-hint">Virtual keys only create local UI log entries.</p></Panel></div></div>;
     return null;
   };
@@ -319,7 +365,7 @@ export default function MaskedFlipperPage() {
         <nav aria-label="Main navigation">
           {navGroups.map((group) => <div className="mf-nav-group" key={group.title}><div className="mf-nav-label">{group.title}</div>{group.items.map((item) => <button key={item.id} className={`mf-nav-item ${activeTab === item.id ? 'active' : ''}`} onClick={() => setActiveTab(item.id)}><span className="mf-nav-icon">{item.icon}</span><span>{item.label}</span>{item.id === 'terminal' && <span style={{ marginLeft: 'auto', color: '#d8a84f', font: '8px "DM Mono", monospace' }}>LOCAL</span>}</button>)}</div>)}
         </nav>
-        <div className="mf-sidebar-bottom"><div className="mf-device-status"><div className="mf-status-head"><span>Raspberry Pi 4</span><Pill tone="red">OFFLINE</Pill></div><div className="mf-status-sub">MASKED FLIPPER / TARGET</div><div className="mf-status-line"><span className="mf-live-dot" /> GATEWAY NOT CONFIGURED</div></div></div>
+        <div className="mf-sidebar-bottom"><div className="mf-device-status"><div className="mf-status-head"><span>{gatewayStatus?.hostname || 'Raspberry Pi'}</span><Pill tone={gatewayOnline ? 'green' : 'red'}>{gatewayOnline ? 'ONLINE' : 'OFFLINE'}</Pill></div><div className="mf-status-sub">MASKED FLIPPER / TARGET</div><div className="mf-status-line"><span className="mf-live-dot" /> {gatewayOnline ? 'LIVE TELEMETRY CONNECTED' : 'GATEWAY UNREACHABLE'}</div></div></div>
       </aside>
       <div className="mf-main">
         <header className="mf-topbar"><div className="mf-breadcrumb">WORKSPACE <span style={{ color: '#4e5059', margin: '0 8px' }}>/</span> <b>{pageTitle.toUpperCase()}</b></div><div className="mf-top-right"><span className="mf-clock">{clock}</span><span className="mf-top-divider" /><Pill tone="amber">SIMULATION / UI</Pill><span className="mf-clock" style={{color:'#55dff7'}}>{userRole === 'admin' ? 'ADMIN' : 'USER'}</span><span className="mf-clock" title={userEmail}>{userEmail}</span><button className="mf-signout" onClick={() => { sessionStorage.removeItem('mf-ui-session'); setAuthenticated(false); setUserRole(null); setUserEmail(''); }} title="Sign out">SIGN OUT ↗</button><div className="mf-avatar">{userRole === 'admin' ? 'AD' : 'US'}</div></div></header>

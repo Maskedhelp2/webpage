@@ -115,6 +115,12 @@
       "namedRegex": "^/projects/masked\\-flipper(?:/)?$"
     },
     {
+      "page": "/projects/masked-flipper/status",
+      "regex": "^/projects/masked\\-flipper/status(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/projects/masked\\-flipper/status(?:/)?$"
+    },
+    {
       "page": "/projects/slam-nav",
       "regex": "^/projects/slam\\-nav(?:/)?$",
       "routeKeys": {},
