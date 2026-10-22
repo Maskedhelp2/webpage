@@ -6,9 +6,9 @@ import * as THREE from "three";
 const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
   <div class="wrap">
     <div class="hero-copy">
-      <div class="tag">AI-powered autonomous drone surveying // 2026</div>
+      <div class="tag">Modular autonomous aerial fleet // SIH 2026</div>
       <h1>AEROCADASTRA<span></span></h1>
-      <p class="sub">Aerial land survey and resurvey for rural agricultural India. One carrier. Two child drones. One unified workflow.</p>
+      <p class="sub">A fixed-wing mothership, two autonomous child drones, and a shared coordination layer with three independent live video feeds converging on one ground station.</p>
     </div>
   </div>
 </section>
@@ -66,11 +66,11 @@ const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
 
       <div class="box list">
         <span class="lbl"><span>// Systems</span><span>Tap a marker</span></span>
-        <div class="item on" data-k="airframe"><button class="hd"><i>01</i>Fixed-wing airframe</button><div class="bd"><p>The carrier is a fixed-wing aerial platform built to cover large agricultural areas efficiently in a single survey.</p><div class="chips"><span>Fixed-wing</span><span>Large-area coverage</span></div></div></div>
-        <div class="item" data-k="payload"><button class="hd"><i>02</i>Imaging payload</button><div class="bd"><p>Captures high-resolution aerial imagery. AI and computer vision then pick out land features and areas that need field verification.</p><div class="chips"><span>High-res imagery</span><span>AI analysis</span></div></div></div>
-        <div class="item" data-k="gnss"><button class="hd"><i>03</i>RTK / GNSS positioning</button><div class="bd"><p>Precise geo-referencing ties every image to exact coordinates, so it can be compared against existing land records.</p><div class="chips"><span>RTK</span><span>DGPS</span><span>GNSS</span></div></div></div>
-        <div class="item" data-k="child"><button class="hd"><i>04</i>Child drones</button><div class="bd"><p>Two autonomous child drones complement the carrier with extra aerial perspectives, positioning data, telemetry and video feeds.</p><div class="chips"><span>2 child drones</span><span>Telemetry</span><span>Video feed</span></div></div></div>
-        <div class="item" data-k="link"><button class="hd"><i>05</i>Data link</button><div class="bd"><p>Fleet telemetry and imagery stream to the ground station, where AI detection and GIS cadastral mapping turn them into survey results.</p><div class="chips"><span>Telemetry</span><span>Ground station</span><span>GIS</span></div></div></div>
+        <div class="item on" data-k="airframe"><button class="hd"><i>01</i>Fixed-wing airframe</button><div class="bd"><p>The mothership is an original, team-designed fixed-wing airframe intended to carry and coordinate two child quadcopters. Its performance remains subject to bench and flight validation.</p><div class="chips"><span>Fixed-wing</span><span>Large-area coverage</span></div></div></div>
+        <div class="item" data-k="payload"><button class="hd"><i>02</i>Imaging payload</button><div class="bd"><p>The current video baseline uses an MS MINI camera and DakeFPV video transmitter. Imagery and AI perception are intended to support detection and mapping; integrated performance is not yet validated.</p><div class="chips"><span>MS MINI camera</span><span>AI baseline</span></div></div></div>
+        <div class="item" data-k="gnss"><button class="hd"><i>03</i>RTK / GNSS positioning</button><div class="bd"><p>GNSS provides positioning for navigation and geo-referencing. RTK/PPK precision is a future upgrade, and cadastral-grade accuracy must be demonstrated through measured validation before it is claimed.</p><div class="chips"><span>GNSS baseline</span><span>RTK / PPK planned</span></div></div></div>
+        <div class="item" data-k="child"><button class="hd"><i>04</i>Child drones</button><div class="bd"><p>The two child quadcopters are designed to work with the carrier through shared identity, telemetry, deployment and video interfaces. The three-feed system remains a core integration target.</p><div class="chips"><span>2 child drones</span><span>Telemetry</span><span>Video feed</span></div></div></div>
+        <div class="item" data-k="link"><button class="hd"><i>05</i>Data link</button><div class="bd"><p>The target architecture brings fleet telemetry and three independent video feeds to one ground station, with ROS 2 software, AI perception and geospatial processing. End-to-end integration still requires validation.</p><div class="chips"><span>ROS 2 Jazzy</span><span>Ground station</span><span>3 video feeds target</span></div></div></div>
       </div>
     </div>
   </div>
@@ -82,38 +82,38 @@ const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
     <h2>Mapping the land, <em>faster</em></h2>
     <div class="cols">
       <div class="about">
-        <p class="lead"><strong>AeroCadastra</strong> is a technology-driven aerial land survey and resurvey solution designed to modernize the mapping and management of rural agricultural land in India.</p>
+        <p class="lead"><strong>AeroCadastra</strong> is developing a modular autonomous aerial fleet: one custom-designed fixed-wing mothership, two child quadcopters, and a shared coordination layer with three live video feeds converging on one ground station.</p>
         <div class="feat">
           <div><i>01</i>Drone-based aerial surveying</div>
-          <div><i>02</i>RTK / DGPS / GNSS positioning</div>
+          <div><i>02</i>GNSS positioning; RTK / PPK planned</div>
           <div><i>03</i>AI-assisted image analysis</div>
           <div><i>04</i>GIS-enabled cadastral mapping</div>
-          <div><i>05</i>Geo-referenced land information</div>
+          <div><i>05</i>Geo-referenced land data (validation required)</div>
           <div class="all"><span>All combined into <b>one unified workflow</b></span></div>
         </div>
         <div class="blk"><h3><i>//</i> The platform</h3>
-          <p>AeroCadastra uses a fixed-wing aerial platform to efficiently capture high-resolution imagery over large agricultural areas. Autonomous child drones can complement the main platform by providing additional aerial perspectives, positioning data, telemetry, and video feeds.</p></div>
+          <p>AeroCadastra’s current design pairs an original fixed-wing mothership with two child quadcopters. The key engineering challenge is integrating deployment, vehicle identity, telemetry and video interfaces so the fleet can operate as one system under a single operator.</p></div>
         <div class="blk"><h3><i>//</i> From imagery to maps</h3>
-          <p>The captured imagery can then be processed using AI and computer-vision techniques to identify relevant land features and areas requiring verification. With precise geo-referencing, this information can support the creation and updating of digital cadastral maps and comparison against existing land records.</p></div>
+          <p>The AI baseline is YOLO26n fine-tuned on VisDrone, with an NVIDIA RTX 3050 used for training. The software baseline is Ubuntu 24.04 and ROS 2 Jazzy; onboard inference using Vicharak Axon is planned for a later stage. Mapping and detection performance must be measured before accuracy claims are made.</p></div>
         <div class="blk"><h3><i>//</i> Connected land records</h3>
           <p>The proposed solution further integrates these records into a unified digital land-information workflow:</p>
           <div class="chips"><span>Record of Rights (RoR)</span><span>Mutation records</span><span>Registration data</span><span>Survey maps</span><span>Ownership history</span><span>Precise geo-coordinates</span></div>
-          <p style="margin-top:14px">This enables discrepancies between recorded and observed land conditions to be identified and sent for field verification.</p></div>
+          <p style="margin-top:14px">The intended workflow can flag possible discrepancies for field verification; it does not independently establish legal ownership or cadastral boundaries.</p></div>
         <div class="callout"><h3>The objective</h3>
-          <p>To create a scalable, evidence-based system that can make rural land surveying <strong>faster, more accurate, transparent, and suitable for digital land administration</strong>, while also providing a foundation for agricultural planning and future precision-agriculture applications.</p></div>
+          <p>To validate a scalable multi-UAV system for <strong>coordinated aerial coverage, unified telemetry and three-feed video</strong>, with potential applications in land survey, agriculture, disaster response, infrastructure inspection and environmental monitoring.</p></div>
         <div class="scale"><span><b>1</b> carrier</span><u>+</u><span><b>2</b> child drones</span><u>&rarr;</u><span>larger coordinated fleets</span></div>
-        <p class="note">The architecture is intentionally scalable: the initial prototype uses one carrier and two child drones, with a planned progression toward larger coordinated aerial fleets after the core system is validated.</p>
+        <p class="note">The initial proof of concept is one carrier, two child drones, one ground station and three video feeds. Larger fleets are a future goal, dependent on validation of the core interfaces.</p>
       </div>
       <div>
         <div class="tag">// Milestones</div>
         <!-- Statuses are editable: class "done", "" (in progress) or "next". Add dates inside the span if you want them. -->
         <ul class="mile">
           <li class="done"><b>Concept <em>Done</em></b><span>System architecture defined: one fixed-wing carrier and two autonomous child drones.</span></li>
-          <li class="done"><b>Prototype airframe <em>Done</em></b><span>Carrier airframe built and tested hands-on in the lab.</span></li>
-          <li class="done"><b>AI person detection <em>Done</em></b><span>Lab-trained YOLO model detecting people in aerial footage.</span></li>
-          <li><b>Ground station <em>In progress</em></b><span>Desktop app for fleet telemetry, aerial imagery, AI detection and GIS land analysis.</span></li>
+          <li><b>Prototype airframe <em>Baseline selected</em></b><span>Custom-designed carrier airframe and PETG for rigid/high-load printed parts; practical validation remains pending.</span></li>
+          <li><b>AI perception baseline <em>Selected</em></b><span>YOLO26n fine-tuned on VisDrone is the planned baseline; validated field performance is not yet claimed.</span></li>
+          <li><b>Ground station <em>In progress</em></b><span>Integrating fleet telemetry, three independent video feeds, AI perception and geospatial workflows in one operator station.</span></li>
           <li class="next"><b>Land records integration <em>Next</em></b><span>Linking RoR, mutation records and survey maps to precise geo-coordinates.</span></li>
-          <li class="next"><b>Field validation <em>Next</em></b><span>Survey real agricultural land and compare observations with recorded data.</span></li>
+          <li class="next"><b>Validation <em>Next</em></b><span>Complete bench tests and controlled flight tests; record measured results before making performance claims.</span></li>
           <li class="next"><b>Fleet scale-up <em>Next</em></b><span>Move from one carrier and two child drones to larger coordinated fleets.</span></li>
         </ul>
       </div>
@@ -124,7 +124,7 @@ const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
 <section class="center">
   <div class="wrap">
     <div class="tag">// In action</div>
-    <h2>Video of the <em>working</em></h2>
+    <h2>System <em>demonstration</em></h2>
     <div class="box work">
       <span class="lbl"><span>// System demo</span></span>
       <video controls preload="metadata" playsinline>
@@ -139,12 +139,12 @@ const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
     <div class="partner">
       <div class="logo-box"><img src="" alt="ekAgracit"></div>
       <div>
-        <div class="tag">// Partnered with</div>
-        <h2>Ek<em>Agracit</em></h2>
-        <p>ekAgracit Technologies is building a next-generation digital ecosystem: one unified gateway for AI, cyber security, cloud, digital operations and workforce intelligence.</p>
-        <p>Guided by the belief that focus is the only way forward, ekAgracit is our partner on AeroCadastra.</p>
+        <div class="tag">// Project context</div>
+        <h2>Engineering <em>baseline</em></h2>
+        <p>AeroCadastra’s technical baseline includes a custom fixed-wing mothership, child quadcopters, ROS 2 software, AI perception and a unified video architecture.</p>
+        <p>The project is being developed by the AeroCadastra team at Amity School of Engineering and Technology for Smart India Hackathon 2026. No external partnership is asserted here.</p>
         <div class="chips"><span>AI</span><span>Cyber security</span><span>Cloud</span><span>Digital operations</span><span>Workforce intelligence</span></div>
-        <a class="btn" href="https://ekagracit.com/coming-soon" target="_blank" rel="noopener">Visit Ekagracit</a>
+        <a class="btn" href="#systems">Explore systems</a>
       </div>
     </div>
   </div>
