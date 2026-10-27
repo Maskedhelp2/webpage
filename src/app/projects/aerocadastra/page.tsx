@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 
 const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
   <div class="wrap">
@@ -127,9 +128,12 @@ const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
     <h2>System <em>demonstration</em></h2>
     <div class="box work">
       <span class="lbl"><span>// System demo</span></span>
-      <video controls preload="metadata" playsinline>
-        <!-- Add your demo video here, e.g. <source src="/videos/aerocadastra-demo.mp4" type="video/mp4" /> -->
-      </video>
+      <video controls preload="metadata" playsInline>
+  <source
+    src="/videos/aerocadastra-demo.mp4"
+    type="video/mp4"
+  />
+</video>
     </div>
   </div>
 </section>
@@ -137,7 +141,12 @@ const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
 <section>
   <div class="wrap">
     <div class="partner">
-      <div class="logo-box"><img src="" alt="ekAgracit"></div>
+      <div className="logo-box">
+  <img
+    src="/images/ekagracit-logo.png"
+    alt="EkAgracit logo"
+  />
+</div>
       <div>
         <div class="tag">// Project context</div>
         <h2>Engineering <em>baseline</em></h2>
@@ -162,7 +171,7 @@ const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
         <div class="chips"><span>Tauri</span><span>React</span><span>TypeScript</span><span>Python</span><span>System integration</span></div></a>
       <a class="member" href="https://maskedhelp.com/friends/aahana">
         <div class="mh"><div class="av">A</div><div><b>Aahana</b><small>Software</small></div></div>
-        <p>Ground station front end: fleet telemetry views, map display and GIS land analysis.</p>
+        <p>Led drone AI development and built AeroCadastra’s software and website, driving core technology and digital innovation.</p>
         <div class="chips"><span>React</span><span>TypeScript</span><span>Vite</span><span>Tailwind CSS</span><span>Zustand</span><span>GeoPandas</span><span>Shapely</span></div></a>
       <a class="member" href="https://maskedhelp.com/friends/vidushi">
         <div class="mh"><div class="av">V</div><div><b>Vidushi</b><small>Software</small></div></div>
@@ -170,15 +179,15 @@ const PAGE_MARKUP = String.raw`<section class="hero-intro" id="home">
         <div class="chips"><span>Python</span><span>PyTorch</span><span>OpenCV</span><span>YOLO</span><span>ByteTrack</span></div></a>
       <a class="member" href="https://maskedhelp.com/friends/rohan">
         <div class="mh"><div class="av">R</div><div><b>Rohan</b><small>Electronics</small></div></div>
-        <p>Onboard electronics: positioning, telemetry link, power and wiring for the carrier and child drones.</p>
+        <p>Drone electronics assembly, flight controller configuration, sensor integration, and hardware troubleshooting</p>
         <div class="chips"><span>RTK / GNSS</span><span>Telemetry</span><span>Flight controller</span><span>Power systems</span></div></a>
       <a class="member" href="https://maskedhelp.com/friends/alisha">
         <div class="mh"><div class="av">A</div><div><b>Alisha</b><small>3D modelling</small></div></div>
-        <p>Carrier airframe design and CAD models.</p>
+        <p>Designed the Aerocadastra mothership, Child drones and Release mechanism, developed mechanical components, and assembled the drone structure and integrated components</p>
         <div class="chips"><span>CAD modelling</span><span>Airframe design</span><span>3D printing</span></div></a>
       <a class="member" href="https://maskedhelp.com/friends/ayush">
         <div class="mh"><div class="av">A</div><div><b>Ayush</b><small>3D modelling</small></div></div>
-        <p>Child drone design, mounts and printable parts.</p>
+        <p>Researched for AI , designed and assembly Aerocadastra mothership , desigened 3D components for Child drones and Release mechanism</p>
         <div class="chips"><span>CAD modelling</span><span>Child drone design</span><span>3D printing</span></div></a>
     </div>
   </div>
@@ -341,7 +350,16 @@ video{display:block;width:100%;background:#000}
 .partner .btn{background:var(--blue);color:#06121f}.partner .btn:hover{background:#8bc0fa}
 
 /* team */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+/* Team cards arranged in a pyramid: lead at the top, core team in the middle, paired roles below. */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto auto;gap:16px;max-width:1120px;margin:0 auto;align-items:stretch}
+.grid>.member:nth-child(1){grid-column:2;grid-row:1}
+.grid>.member:nth-child(2){grid-column:1;grid-row:2}
+.grid>.member:nth-child(3){grid-column:1;grid-row:3}
+.grid>.member:nth-child(4){grid-column:2;grid-row:2}
+.grid>.member:nth-child(5){grid-column:3;grid-row:2}
+.grid>.member:nth-child(6){grid-column:3;grid-row:3}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;max-width:640px}.grid>.member:nth-child(n){grid-column:auto;grid-row:auto}.grid>.member:nth-child(1){grid-column:1 / -1;justify-self:center;width:min(100%,420px)}}
+@media(max-width:480px){.grid{grid-template-columns:minmax(0,1fr)}.grid>.member:nth-child(1){grid-column:auto;width:100%}}
 .member{border:1px solid var(--line);background:var(--panel);padding:22px;transition:.2s;display:block;position:relative}
 .member:hover{border-color:var(--red);transform:translateY(-3px)}
 .mh{display:flex;align-items:center;gap:14px;margin-bottom:14px}
@@ -377,31 +395,39 @@ export default function AeroCadastraPage() {
     const rim = new THREE.DirectionalLight(0xc74737, 3.2); rim.position.set(-6, 2, -5); scene.add(rim);
 
     const plane = new THREE.Group(); scene.add(plane);
-    const paint = new THREE.MeshStandardMaterial({ color: 0xb8b9b7, metalness: 0.72, roughness: 0.28 });
-    const dark = new THREE.MeshStandardMaterial({ color: 0x202326, metalness: 0.65, roughness: 0.34 });
-    const red = new THREE.MeshStandardMaterial({ color: 0xb53a2d, metalness: 0.35, roughness: 0.3 });
-    const glass = new THREE.MeshStandardMaterial({ color: 0x171f25, metalness: 0.7, roughness: 0.15 });
-    const part = (geo: THREE.BufferGeometry, mat: THREE.Material, pos: [number, number, number], rot?: [number, number, number]) => {
-      const mesh = new THREE.Mesh(geo, mat); mesh.position.set(...pos); if (rot) mesh.rotation.set(...rot); plane.add(mesh); return mesh;
-    };
-    part(new THREE.CapsuleGeometry(0.22, 3.65, 6, 12), paint, [0, 0, 0], [Math.PI / 2, 0, 0]);
-    part(new THREE.ConeGeometry(0.22, 0.8, 12), paint, [0, 0, 2.15], [-Math.PI / 2, 0, 0]);
-    part(new THREE.SphereGeometry(0.225, 18, 12), glass, [0, 0.08, 1.48]).scale.set(1, 0.7, 1.1);
-    function wing(span: number, chord: number, z: number, y: number, material: THREE.Material) {
-      const shape = new THREE.Shape(); shape.moveTo(-span / 2, -chord * 0.34); shape.lineTo(span * 0.36, -chord * 0.34); shape.lineTo(span / 2, chord * 0.18); shape.lineTo(span * 0.48, chord * 0.34); shape.lineTo(-span * 0.42, chord * 0.34); shape.lineTo(-span / 2, -chord * 0.34);
-      const geometry = new THREE.ExtrudeGeometry(shape, { depth: 0.075, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.035, bevelThickness: 0.035 });
-      const mesh = new THREE.Mesh(geometry, material); mesh.rotation.x = Math.PI / 2; mesh.position.set(0, y, z); plane.add(mesh);
-    }
-    wing(6.4, 1.3, 0.1, 0.02, paint); wing(2.5, 0.65, -1.8, 0, dark);
-    part(new THREE.BoxGeometry(0.22, 0.28, 1.25), red, [0, 0.18, -1.85]);
-    for (const side of [-1, 1]) {
-      const pod = new THREE.Group(); pod.position.set(side * 1.55, -0.22, 0.1); plane.add(pod);
-      pod.add(new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.16, 0.52), dark));
-      for (const [x, z] of [[-0.34, -0.38], [0.34, -0.38], [-0.34, 0.38], [0.34, 0.38]] as [number, number][]) {
-        const arm = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.08, 0.48), paint); arm.position.set(x, 0, z * 0.45); arm.rotation.y = x * z * 0.45; pod.add(arm);
-        const rotor = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.025, 24), red); rotor.position.set(x * 1.25, 0.06, z * 1.25); pod.add(rotor);
-      }
-    }
+    const paint = new THREE.MeshStandardMaterial({ color: 0xb8b9b7, metalness: 0.62, roughness: 0.34, side: THREE.DoubleSide });
+    // Load the user's actual STL and normalize its CAD-scale coordinates for the Three.js scene.
+    // Put aerocadastra-plane.stl in the project's public/models/ directory.
+    let componentDisposed = false;
+    const stlLoader = new STLLoader();
+    stlLoader.load(
+      "/models/aerocadastra-plane.stl",
+      (geometry) => {
+        if (componentDisposed) { geometry.dispose(); return; }
+        geometry.computeBoundingBox();
+        const bounds = geometry.boundingBox;
+        if (!bounds) { geometry.dispose(); return; }
+        const size = new THREE.Vector3();
+        bounds.getSize(size);
+        const maxDimension = Math.max(size.x, size.y, size.z) || 1;
+        const center = new THREE.Vector3();
+        bounds.getCenter(center);
+        geometry.translate(-center.x, -center.y, -center.z);
+        const modelScale = 6.4 / maxDimension;
+        geometry.scale(modelScale, modelScale, modelScale);
+        geometry.computeVertexNormals();
+        const aircraft = new THREE.Mesh(geometry, paint);
+        // Correct the STL's local forward axis so the aircraft flies nose-first
+        // instead of presenting its tail as the leading end during the entrance.
+        aircraft.rotation.y = Math.PI;
+        aircraft.name = "AeroCadastra-STL-Aircraft";
+        aircraft.castShadow = true;
+        aircraft.receiveShadow = true;
+        plane.add(aircraft);
+      },
+      undefined,
+      (error) => console.error("Could not load AeroCadastra STL. Check public/models/aerocadastra-plane.stl", error)
+    );
     const ring = new THREE.Mesh(new THREE.TorusGeometry(4.25, 0.008, 8, 160), new THREE.MeshBasicMaterial({ color: 0x8b342a, transparent: true, opacity: 0.65 })); ring.rotation.x = Math.PI / 2.7; ring.position.y = -1.45; scene.add(ring);
     const grid = new THREE.GridHelper(30, 50, 0x49241f, 0x29201e); grid.position.y = -2.2; (grid.material as THREE.Material).transparent = true; (grid.material as THREE.Material).opacity = 0.28; scene.add(grid);
 
@@ -503,6 +529,7 @@ export default function AeroCadastraPage() {
     show("airframe");
 
     return () => {
+      componentDisposed = true;
       cancelAnimationFrame(frame); observer.disconnect(); renderer.dispose();
       landingPulse.geometry.dispose(); pulseMaterial.dispose();
       canvas.removeEventListener("pointerdown", onDown); canvas.removeEventListener("pointermove", onMove); canvas.removeEventListener("pointerup", onUp); canvas.removeEventListener("pointercancel", onUp); canvas.removeEventListener("keydown", onKey);
